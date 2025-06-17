@@ -1,0 +1,15 @@
+.popoverTrigger {
+    background-color: white;
+    border-radius: 4px;
+}
+
+.popoverContent {
+    border-radius: 4px;
+    padding: 20px;
+    width: 260px;
+    background-color: white;
+}
+
+.popoverArrow {
+    fill: white;
+}

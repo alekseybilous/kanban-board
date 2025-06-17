@@ -1,4 +1,5 @@
 import styles from './page.module.css';
+import { PopoverDemo } from '@kanban-board/desing-system'
 
 export default function Index() {
   /*
@@ -8,6 +9,7 @@ export default function Index() {
    */
   return (
     <div className={styles.page}>
+      <PopoverDemo />
       <div className="wrapper">
         <div className="container">
           <div id="welcome">
