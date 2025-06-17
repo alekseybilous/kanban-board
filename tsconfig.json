@@ -5,6 +5,12 @@
   "references": [
     {
       "path": "./packages/desing-system"
+    },
+    {
+      "path": "./apps/web-e2e"
+    },
+    {
+      "path": "./apps/web"
     }
   ]
 }
