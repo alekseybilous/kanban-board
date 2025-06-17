@@ -3,6 +3,9 @@
   "include": [],
   "references": [
     {
+      "path": "../eslint-config"
+    },
+    {
       "path": "./tsconfig.lib.json"
     },
     {

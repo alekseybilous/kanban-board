@@ -1,0 +1,56 @@
+{
+  "name": "@kanban-board/eslint-config",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "development": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./base": {
+      "development": "./src/lib/base.js",
+      "import": "./dist/lib/base.js",
+      "default": "./dist/lib/base.js"
+    },
+    "./react": {
+      "development": "./src/lib/react.js",
+      "import": "./dist/lib/react.js",
+      "default": "./dist/lib/react.js"
+    },
+    "./next": {
+      "development": "./src/lib/next.js",
+      "import": "./dist/lib/next.js",
+      "default": "./dist/lib/next.js"
+    },
+    "./node": {
+      "development": "./src/lib/node.js",
+      "import": "./dist/lib/node.js",
+      "default": "./dist/lib/node.js"
+    }
+  },
+  "dependencies": {
+    "@nx/eslint-plugin": "^21.2.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-config-next": "^15.3.3",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.10.1",
+    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "tslib": "^2.3.0"
+  },
+  "peerDependencies": {
+    "eslint": "^8.57.0 || ^9.0.0",
+    "typescript": "^5.0.0"
+  }
+}

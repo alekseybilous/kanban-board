@@ -1,9 +1,7 @@
-import nx from '@nx/eslint-plugin';
-import baseConfig from '../../eslint.config.mjs';
+import reactConfig from '@kanban-board/eslint-config/react';
 
 export default [
-  ...baseConfig,
-  ...nx.configs['flat/react'],
+  ...reactConfig,
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     // Override or add rules here
