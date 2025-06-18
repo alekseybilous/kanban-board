@@ -1,3 +1,5 @@
 export default function RootPage() {
-  return <div>Start Page</div>;
+  const title = 'Start Page';
+
+  return <div>{title}</div>;
 }
