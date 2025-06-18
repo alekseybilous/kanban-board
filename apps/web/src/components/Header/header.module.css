@@ -1,0 +1,21 @@
+.header {
+  grid-area: header;
+  background-color: white;
+  border-bottom: 1px solid #e4ebfa;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+}
+
+.header h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #000112;
+}
+
+@media (min-width: 768px) {
+  .header h1 {
+    font-size: 1.5rem;
+  }
+}
