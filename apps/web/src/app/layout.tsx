@@ -1,6 +1,7 @@
 import './global.css';
 import { ReactNode } from 'react';
 import { AppSidebar, Header } from '@/components';
+import { ThemeProvider } from '@/providers';
 import styles from './layout.module.css';
 
 export const metadata = {
@@ -15,15 +16,17 @@ type RootLayoutProps = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
-        <div className={styles.appLayout}>
-          <AppSidebar />
+        <ThemeProvider>
+          <div className={styles.appLayout}>
+            <AppSidebar />
 
-          <Header title="Dummy project" />
+            <Header title="Dummy project" />
 
-          <main className={styles.content}>{children}</main>
-        </div>
+            <main className={styles.content}>{children}</main>
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

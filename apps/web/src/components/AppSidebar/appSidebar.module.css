@@ -1,6 +1,7 @@
 .sidebar {
-  background-color: #2b2c37;
-  color: #828fa3;
+  background-color: var(--color-background-subtle);
+  color: var(--color-text-muted);
+  border-right: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
   padding: 2rem 0;

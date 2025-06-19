@@ -1,6 +1,6 @@
 import styles from './appSidebar.module.css';
 import Link from 'next/link';
-import { Logo } from '@/components';
+import { Logo, ThemeSwitcher } from '@/components';
 
 export const AppSidebar = () => {
   return (
@@ -12,7 +12,7 @@ export const AppSidebar = () => {
       </header>
       <nav className={styles.nav}>navigation</nav>
       <footer className={styles.footer}>
-        <div>Footer</div>
+        <ThemeSwitcher />
       </footer>
     </aside>
   );
