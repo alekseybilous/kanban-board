@@ -1,15 +1,14 @@
 import baseConfig from './base.js';
-import { 
-  commonLanguageOptions, 
-  commonPlugins, 
-  browserGlobals 
+import {
+  commonLanguageOptions,
+  commonPlugins,
+  browserGlobals,
 } from './shared.js';
 
-// @ts-ignore - No types available
+// @ts-expect-error - No types available
 import reactPlugin from 'eslint-plugin-react';
-// @ts-ignore - No types available
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
-// @ts-ignore - No types available
+// @ts-expect-error - No types available
 import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
 
 export default [
