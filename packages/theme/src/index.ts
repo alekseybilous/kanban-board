@@ -1,5 +1,5 @@
 // Theme package exports
-export * from './css/index.css';
+// Note: CSS is handled separately via package.json exports
 
 // Theme names for TypeScript
 export const themes = ['light', 'dark', 'blue'] as const;

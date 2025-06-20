@@ -22,12 +22,13 @@ export default defineConfig(() => ({
     outDir: './dist',
     emptyOutDir: true,
     reportCompressedSize: true,
+    cssCodeSplit: true,
     commonjsOptions: {
       transformMixedEsModules: true,
     },
     lib: {
       // Could also be a dictionary or array of multiple entry points.
-      entry: 'src/index.ts',
+      entry: ['src/index.ts', 'src/css/index.css'],
       name: '@kanban-board/theme',
       fileName: 'index',
       // Change this to the formats you want to support.
