@@ -1,109 +1,119 @@
-# KanbanBoard
+# Kanban Board
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+A modern, feature-rich Kanban board application built with cutting-edge web technologies. Designed for task management with an intuitive drag-and-drop interface and multiple theme support.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+🚀 **[Live Demo](https://kanban-board-web-three.vercel.app/)**
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+## What We're Building
 
-## Generate a library
+A comprehensive task management solution that provides:
 
-```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
+- **Visual Task Organization** - Intuitive Kanban board with drag-and-drop functionality
+- **Modern User Experience** - Clean, responsive design with multiple themes
+- **Scalable Architecture** - Monorepo structure for maintainable, reusable code
+- **Accessibility First** - WCAG compliant components and inclusive design
+- **Developer Experience** - Full TypeScript support, automated testing, and consistent tooling
+
+## Technologies Used
+
+### Frontend
+
+- **Next.js 15** - React framework with App Router
+- **TypeScript** - Type-safe development
+- **CSS Modules** - Component-scoped styling
+- **Radix UI** - Accessible UI primitives
+- **next-themes** - Theme switching functionality
+
+### Development Tools
+
+- **Nx** - Monorepo management and build system
+- **ESLint** - Code linting with custom configurations
+- **Vite** - Fast build tool for packages
+- **Vitest** - Unit testing framework
+
+### Deployment
+
+- **Vercel** - Production hosting and deployment
+
+## Project Structure
+
+```
+kanban-board/
+├── apps/
+│   └── web/                    # Next.js application
+├── packages/
+│   ├── theme/                  # Design tokens and CSS variables
+│   ├── design-system/          # Shared React components
+│   └── eslint-config/          # Shared ESLint configurations
+└── tools/                      # Build and development tools
 ```
 
-## Run tasks
+### Package Overview
 
-To build the library use:
+- **`@kanban-board/theme`** - Centralized theme system with CSS custom properties, supporting light, dark, and blue themes
+- **`@kanban-board/design-system`** - Reusable React components built on Radix UI for consistency and accessibility
+- **`@kanban-board/eslint-config`** - Shared ESLint rules for code quality across all projects
 
-```sh
-npx nx build pkg1
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+### Installation
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd kanban-board
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
 ```
 
-To run any task with Nx use:
+### Available Scripts
 
-```sh
-npx nx <target> <project-name>
+```bash
+# Development
+npm run dev              # Start all applications in development mode
+npm run build           # Build all applications and packages
+npm run test            # Run all tests
+
+# Individual packages
+npx nx dev web          # Start web app only
+npx nx build web        # Build web app only
+npx nx test web         # Test web app only
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+## Architecture Decisions
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+### Monorepo Structure
 
-## Versioning and releasing
+We chose Nx for its powerful monorepo capabilities, enabling:
 
-To version and release the library use
+- Shared code and dependencies
+- Consistent build and test processes
+- Efficient caching and incremental builds
+- Clear dependency graph management
 
-```
-npx nx release
-```
+### Theme System
 
-Pass `--dry-run` to see what would happen without actually releasing the library.
+Custom CSS properties provide:
 
-[Learn more about Nx release &raquo;](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- Runtime theme switching without JavaScript
+- Better performance than CSS-in-JS solutions
+- Easy customization and extension
+- Consistent design tokens across applications
 
-## Keep TypeScript project references up to date
+### Component Architecture
 
-Nx automatically updates TypeScript [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) in `tsconfig.json` files to ensure they remain accurate based on your project dependencies (`import` or `require` statements). This sync is automatically done when running tasks such as `build` or `typecheck`, which require updated references to function correctly.
+Radix UI foundation ensures:
 
-To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
-
-```sh
-npx nx sync
-```
-
-You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
-
-```sh
-npx nx sync:check
-```
-
-[Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
-
-## Set up CI!
-
-### Step 1
-
-To connect to Nx Cloud, run the following command:
-
-```sh
-npx nx connect
-```
-
-Connecting to Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
-
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-### Step 2
-
-Use the following command to configure a CI workflow for your workspace:
-
-```sh
-npx nx g ci-workflow
-```
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- Accessibility compliance out of the box
+- Unstyled primitives for design flexibility
+- Keyboard navigation and screen reader support
+- Robust behavior patterns
