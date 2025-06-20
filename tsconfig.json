@@ -17,6 +17,16 @@
     },
     {
       "path": "./packages/theme"
+    },
+    {
+      "path": "./packages/storybook-host"
     }
-  ]
+  ],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs",
+      "moduleResolution": "node10",
+      "customConditions": null
+    }
+  }
 }
