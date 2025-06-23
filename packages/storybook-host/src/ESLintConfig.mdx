@@ -1,0 +1,332 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Packages/ESLint Config" />
+
+# @kanban-board/eslint-config
+
+A comprehensive ESLint configuration package that provides consistent code quality standards across all applications and packages in the monorepo. Built with TypeScript, React, and Prettier integration for a seamless development experience.
+
+## 🏗️ Architecture
+
+### **File Structure**
+
+```
+packages/eslint-config/
+├── src/
+│   ├── lib/
+│   │   ├── base.ts           # Base configuration
+│   │   ├── react.ts          # React-specific rules
+│   │   ├── next.ts           # Next.js configuration
+│   │   ├── node.ts           # Node.js configuration
+│   │   └── shared.ts         # Shared utilities and constants
+│   └── index.ts              # Main export
+├── dist/                     # Built output
+└── tsconfig.json             # TypeScript configuration
+```
+
+### **Configuration Hierarchy**
+
+1. **Base Config** - Core rules for all JavaScript/TypeScript
+2. **Environment Configs** - React, Next.js, Node.js specific rules
+3. **Prettier Integration** - Formatting conflict resolution
+4. **Custom Overrides** - Project-specific rule adjustments
+
+## ⚙️ Configuration Details
+
+### **Base Configuration**
+
+The base configuration provides fundamental code quality rules:
+
+```typescript
+// Core rules included
+{
+  // Code quality
+  'prefer-const': 'error',
+  'no-var': 'error',
+  'object-shorthand': 'error',
+
+  // Import organization
+  'import/order': ['error', {
+    groups: ['builtin', 'external', 'internal', 'parent', 'sibling'],
+    'newlines-between': 'always',
+    alphabetize: { order: 'asc', caseInsensitive: true }
+  }],
+
+  // TypeScript rules
+  '@typescript-eslint/no-unused-vars': ['error', {
+    argsIgnorePattern: '^_',
+    varsIgnorePattern: '^_'
+  }],
+  '@typescript-eslint/consistent-type-imports': 'error'
+}
+```
+
+### **React Configuration**
+
+Enhanced rules for React development:
+
+```typescript
+// React-specific rules
+{
+  // Component patterns
+  'react/function-component-definition': ['error', {
+    namedComponents: 'arrow-function'
+  }],
+  'react/jsx-props-no-spreading': 'off', // Allow prop spreading
+  'react/prop-types': 'off', // Using TypeScript instead
+
+  // JSX formatting
+  'react/jsx-boolean-value': ['error', 'never'],
+  'react/jsx-curly-brace-presence': ['error', {
+    props: 'never',
+    children: 'never'
+  }],
+
+  // Accessibility
+  'jsx-a11y/alt-text': 'error',
+  'jsx-a11y/anchor-is-valid': 'error',
+  'jsx-a11y/label-has-associated-control': 'error'
+}
+```
+
+### **Prettier Integration**
+
+Automatic formatting conflict resolution:
+
+```typescript
+// Prettier config is added last to override formatting rules
+import prettierConfig from 'eslint-config-prettier';
+
+export default [
+  // ... other configs
+  prettierConfig, // Disables all formatting rules
+];
+```
+
+## 🎯 Features
+
+### **TypeScript Support**
+
+- **Full TypeScript Integration** - Complete type checking and linting
+- **Project Service** - Automatic TypeScript project detection
+- **Type-aware Rules** - Rules that understand TypeScript semantics
+- **Import Resolution** - Proper TypeScript module resolution
+
+### **Accessibility**
+
+- **WCAG Compliance** - Rules that help ensure accessible React components
+- **JSX A11y Rules** - Comprehensive accessibility linting for JSX
+- **Best Practices** - Enforces accessible patterns and ARIA usage
+
+### **Code Quality**
+
+- **Import Organization** - Automatic import sorting and grouping
+- **Unused Code Detection** - Identifies unused variables and imports
+- **Consistent Patterns** - Enforces consistent coding patterns
+- **Error Prevention** - Catches common JavaScript/TypeScript errors
+
+### **Prettier Compatibility**
+
+- **Zero Conflicts** - No formatting rule conflicts with Prettier
+- **Seamless Integration** - Works perfectly with existing Prettier setup
+- **Automatic Resolution** - Prettier config automatically disables conflicting rules
+
+## 💻 Usage
+
+### **Basic Setup**
+
+```javascript
+// eslint.config.mjs
+import reactConfig from '@kanban-board/eslint-config/react';
+
+export default [
+  ...reactConfig,
+  {
+    files: ['**/*.ts', '**/*.tsx'],
+    rules: {
+      // Add project-specific overrides here
+    },
+  },
+];
+```
+
+### **Different Environment Configs**
+
+#### **React Applications**
+
+```javascript
+import reactConfig from '@kanban-board/eslint-config/react';
+
+export default [...reactConfig];
+```
+
+#### **Next.js Applications**
+
+```javascript
+import nextConfig from '@kanban-board/eslint-config/next';
+
+export default [...nextConfig];
+```
+
+#### **Node.js Applications**
+
+```javascript
+import nodeConfig from '@kanban-board/eslint-config/node';
+
+export default [...nodeConfig];
+```
+
+#### **Base Configuration Only**
+
+```javascript
+import baseConfig from '@kanban-board/eslint-config/base';
+
+export default [...baseConfig];
+```
+
+### **Custom Overrides**
+
+```javascript
+import reactConfig from '@kanban-board/eslint-config/react';
+
+export default [
+  ...reactConfig,
+  {
+    files: ['**/*.test.{ts,tsx}'],
+    rules: {
+      // Test-specific rule overrides
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
+  {
+    files: ['**/*.stories.{ts,tsx}'],
+    rules: {
+      // Storybook-specific overrides
+      'import/no-default-export': 'off',
+    },
+  },
+];
+```
+
+## 🔧 Development
+
+### **Adding New Rules**
+
+1. **Identify the appropriate configuration file**:
+
+   - `base.ts` - Rules for all environments
+   - `react.ts` - React-specific rules
+   - `shared.ts` - Shared utilities
+
+2. **Add the rule with proper configuration**:
+
+```typescript
+// In the appropriate rules object
+'new-rule-name': ['error', {
+  // Rule configuration
+}],
+```
+
+3. **Test the rule** across different file types
+4. **Document the rule** in this file
+
+### **Testing Configurations**
+
+```bash
+# Lint a specific package
+nx lint design-system
+
+# Lint all packages
+nx run-many --target=lint
+
+# Check for config issues
+nx lint design-system --fix
+```
+
+### **Build Process**
+
+```bash
+# Build the configuration package
+nx build eslint-config
+
+# Development mode
+nx dev eslint-config
+```
+
+## 📋 Rule Categories
+
+### **Error Prevention**
+
+- **No unused variables** - Prevents dead code
+- **Type safety** - Catches TypeScript type errors
+- **Import validation** - Ensures valid imports and exports
+
+### **Code Style**
+
+- **Consistent imports** - Organized import statements
+- **Function definitions** - Consistent function declaration patterns
+- **Component patterns** - Standard React component structures
+
+### **Accessibility**
+
+- **Alt text** - Images must have alt attributes
+- **Semantic HTML** - Proper use of HTML elements
+- **ARIA labels** - Correct ARIA attribute usage
+
+### **Performance**
+
+- **Optimization hints** - Rules that suggest performance improvements
+- **Bundle efficiency** - Prevents common bundling issues
+
+## 🔗 Dependencies
+
+### **Used By**
+
+- `@kanban-board/design-system` - Component library linting
+- `@kanban-board/web` - Main application linting
+- `@kanban-board/storybook-host` - Storybook configuration linting
+- All other packages in the monorepo
+
+### **Integration Points**
+
+- **Prettier** - Seamless formatting integration
+- **TypeScript** - Full TypeScript project support
+- **Storybook** - Special rules for story files
+- **Testing** - Optimized rules for test files
+
+### **External Dependencies**
+
+- **ESLint** - The core linting engine
+- **TypeScript** - Language support and type checking
+- **Prettier** - Code formatting integration
+
+## 🚀 Benefits
+
+### **Developer Experience**
+
+- **Consistent Code Style** - Same rules across all packages
+- **Early Error Detection** - Catch issues before runtime
+- **IDE Integration** - Real-time feedback in editors
+- **Automated Fixes** - Many issues can be auto-fixed
+
+### **Code Quality**
+
+- **Accessibility** - Built-in accessibility checking
+- **Type Safety** - TypeScript error prevention
+- **Best Practices** - Enforces React and JavaScript best practices
+- **Import Organization** - Clean, organized imports
+
+### **Team Collaboration**
+
+- **Shared Standards** - Everyone follows the same rules
+- **Reduced Reviews** - Fewer style-related review comments
+- **Onboarding** - New team members get immediate feedback
+- **Consistency** - Unified codebase style
+
+---
+
+**Next Steps**:
+
+- Learn about our [Theme System](?path=/docs/packages-theme--docs) and how it integrates with linting
+- Explore the [Design System](?path=/docs/packages-design-system--docs) components that follow these standards
+- Check out our [Button component](?path=/docs/components-button--docs) as an example of clean, linted code

@@ -1,0 +1,115 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction" />
+
+# Kanban Board Design System
+
+Welcome to the **Kanban Board Design System** documentation! This Storybook serves as the central hub for all reusable UI components, design tokens, and development guidelines used across our modern task management application.
+
+## 🎯 Project Overview
+
+The Kanban Board is a comprehensive task management solution built with a focus on user experience, accessibility, and maintainable code architecture. Our application provides:
+
+- **Visual Task Organization** - Intuitive Kanban board with drag-and-drop functionality
+- **Modern User Experience** - Clean, responsive design with multiple theme support
+- **Scalable Architecture** - Monorepo structure for maintainable, reusable code
+- **Accessibility First** - WCAG compliant components and inclusive design
+- **Developer Experience** - Full TypeScript support, automated testing, and consistent tooling
+
+## 🏗️ Monorepo Architecture
+
+Our project follows a well-structured monorepo pattern using **Nx** for efficient development and build processes:
+
+```
+kanban-board/
+├── apps/
+│   ├── web/                    # Next.js application (main app)
+│   ├── web-e2e/              # End-to-end tests
+│   └── storybook-host/       # This Storybook instance
+├── packages/
+│   ├── theme/                # Design tokens & CSS variables
+│   ├── design-system/        # Shared React components
+│   └── eslint-config/        # Shared ESLint configurations
+└── tools/                    # Build and development tools
+```
+
+## 🛠️ Technical Stack
+
+### **Core Technologies**
+
+- **React 19** - UI library with latest features
+- **TypeScript 5.8** - Type-safe development
+- **Next.js 15** - React framework with App Router
+- **CSS Modules** - Component-scoped styling
+
+### **Design & Styling**
+
+- **CSS Custom Properties** - Theme system foundation
+- **Radix UI** - Accessible UI primitives
+- **Plus Jakarta Sans** - Primary typeface
+- **Responsive Design** - Mobile-first approach
+
+### **Development Tools**
+
+- **Nx 21** - Monorepo management and build system
+- **Vite** - Fast build tool for packages
+- **ESLint + Prettier** - Code quality and formatting
+- **Storybook 9** - Component development and documentation
+
+### **Testing & Quality**
+
+- **Vitest** - Unit testing framework
+- **Cypress** - End-to-end testing
+- **TypeScript** - Compile-time error checking
+- **ESLint** - Code linting with custom rules
+
+### **Deployment**
+
+- **Vercel** - Production hosting and deployment
+- **GitHub Actions** - Continuous integration (planned)
+
+## 🎨 Design Principles
+
+### **Accessibility First**
+
+- WCAG 2.1 AA compliance
+- Keyboard navigation support
+- Screen reader compatibility
+- High contrast color ratios
+
+### **Consistency**
+
+- Unified design tokens
+- Standardized component API
+- Consistent spacing and typography
+- Predictable interaction patterns
+
+### **Performance**
+
+- Optimized bundle sizes
+- Efficient CSS-only theme switching
+- Lazy loading and code splitting
+- Minimal runtime overhead
+
+### **Developer Experience**
+
+- TypeScript for type safety
+- Comprehensive component documentation
+- Live examples and interactive controls
+- Clear naming conventions
+
+## 📦 Package Overview
+
+Our monorepo consists of several focused packages, each serving a specific purpose:
+
+### **[@kanban-board/theme](?path=/docs/packages-theme--docs)**
+
+Centralized theme system with CSS custom properties supporting Light, Dark, and Blue themes.
+
+### **[@kanban-board/design-system](?path=/docs/packages-design-system--docs)**
+
+Reusable React components library built on Radix UI for accessibility and consistency.
+
+### **[@kanban-board/eslint-config](?path=/docs/packages-eslint-config--docs)**
+
+Shared ESLint configurations with Prettier integration for code quality across all projects.

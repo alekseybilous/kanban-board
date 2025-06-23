@@ -1,0 +1,207 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Packages/Design System" />
+
+# @kanban-board/design-system
+
+The design system package provides a comprehensive library of reusable React components built with accessibility, consistency, and developer experience in mind. All components are built on top of Radix UI primitives to ensure robust behavior and WCAG compliance.
+
+## 🏗️ Architecture
+
+### **File Structure**
+
+```
+packages/design-system/
+├── src/
+│   ├── components/
+│   │   ├── Button/
+│   │   │   ├── Button.tsx           # Component implementation
+│   │   │   ├── button.module.css    # Component styles
+│   │   │   ├── Button.stories.tsx   # Storybook documentation
+│   │   │   └── index.tsx            # Re-exports
+│   │   └── index.ts                 # All component exports
+│   └── index.ts                     # Package entry point
+├── dist/                            # Built output
+└── vite.config.ts                   # Build configuration
+```
+
+### **Component Architecture Pattern**
+
+Each component follows a consistent structure:
+
+1. **TypeScript Interface** - Comprehensive prop definitions with JSDoc
+2. **forwardRef Implementation** - Proper ref forwarding for DOM access
+3. **CSS Modules** - Scoped styling with theme variable integration
+4. **Storybook Stories** - Complete documentation and examples
+5. **Index Exports** - Clean public API
+
+## 🧩 Components
+
+### **Button Component** ✅ Complete
+
+A versatile button component supporting multiple variants, sizes, and states.
+
+#### **Styling Integration**
+
+The Button component uses CSS variables from the theme system:
+
+```css
+/* button.module.css */
+.primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.primary:hover:not(:disabled) {
+  background-color: var(--color-primary-light);
+}
+
+.secondary {
+  background-color: var(--color-background-light-subtle);
+  color: var(--color-primary);
+}
+```
+
+## 🎨 Design Principles
+
+### **Accessibility First**
+
+All components are built with accessibility as a core requirement:
+
+- **WCAG 2.1 AA Compliance** - Meeting international accessibility standards
+- **Keyboard Navigation** - Full keyboard support for all interactive elements
+- **Screen Reader Support** - Proper ARIA labels and descriptions
+- **Focus Management** - Visible focus indicators and logical tab order
+- **Color Contrast** - Minimum 4.5:1 contrast ratio for text
+
+### **Consistency**
+
+- **Unified API** - Consistent prop naming across all components
+- **Theme Integration** - All components use theme variables
+- **Predictable Behavior** - Similar components behave similarly
+- **Standard Sizes** - Consistent sizing scale across components
+
+### **Composition**
+
+- **asChild Pattern** - Radix UI's composition pattern for flexibility
+- **Slot Components** - Extensible component architecture
+- **Polymorphic Components** - Components that can render as different elements
+- **Compound Components** - Related components that work together
+
+### **Performance**
+
+- **Tree Shaking** - Individual component imports
+- **CSS Modules** - Scoped styles without runtime overhead
+- **Minimal Dependencies** - Only essential dependencies included
+- **TypeScript** - Compile-time optimizations
+
+## 💻 Usage
+
+Components can be customized through CSS variables:
+
+```css
+/* Override button styles */
+.custom-button {
+  --color-primary: #ff6b6b;
+  --color-primary-light: #ff8e8e;
+}
+```
+
+## 🔧 Development
+
+### **Adding New Components**
+
+1. **Create component directory**:
+
+```
+src/components/NewComponent/
+├── NewComponent.tsx
+├── newComponent.module.css
+├── NewComponent.stories.tsx
+└── index.tsx
+```
+
+2. **Implement component with TypeScript**:
+
+```typescript
+export interface NewComponentProps {
+  // Define props
+}
+
+export const NewComponent = React.forwardRef<HTMLDivElement, NewComponentProps>(
+  (props, ref) => {
+    // Implementation
+  }
+);
+```
+
+3. **Add Storybook stories**:
+
+```typescript
+import type { Meta, StoryObj } from '@storybook/react';
+import { NewComponent } from './NewComponent';
+
+const meta: Meta<typeof NewComponent> = {
+  title: 'Components/NewComponent',
+  component: NewComponent,
+};
+
+export default meta;
+```
+
+4. **Export from index**:
+
+```typescript
+// src/components/index.ts
+export { NewComponent } from './NewComponent';
+export type { NewComponentProps } from './NewComponent';
+```
+
+### **Testing Guidelines**
+
+- **Unit Tests** - Test component behavior and props
+- **Accessibility Tests** - Automated a11y testing
+- **Visual Tests** - Storybook visual regression testing
+- **Integration Tests** - Test component interactions
+
+### **Build Process**
+
+The package uses Vite for building:
+
+```bash
+# Build the package
+nx build design-system
+
+# Development mode
+nx dev design-system
+
+# Type checking
+nx type-check design-system
+```
+
+## 🔗 Dependencies
+
+### **Used By**
+
+- `@kanban-board/web` - Main application uses all components
+- `@kanban-board/storybook-host` - Documentation and development
+
+### **Dependencies**
+
+- `@kanban-board/theme` - CSS variables and design tokens
+- `@radix-ui/react-slot` - Component composition utilities
+- `clsx` - Conditional className handling
+
+### **Integration Points**
+
+- **Theme System** - All components use CSS variables from theme package
+- **Storybook** - Components are documented with stories
+- **TypeScript** - Full type safety across the component library
+
+---
+
+**Next Steps**:
+
+- Explore the [Button component](?path=/docs/components-button--docs) to see the design system in action
+- Learn about our [Theme System](?path=/docs/packages-theme--docs) integration
+- Check out our [ESLint Configuration](?path=/docs/packages-eslint-config--docs) for code quality standards

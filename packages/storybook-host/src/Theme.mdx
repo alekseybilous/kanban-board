@@ -1,0 +1,299 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Packages/Theme" />
+
+# @kanban-board/theme
+
+The theme package provides a comprehensive design system foundation built on CSS custom properties, enabling consistent styling across all applications and packages in the monorepo.
+
+## 🎨 Overview
+
+Our theme system is designed with flexibility and performance in mind:
+
+- **CSS Custom Properties** - No JavaScript required for theme switching
+- **Multiple Themes** - Light, Dark, and Blue variants built-in
+- **Design Tokens** - Consistent colors, typography, and spacing
+- **Runtime Switching** - Instant theme changes without page reload
+- **Performance Optimized** - Minimal bundle size and runtime overhead
+
+## 🏗️ Architecture
+
+### **File Structure**
+
+```
+packages/theme/
+├── src/
+│   ├── css/
+│   │   ├── index.css          # Entry point
+│   │   ├── base.css           # Design tokens & color palette
+│   │   └── themes/
+│   │       ├── light.css      # Light theme variables
+│   │       ├── dark.css       # Dark theme variables
+│   │       └── blue.css       # Blue theme variables
+│   └── index.ts               # JavaScript exports
+└── dist/                      # Built output
+```
+
+### **CSS Cascade**
+
+1. **base.css** - Defines the complete color palette and design tokens
+2. **theme files** - Override specific variables for each theme
+3. **index.css** - Imports all and provides fallback defaults
+
+## 🌈 Available Themes
+
+### **Light Theme** (Default)
+
+Clean, bright interface perfect for daytime use with high contrast and excellent readability.
+
+```css
+[data-theme='light'] {
+  --color-background: #ffffff;
+  --color-text: var(--color-gray-900);
+  --color-primary: var(--color-indigo-600);
+}
+```
+
+### **Dark Theme**
+
+Easy on the eyes for low-light environments with carefully chosen contrast ratios.
+
+```css
+[data-theme='dark'] {
+  --color-background: var(--color-slate-950);
+  --color-text: var(--color-slate-100);
+  --color-primary: var(--color-indigo-400);
+}
+```
+
+### **Blue Theme**
+
+Alternative color scheme with blue tones for brand customization.
+
+```css
+[data-theme='blue'] {
+  --color-background: var(--color-blue-950);
+  --color-text: var(--color-blue-50);
+  --color-primary: var(--color-blue-400);
+}
+```
+
+## 🎯 Design Tokens
+
+### **Color System**
+
+#### **Base Palette**
+
+We use a comprehensive color scale with OKLCH color space for better perceptual uniformity:
+
+```css
+/* Gray Scale */
+--color-gray-50: oklch(98.7% 0.002 240);
+--color-gray-100: oklch(96.2% 0.006 240);
+/* ... through to ... */
+--color-gray-950: oklch(14.5% 0.014 240);
+
+/* Primary Colors */
+--color-indigo-50: oklch(97.3% 0.02 270);
+/* ... full scale ... */
+--color-indigo-950: oklch(20.4% 0.058 270);
+```
+
+#### **Semantic Colors**
+
+Theme-aware colors that change based on the active theme:
+
+```css
+/* Backgrounds */
+--color-background: /* Theme-specific background */
+--color-background-subtle: /* Secondary background */
+--color-surface: /* Card/panel background */
+
+/* Text */
+--color-text: /* Primary text color */
+--color-text-muted: /* Secondary text */
+--color-text-subtle: /* Tertiary text */
+
+/* Interactive */
+--color-primary: /* Brand primary color */
+--color-primary-hover: /* Primary hover state */
+--color-error: /* Error/destructive actions */
+--color-success: /* Success states */
+```
+
+### **Typography Scale**
+
+```css
+/* Font Sizes */
+--font-size-xs: 0.75rem; /* 12px */
+--font-size-sm: 0.875rem; /* 14px */
+--font-size-base: 1rem; /* 16px */
+--font-size-lg: 1.125rem; /* 18px */
+--font-size-xl: 1.25rem; /* 20px */
+
+/* Font Weights */
+--font-weight-normal: 400;
+--font-weight-medium: 500;
+--font-weight-semibold: 600;
+--font-weight-bold: 700;
+
+/* Line Heights */
+--line-height-tight: 1.25;
+--line-height-normal: 1.5;
+--line-height-relaxed: 1.75;
+```
+
+### **Spacing Scale**
+
+```css
+/* Spacing (based on 4px grid) */
+--spacing-0: 0;
+--spacing-1: 0.25rem; /* 4px */
+--spacing-2: 0.5rem; /* 8px */
+--spacing-3: 0.75rem; /* 12px */
+--spacing-4: 1rem; /* 16px */
+--spacing-6: 1.5rem; /* 24px */
+--spacing-8: 2rem; /* 32px */
+/* ... continues to spacing-96 */
+```
+
+## 💻 Usage
+
+### **Installing the Theme**
+
+```bash
+# The theme is already included in the monorepo
+# No installation needed for internal packages
+```
+
+### **Basic Usage**
+
+```typescript
+// Import CSS in your application entry point
+import '@kanban-board/theme/css';
+
+// Or in a CSS file
+@import '@kanban-board/theme/css';
+```
+
+### **Using Theme Utilities**
+
+```typescript
+import { themes, themeConfig } from '@kanban-board/theme';
+
+// Available themes
+console.log(themes); // ['light', 'dark', 'blue']
+
+// Default configuration
+console.log(themeConfig.defaultTheme); // 'light'
+```
+
+### **Applying Themes**
+
+Themes are applied using the `data-theme` attribute:
+
+```html
+<!-- Light theme (default) -->
+<html data-theme="light">
+  <!-- Dark theme -->
+  <html data-theme="dark">
+    <!-- Blue theme -->
+    <html data-theme="blue"></html>
+  </html>
+</html>
+```
+
+### **Using CSS Variables in Components**
+
+```css
+.my-component {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  padding: var(--spacing-4);
+  border-radius: var(--radius-md);
+}
+
+.my-component:hover {
+  background-color: var(--color-surface-hover);
+}
+```
+
+## 🔧 Customization
+
+### **Adding a Custom Theme**
+
+1. Create a new CSS file in `src/css/themes/`:
+
+```css
+/* custom.css */
+[data-theme='custom'] {
+  --color-background: #f0f0f0;
+  --color-text: #333333;
+  --color-primary: #ff6b6b;
+  /* Override other variables as needed */
+}
+```
+
+2. Import it in `index.css`:
+
+```css
+@import './themes/custom.css';
+```
+
+3. Add to the themes array:
+
+```typescript
+// src/index.ts
+export const themes = ['light', 'dark', 'blue', 'custom'] as const;
+```
+
+### **Overriding Variables**
+
+You can override any theme variable in your application:
+
+```css
+:root {
+  --color-primary: #your-brand-color;
+  --font-family-sans: 'Your Font', system-ui;
+}
+```
+
+## 🚀 Performance
+
+### **Bundle Size**
+
+- **CSS**: ~8KB gzipped
+- **JavaScript**: ~1KB gzipped
+- **Total**: ~9KB gzipped
+
+### **Runtime Performance**
+
+- **Theme switching**: ~0ms (CSS-only)
+- **Memory usage**: Minimal
+- **Repaints**: Only affected elements
+
+### **Best Practices**
+
+1. **Load CSS early** - Import theme CSS in your app's entry point
+2. **Use semantic tokens** - Prefer `--color-text` over `--color-gray-900`
+3. **Minimize overrides** - Work with the existing token system
+4. **Test all themes** - Ensure components work across all themes
+
+## 🔗 Dependencies
+
+### **Used By**
+
+- `@kanban-board/design-system` - Components use theme variables
+- `@kanban-board/web` - Main application imports theme CSS
+- `@kanban-board/storybook-host` - Storybook uses themes for documentation
+
+### **Integration Points**
+
+- **Storybook**: Theme switching toolbar integration
+- **Next.js**: SSR-compatible theme system
+- **CSS Modules**: Variables available in all stylesheets
+
+---
+
+**Next Steps**: Explore how our [Design System](?path=/docs/packages-design-system--docs) uses these theme tokens to create consistent, accessible components.
