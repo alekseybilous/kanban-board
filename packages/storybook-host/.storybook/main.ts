@@ -9,7 +9,7 @@ const config: StorybookConfig = {
     '../src/**/*.@(mdx|stories.@(js|jsx|ts|tsx))',
     '../../desing-system/src/**/*.@(mdx|stories.@(js|jsx|ts|tsx))',
   ],
-  addons: ['@storybook/addon-docs'],
+  addons: ['@storybook/addon-docs', '@storybook/addon-themes'],
   framework: {
     name: '@storybook/react-vite',
     options: {},

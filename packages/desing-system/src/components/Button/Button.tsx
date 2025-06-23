@@ -20,7 +20,7 @@ export interface ButtonProps
   /**
    * The size of the button
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'lg';
   /**
    * If true, the button will take up the full width of its container
    */
@@ -32,7 +32,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     {
       className,
       variant = 'primary',
-      size = 'md',
+      size = 'lg',
       fullWidth = false,
       asChild = false,
       ...props

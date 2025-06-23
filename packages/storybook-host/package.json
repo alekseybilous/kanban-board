@@ -12,6 +12,7 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@storybook/addon-docs": "^9.0.12"
+    "@storybook/addon-docs": "^9.0.12",
+    "@storybook/addon-themes": "^9.0.12"
   }
 }
