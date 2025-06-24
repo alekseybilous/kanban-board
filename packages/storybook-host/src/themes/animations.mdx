@@ -1,0 +1,1034 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="packages/themes/tokens/Animations" />
+
+# Animation System
+
+Bring your interface to life with our carefully crafted animation system that provides smooth, purposeful motion.
+
+## ⏱️ Duration Scale
+
+Experience different animation speeds with interactive examples.
+
+<div style={{
+  background: 'linear-gradient(135deg, var(--surface) 0%, var(--surface-subtle) 100%)',
+  borderRadius: '12px',
+  padding: 'var(--space-8)',
+  marginBottom: 'var(--space-8)',
+  border: '1px solid var(--border)'
+}}>
+  <div style={{ marginBottom: 'var(--space-6)', textAlign: 'center' }}>
+    <h2 style={{ margin: 0, color: 'var(--text)', fontSize: '1.5rem' }}>Animation Duration Playground</h2>
+    <p style={{ margin: 'var(--space-2) 0 0', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+      Click any button to see the animation • Hover to preview timing
+    </p>
+  </div>
+
+  <div style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+    gap: 'var(--space-4)'
+  }}>
+    {[
+      { token: 'duration-instant', value: '0ms', name: 'Instant', color: '#ef4444' },
+      { token: 'duration-fast', value: '100ms', name: 'Fast', color: '#f97316' },
+      { token: 'duration-normal', value: '200ms', name: 'Normal', color: '#eab308' },
+      { token: 'duration-slow', value: '300ms', name: 'Slow', color: '#22c55e' },
+      { token: 'duration-slower', value: '500ms', name: 'Slower', color: '#3b82f6' },
+      { token: 'duration-slowest', value: '1000ms', name: 'Slowest', color: '#8b5cf6' }
+    ].map((duration, index) => (
+      <div key={duration.token} style={{
+        background: 'var(--surface)',
+        border: '1px solid var(--border)',
+        borderRadius: '8px',
+        padding: 'var(--space-4)',
+        textAlign: 'center'
+      }}>
+        <button
+          style={{
+            width: '100%',
+            padding: 'var(--space-3) var(--space-4)',
+            background: duration.color,
+            color: 'white',
+            border: 'none',
+            borderRadius: 'var(--border-radius-md)',
+            fontSize: 'var(--font-size-sm)',
+            fontWeight: 'var(--font-weight-medium)',
+            cursor: 'pointer',
+            transition: `transform var(--${duration.token}) var(--ease-out)`,
+            marginBottom: 'var(--space-3)'
+          }}
+          onClick={(e) => {
+            navigator.clipboard?.writeText(`var(--${duration.token})`);
+            e.currentTarget.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+              e.currentTarget.style.transform = 'scale(1)';
+            }, 50);
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-2px)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+          }}
+          title={`Click to copy var(--${duration.token})`}
+        >
+          {duration.name}
+        </button>
+
+        <div style={{
+          fontSize: 'var(--font-size-xs)',
+          fontFamily: 'monospace',
+          color: 'var(--primary-base)',
+          marginBottom: 'var(--space-1)'
+        }}>
+          --{duration.token}
+        </div>
+
+        <div style={{
+          fontSize: 'var(--font-size-xs)',
+          color: 'var(--text-tertiary)'
+        }}>
+          {duration.value}
+        </div>
+
+        {/* Animation preview bar */}
+        <div style={{
+          marginTop: 'var(--space-3)',
+          height: '4px',
+          background: 'var(--surface-subtle)',
+          borderRadius: '2px',
+          overflow: 'hidden',
+          position: 'relative'
+        }}>
+          <div
+            key={Math.random()} // Force re-render for animation
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              height: '100%',
+              width: '100%',
+              background: duration.color,
+              animation: `slideRight var(--${duration.token}) var(--ease-out) forwards`
+            }}
+          />
+        </div>
+      </div>
+    ))}
+
+  </div>
+
+{' '}
+<style>{`
+    @keyframes slideRight {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0); }
+    }
+  `}</style>
+
+</div>
+
+## 🎯 Easing Functions
+
+See how different easing curves affect motion feel.
+
+<div style={{
+  display: 'grid',
+  gap: 'var(--space-6)',
+  marginBottom: 'var(--space-8)'
+}}>
+  {[
+    {
+      token: 'ease-linear',
+      name: 'Linear',
+      value: 'linear',
+      desc: 'Constant speed, mechanical feel',
+      color: '#6b7280'
+    },
+    {
+      token: 'ease-in',
+      name: 'Ease In',
+      value: 'cubic-bezier(0.4, 0, 1, 1)',
+      desc: 'Starts slow, accelerates',
+      color: '#ef4444'
+    },
+    {
+      token: 'ease-out',
+      name: 'Ease Out',
+      value: 'cubic-bezier(0, 0, 0.2, 1)',
+      desc: 'Starts fast, decelerates (recommended)',
+      color: '#22c55e'
+    },
+    {
+      token: 'ease-in-out',
+      name: 'Ease In-Out',
+      value: 'cubic-bezier(0.4, 0, 0.2, 1)',
+      desc: 'Smooth acceleration and deceleration',
+      color: '#3b82f6'
+    },
+    {
+      token: 'ease-bounce',
+      name: 'Bounce',
+      value: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+      desc: 'Playful overshoot effect',
+      color: '#f59e0b'
+    },
+    {
+      token: 'ease-elastic',
+      name: 'Elastic',
+      value: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+      desc: 'Subtle elastic effect',
+      color: '#8b5cf6'
+    }
+  ].map((easing) => (
+    <div key={easing.token} style={{
+      background: 'var(--surface)',
+      border: '1px solid var(--border)',
+      borderRadius: '8px',
+      padding: 'var(--space-6)',
+      position: 'relative',
+      overflow: 'hidden'
+    }}>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr auto',
+        gap: 'var(--space-4)',
+        alignItems: 'start',
+        marginBottom: 'var(--space-4)'
+      }}>
+        <div>
+          <h3 style={{
+            margin: '0 0 var(--space-2) 0',
+            fontSize: 'var(--font-size-lg)',
+            fontWeight: 'var(--font-weight-semibold)',
+            color: 'var(--text)'
+          }}>
+            {easing.name}
+          </h3>
+          <p style={{
+            margin: '0 0 var(--space-2) 0',
+            fontSize: 'var(--font-size-sm)',
+            color: 'var(--text-secondary)'
+          }}>
+            {easing.desc}
+          </p>
+          <code style={{
+            fontSize: 'var(--font-size-xs)',
+            fontFamily: 'monospace',
+            color: 'var(--primary-base)',
+            cursor: 'pointer'
+          }}
+          onClick={() => navigator.clipboard?.writeText(`var(--${easing.token})`)}
+          title={`Click to copy var(--${easing.token})`}
+          >
+            --{easing.token}
+          </code>
+        </div>
+
+        <button
+          style={{
+            padding: 'var(--space-2) var(--space-3)',
+            background: easing.color,
+            color: 'white',
+            border: 'none',
+            borderRadius: 'var(--border-radius-md)',
+            fontSize: 'var(--font-size-sm)',
+            fontWeight: 'var(--font-weight-medium)',
+            cursor: 'pointer'
+          }}
+          onClick={(e) => {
+            const ball = e.currentTarget.parentElement.parentElement.querySelector('.animation-ball');
+            ball.style.animation = 'none';
+            setTimeout(() => {
+              ball.style.animation = '';
+            }, 10);
+          }}
+        >
+          Play
+        </button>
+      </div>
+
+      {/* Animation track */}
+      <div style={{
+        height: '60px',
+        background: 'var(--surface-subtle)',
+        borderRadius: '30px',
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        padding: '0 30px'
+      }}>
+        <div
+          className="animation-ball"
+          style={{
+            width: '40px',
+            height: '40px',
+            background: easing.color,
+            borderRadius: '50%',
+            position: 'absolute',
+            left: '10px',
+            animation: `moveBall 2s var(--${easing.token}) infinite`
+          }}
+        />
+      </div>
+
+      {/* Curve visualization */}
+      <div style={{
+        marginTop: 'var(--space-3)',
+        fontSize: 'var(--font-size-xs)',
+        fontFamily: 'monospace',
+        color: 'var(--text-tertiary)',
+        textAlign: 'center'
+      }}>
+        {easing.value}
+      </div>
+    </div>
+
+))}
+
+{' '}
+<style>{`
+    @keyframes moveBall {
+      0%, 100% { left: 10px; }
+      50% { left: calc(100% - 50px); }
+    }
+  `}</style>
+
+</div>
+
+## 🔄 Transform Scales
+
+Interactive scale transformations for hover and click effects.
+
+<div style={{
+  background: 'var(--surface)',
+  border: '1px solid var(--border)',
+  borderRadius: '12px',
+  padding: 'var(--space-6)',
+  marginBottom: 'var(--space-8)'
+}}>
+  <h3 style={{
+    margin: '0 0 var(--space-4) 0',
+    fontSize: 'var(--font-size-xl)',
+    fontWeight: 'var(--font-weight-semibold)',
+    color: 'var(--text)',
+    textAlign: 'center'
+  }}>
+    Scale Transform Values
+  </h3>
+
+  <div style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
+    gap: 'var(--space-4)'
+  }}>
+    {[
+      { token: 'scale-0', value: '0', demo: 0 },
+      { token: 'scale-50', value: '0.5', demo: 0.5 },
+      { token: 'scale-75', value: '0.75', demo: 0.75 },
+      { token: 'scale-90', value: '0.9', demo: 0.9 },
+      { token: 'scale-95', value: '0.95', demo: 0.95 },
+      { token: 'scale-100', value: '1', demo: 1 },
+      { token: 'scale-105', value: '1.05', demo: 1.05 },
+      { token: 'scale-110', value: '1.1', demo: 1.1 },
+      { token: 'scale-125', value: '1.25', demo: 1.25 },
+      { token: 'scale-150', value: '1.5', demo: 1.5 }
+    ].map((scale) => (
+      <div key={scale.token} style={{
+        textAlign: 'center',
+        cursor: 'pointer'
+      }}
+      onClick={() => navigator.clipboard?.writeText(`var(--${scale.token})`)}
+      title={`Click to copy var(--${scale.token})`}
+      >
+        <div style={{
+          height: '80px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginBottom: 'var(--space-2)'
+        }}>
+          <div
+            style={{
+              width: '40px',
+              height: '40px',
+              background: 'var(--primary-base)',
+              borderRadius: 'var(--border-radius-md)',
+              transform: `scale(${scale.demo})`,
+              transition: 'transform var(--duration-normal) var(--ease-out)',
+              cursor: 'pointer'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.transform = `scale(${scale.demo * 1.1})`;
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.transform = `scale(${scale.demo})`;
+            }}
+          />
+        </div>
+
+        <div style={{
+          fontSize: 'var(--font-size-xs)',
+          fontFamily: 'monospace',
+          color: 'var(--primary-base)',
+          marginBottom: 'var(--space-1)'
+        }}>
+          --{scale.token}
+        </div>
+
+        <div style={{
+          fontSize: 'var(--font-size-xs)',
+          color: 'var(--text-tertiary)'
+        }}>
+          {scale.value}
+        </div>
+      </div>
+    ))}
+
+  </div>
+</div>
+
+## 🔄 Rotation Values
+
+Explore rotation angles for creative animations.
+
+<div style={{
+  background: 'var(--surface-subtle)',
+  borderRadius: '12px',
+  padding: 'var(--space-6)',
+  marginBottom: 'var(--space-8)'
+}}>
+  <h3 style={{
+    margin: '0 0 var(--space-4) 0',
+    fontSize: 'var(--font-size-xl)',
+    fontWeight: 'var(--font-weight-semibold)',
+    color: 'var(--text)',
+    textAlign: 'center'
+  }}>
+    Rotation Angles
+  </h3>
+
+  <div style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+    gap: 'var(--space-4)'
+  }}>
+    {[
+      { token: 'rotate-0', value: '0deg', angle: 0 },
+      { token: 'rotate-1', value: '1deg', angle: 1 },
+      { token: 'rotate-2', value: '2deg', angle: 2 },
+      { token: 'rotate-3', value: '3deg', angle: 3 },
+      { token: 'rotate-6', value: '6deg', angle: 6 },
+      { token: 'rotate-12', value: '12deg', angle: 12 },
+      { token: 'rotate-45', value: '45deg', angle: 45 },
+      { token: 'rotate-90', value: '90deg', angle: 90 },
+      { token: 'rotate-180', value: '180deg', angle: 180 }
+    ].map((rotate) => (
+      <div key={rotate.token} style={{
+        background: 'var(--surface)',
+        borderRadius: '8px',
+        padding: 'var(--space-4)',
+        textAlign: 'center',
+        cursor: 'pointer'
+      }}
+      onClick={() => navigator.clipboard?.writeText(`var(--${rotate.token})`)}
+      title={`Click to copy var(--${rotate.token})`}
+      >
+        <div style={{
+          height: '80px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginBottom: 'var(--space-3)'
+        }}>
+          <div
+            style={{
+              width: '50px',
+              height: '50px',
+              background: 'linear-gradient(135deg, var(--primary-base) 0%, var(--primary-base) 50%, transparent 50%)',
+              borderRadius: 'var(--border-radius-sm)',
+              transform: `rotate(${rotate.angle}deg)`,
+              transition: 'transform var(--duration-slow) var(--ease-out)',
+              cursor: 'pointer'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.transform = `rotate(${rotate.angle + 360}deg)`;
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.transform = `rotate(${rotate.angle}deg)`;
+            }}
+          />
+        </div>
+
+        <div style={{
+          fontSize: 'var(--font-size-xs)',
+          fontFamily: 'monospace',
+          color: 'var(--primary-base)',
+          marginBottom: 'var(--space-1)'
+        }}>
+          --{rotate.token}
+        </div>
+
+        <div style={{
+          fontSize: 'var(--font-size-xs)',
+          color: 'var(--text-tertiary)'
+        }}>
+          {rotate.value}
+        </div>
+      </div>
+    ))}
+
+  </div>
+</div>
+
+## 🎬 Common Animation Patterns
+
+Ready-to-use animation examples for common UI interactions.
+
+<div style={{
+  display: 'grid',
+  gap: 'var(--space-6)',
+  marginBottom: 'var(--space-8)'
+}}>
+  {/* Hover Effects */}
+  <div>
+    <h3 style={{
+      margin: '0 0 var(--space-4) 0',
+      fontSize: 'var(--font-size-xl)',
+      fontWeight: 'var(--font-weight-semibold)',
+      color: 'var(--text)'
+    }}>
+      Hover Interactions
+    </h3>
+
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+      gap: 'var(--space-4)'
+    }}>
+      {[
+        {
+          name: 'Lift',
+          transform: 'translateY(-4px)',
+          shadow: 'var(--shadow-lg)'
+        },
+        {
+          name: 'Scale',
+          transform: 'scale(1.05)',
+          shadow: 'var(--shadow-md)'
+        },
+        {
+          name: 'Rotate',
+          transform: 'rotate(3deg)',
+          shadow: 'var(--shadow-sm)'
+        }
+      ].map((effect) => (
+        <div key={effect.name} style={{
+          background: 'var(--surface)',
+          border: '1px solid var(--border)',
+          borderRadius: 'var(--border-radius-lg)',
+          padding: 'var(--space-6)',
+          textAlign: 'center',
+          cursor: 'pointer',
+          transition: 'all var(--duration-normal) var(--ease-out)',
+          boxShadow: 'var(--shadow-sm)'
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = effect.transform;
+          e.currentTarget.style.boxShadow = effect.shadow;
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'none';
+          e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
+        }}
+        onClick={() => navigator.clipboard?.writeText(`transform: ${effect.transform};\ntransition: all var(--duration-normal) var(--ease-out);`)}
+        title="Click to copy CSS"
+        >
+          <h4 style={{
+            margin: '0 0 var(--space-2) 0',
+            fontSize: 'var(--font-size-lg)',
+            fontWeight: 'var(--font-weight-medium)',
+            color: 'var(--text)'
+          }}>
+            {effect.name} Effect
+          </h4>
+          <p style={{
+            margin: 0,
+            fontSize: 'var(--font-size-sm)',
+            color: 'var(--text-secondary)'
+          }}>
+            Hover to preview
+          </p>
+        </div>
+      ))}
+    </div>
+
+  </div>
+
+{/* Loading States */}
+
+  <div>
+    <h3 style={{
+      margin: '0 0 var(--space-4) 0',
+      fontSize: 'var(--font-size-xl)',
+      fontWeight: 'var(--font-weight-semibold)',
+      color: 'var(--text)'
+    }}>
+      Loading Animations
+    </h3>
+
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+      gap: 'var(--space-4)'
+    }}>
+      {/* Spinner */}
+      <div style={{
+        background: 'var(--surface)',
+        border: '1px solid var(--border)',
+        borderRadius: 'var(--border-radius-lg)',
+        padding: 'var(--space-6)',
+        textAlign: 'center'
+      }}>
+        <div style={{
+          width: '40px',
+          height: '40px',
+          border: '3px solid var(--border)',
+          borderTopColor: 'var(--primary-base)',
+          borderRadius: '50%',
+          margin: '0 auto var(--space-3) auto',
+          animation: 'spin var(--duration-slowest) var(--ease-linear) infinite'
+        }} />
+        <div style={{
+          fontSize: 'var(--font-size-sm)',
+          fontWeight: 'var(--font-weight-medium)',
+          color: 'var(--text)',
+          marginBottom: 'var(--space-1)'
+        }}>
+          Spinner
+        </div>
+        <code style={{
+          fontSize: 'var(--font-size-xs)',
+          fontFamily: 'monospace',
+          color: 'var(--text-tertiary)'
+        }}>
+          duration-slowest
+        </code>
+      </div>
+
+      {/* Pulse */}
+      <div style={{
+        background: 'var(--surface)',
+        border: '1px solid var(--border)',
+        borderRadius: 'var(--border-radius-lg)',
+        padding: 'var(--space-6)',
+        textAlign: 'center'
+      }}>
+        <div style={{
+          width: '40px',
+          height: '40px',
+          background: 'var(--primary-base)',
+          borderRadius: '50%',
+          margin: '0 auto var(--space-3) auto',
+          animation: 'pulse 2s var(--ease-in-out) infinite'
+        }} />
+        <div style={{
+          fontSize: 'var(--font-size-sm)',
+          fontWeight: 'var(--font-weight-medium)',
+          color: 'var(--text)',
+          marginBottom: 'var(--space-1)'
+        }}>
+          Pulse
+        </div>
+        <code style={{
+          fontSize: 'var(--font-size-xs)',
+          fontFamily: 'monospace',
+          color: 'var(--text-tertiary)'
+        }}>
+          ease-in-out
+        </code>
+      </div>
+
+      {/* Skeleton */}
+      <div style={{
+        background: 'var(--surface)',
+        border: '1px solid var(--border)',
+        borderRadius: 'var(--border-radius-lg)',
+        padding: 'var(--space-6)',
+        textAlign: 'center'
+      }}>
+        <div style={{
+          height: '40px',
+          background: 'linear-gradient(90deg, var(--surface-subtle) 0%, var(--surface) 50%, var(--surface-subtle) 100%)',
+          backgroundSize: '200% 100%',
+          borderRadius: 'var(--border-radius-md)',
+          marginBottom: 'var(--space-3)',
+          animation: 'shimmer 1.5s var(--ease-linear) infinite'
+        }} />
+        <div style={{
+          fontSize: 'var(--font-size-sm)',
+          fontWeight: 'var(--font-weight-medium)',
+          color: 'var(--text)',
+          marginBottom: 'var(--space-1)'
+        }}>
+          Skeleton
+        </div>
+        <code style={{
+          fontSize: 'var(--font-size-xs)',
+          fontFamily: 'monospace',
+          color: 'var(--text-tertiary)'
+        }}>
+          ease-linear
+        </code>
+      </div>
+    </div>
+
+  </div>
+
+{' '}
+<style>{`
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.9); }
+    }
+
+    @keyframes shimmer {
+      from { background-position: -200% 0; }
+      to { background-position: 200% 0; }
+    }
+  `}</style>
+
+</div>
+
+## 🎯 Micro-interactions
+
+Small animations that enhance user experience.
+
+<div style={{
+  background: 'var(--surface)',
+  border: '1px solid var(--border)',
+  borderRadius: '12px',
+  padding: 'var(--space-6)',
+  marginBottom: 'var(--space-8)'
+}}>
+  <h3 style={{
+    margin: '0 0 var(--space-4) 0',
+    fontSize: 'var(--font-size-xl)',
+    fontWeight: 'var(--font-weight-semibold)',
+    color: 'var(--text)'
+  }}>
+    Interactive Elements
+  </h3>
+
+  <div style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gap: 'var(--space-6)'
+  }}>
+    {/* Toggle Switch */}
+    <div>
+      <h4 style={{
+        margin: '0 0 var(--space-3) 0',
+        fontSize: 'var(--font-size-base)',
+        fontWeight: 'var(--font-weight-medium)',
+        color: 'var(--text)'
+      }}>
+        Toggle Switch
+      </h4>
+      <label style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        cursor: 'pointer'
+      }}>
+        <input type="checkbox" style={{ display: 'none' }} />
+        <div
+          onClick={(e) => {
+            const isChecked = e.currentTarget.getAttribute('data-checked') === 'true';
+            e.currentTarget.setAttribute('data-checked', !isChecked);
+            const thumb = e.currentTarget.querySelector('.thumb');
+            if (!isChecked) {
+              thumb.style.transform = 'translateX(24px)';
+              e.currentTarget.style.backgroundColor = 'var(--primary-base)';
+            } else {
+              thumb.style.transform = 'translateX(0)';
+              e.currentTarget.style.backgroundColor = 'var(--surface-subtle)';
+            }
+          }}
+          data-checked="false"
+          style={{
+            width: '48px',
+            height: '24px',
+            background: 'var(--surface-subtle)',
+            borderRadius: '12px',
+            padding: '2px',
+            transition: 'background-color var(--duration-normal) var(--ease-out)',
+            position: 'relative'
+          }}
+        >
+          <div
+            className="thumb"
+            style={{
+              width: '20px',
+              height: '20px',
+              background: 'white',
+              borderRadius: '50%',
+              transition: 'transform var(--duration-normal) var(--ease-out)',
+              boxShadow: 'var(--shadow-sm)'
+            }}
+          />
+        </div>
+      </label>
+    </div>
+
+    {/* Like Button */}
+    <div>
+      <h4 style={{
+        margin: '0 0 var(--space-3) 0',
+        fontSize: 'var(--font-size-base)',
+        fontWeight: 'var(--font-weight-medium)',
+        color: 'var(--text)'
+      }}>
+        Like Animation
+      </h4>
+      <button
+        onClick={(e) => {
+          e.currentTarget.style.transform = 'scale(0.8)';
+          setTimeout(() => {
+            e.currentTarget.style.transform = 'scale(1.2)';
+            e.currentTarget.querySelector('span').textContent = '❤️';
+          }, 100);
+          setTimeout(() => {
+            e.currentTarget.style.transform = 'scale(1)';
+          }, 200);
+        }}
+        style={{
+          background: 'var(--surface-subtle)',
+          border: '1px solid var(--border)',
+          borderRadius: 'var(--border-radius-full)',
+          width: '48px',
+          height: '48px',
+          fontSize: '1.5rem',
+          cursor: 'pointer',
+          transition: 'transform var(--duration-fast) var(--ease-bounce)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+      >
+        <span>🤍</span>
+      </button>
+    </div>
+
+    {/* Success Check */}
+    <div>
+      <h4 style={{
+        margin: '0 0 var(--space-3) 0',
+        fontSize: 'var(--font-size-base)',
+        fontWeight: 'var(--font-weight-medium)',
+        color: 'var(--text)'
+      }}>
+        Success Check
+      </h4>
+      <button
+        onClick={(e) => {
+          const icon = e.currentTarget.querySelector('.icon');
+          icon.style.transform = 'scale(0) rotate(-180deg)';
+          setTimeout(() => {
+            icon.textContent = '✓';
+            icon.style.transform = 'scale(1) rotate(0deg)';
+            e.currentTarget.style.backgroundColor = 'var(--success-base)';
+            e.currentTarget.style.color = 'white';
+          }, 200);
+        }}
+        style={{
+          background: 'var(--surface-subtle)',
+          color: 'var(--text)',
+          border: '1px solid var(--border)',
+          borderRadius: 'var(--border-radius-md)',
+          padding: 'var(--space-3) var(--space-4)',
+          fontSize: 'var(--font-size-sm)',
+          fontWeight: 'var(--font-weight-medium)',
+          cursor: 'pointer',
+          transition: 'all var(--duration-normal) var(--ease-out)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 'var(--space-2)'
+        }}
+      >
+        <span
+          className="icon"
+          style={{
+            display: 'inline-block',
+            transition: 'transform var(--duration-normal) var(--ease-elastic)'
+          }}
+        >
+          →
+        </span>
+        Submit
+      </button>
+    </div>
+
+  </div>
+</div>
+
+## 💡 Best Practices
+
+<div style={{
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+  gap: 'var(--space-6)',
+  marginBottom: 'var(--space-8)'
+}}>
+  <div style={{
+    background: 'var(--success-surface)',
+    border: '1px solid var(--success-border)',
+    borderRadius: '8px',
+    padding: 'var(--space-4)'
+  }}>
+    <h4 style={{
+      color: 'var(--success-text)',
+      marginBottom: 'var(--space-3)',
+      display: 'flex',
+      alignItems: 'center',
+      gap: 'var(--space-2)'
+    }}>
+      <span>✅</span> Do's
+    </h4>
+    <ul style={{
+      margin: 0,
+      paddingLeft: 'var(--space-4)',
+      color: 'var(--success-text)',
+      fontSize: 'var(--font-size-sm)',
+      lineHeight: 'var(--line-height-normal)'
+    }}>
+      <li>Use ease-out for most animations</li>
+      <li>Keep animations under 300ms</li>
+      <li>Animate opacity and transform for performance</li>
+      <li>Provide motion preferences options</li>
+      <li>Use animations to guide attention</li>
+    </ul>
+  </div>
+
+  <div style={{
+    background: 'var(--danger-surface)',
+    border: '1px solid var(--danger-border)',
+    borderRadius: '8px',
+    padding: 'var(--space-4)'
+  }}>
+    <h4 style={{
+      color: 'var(--danger-text)',
+      marginBottom: 'var(--space-3)',
+      display: 'flex',
+      alignItems: 'center',
+      gap: 'var(--space-2)'
+    }}>
+      <span>❌</span> Don'ts
+    </h4>
+    <ul style={{
+      margin: 0,
+      paddingLeft: 'var(--space-4)',
+      color: 'var(--danger-text)',
+      fontSize: 'var(--font-size-sm)',
+      lineHeight: 'var(--line-height-normal)'
+    }}>
+      <li>Overuse animations everywhere</li>
+      <li>Make animations too long or slow</li>
+      <li>Animate layout properties (width, height)</li>
+      <li>Use linear easing for natural motion</li>
+      <li>Ignore reduced motion preferences</li>
+    </ul>
+  </div>
+</div>
+
+## 🔧 Quick Reference
+
+Common animation patterns ready to copy and use.
+
+<div style={{
+  background: 'var(--surface-subtle)',
+  borderRadius: '8px',
+  padding: 'var(--space-4)',
+  marginBottom: 'var(--space-8)'
+}}>
+  <h4 style={{ marginBottom: 'var(--space-3)', color: 'var(--text)' }}>Copy-Paste Animation Patterns</h4>
+
+  <div style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gap: 'var(--space-3)'
+  }}>
+    {[
+      {
+        name: 'Button Hover',
+        css: 'transition: transform var(--duration-normal) var(--ease-out);\n&:hover { transform: translateY(-2px); }'
+      },
+      {
+        name: 'Card Hover',
+        css: 'transition: all var(--duration-normal) var(--ease-out);\n&:hover { transform: scale(1.02); }'
+      },
+      {
+        name: 'Fade In',
+        css: 'animation: fadeIn var(--duration-slow) var(--ease-out);\n@keyframes fadeIn { from { opacity: 0; } }'
+      },
+      {
+        name: 'Slide Up',
+        css: 'animation: slideUp var(--duration-normal) var(--ease-out);\n@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } }'
+      },
+      {
+        name: 'Loading Spin',
+        css: 'animation: spin var(--duration-slowest) var(--ease-linear) infinite;\n@keyframes spin { to { transform: rotate(360deg); } }'
+      },
+      {
+        name: 'Pulse',
+        css: 'animation: pulse 2s var(--ease-in-out) infinite;\n@keyframes pulse { 50% { opacity: 0.5; } }'
+      }
+    ].map((pattern) => (
+      <div key={pattern.name} style={{
+        background: 'var(--surface)',
+        border: '1px solid var(--border-subtle)',
+        borderRadius: '6px',
+        padding: 'var(--space-3)',
+        cursor: 'pointer',
+        transition: 'all 0.2s ease'
+      }}
+      onClick={() => navigator.clipboard?.writeText(pattern.css)}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.borderColor = 'var(--primary-border)';
+        e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.borderColor = 'var(--border-subtle)';
+        e.currentTarget.style.backgroundColor = 'var(--surface)';
+      }}
+      title={`Click to copy CSS for ${pattern.name}`}
+      >
+        <div style={{
+          fontSize: 'var(--font-size-sm)',
+          fontWeight: 'var(--font-weight-medium)',
+          color: 'var(--text)',
+          marginBottom: 'var(--space-1)'
+        }}>
+          {pattern.name}
+        </div>
+        <div style={{
+          fontSize: 'var(--font-size-xs)',
+          fontFamily: 'monospace',
+          color: 'var(--text-tertiary)',
+          whiteSpace: 'pre-wrap'
+        }}>
+          {pattern.css}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+---
+
+_Thoughtful animations enhance user experience by providing visual feedback, guiding attention, and creating delightful interactions._

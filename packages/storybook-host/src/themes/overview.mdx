@@ -1,0 +1,729 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="packages/Themes" />
+
+# Design Token System
+
+A comprehensive design token system that provides the foundation for consistent, scalable, and maintainable user interfaces across your entire application.
+
+## 🎯 What Are Design Tokens?
+
+Design tokens are the visual design atoms of your design system — specifically, they are named entities that store visual design attributes. They're used in place of hard-coded values to maintain a scalable and consistent visual system.
+
+<div style={{
+  background: 'linear-gradient(135deg, var(--surface) 0%, var(--surface-subtle) 100%)',
+  borderRadius: '12px',
+  padding: 'var(--space-8)',
+  marginBottom: 'var(--space-8)',
+  border: '1px solid var(--border)'
+}}>
+  <div style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+    gap: 'var(--space-6)',
+    textAlign: 'center'
+  }}>
+    <div>
+      <div style={{
+        fontSize: '3rem',
+        marginBottom: 'var(--space-2)'
+      }}>🎨</div>
+      <h3 style={{
+        margin: '0 0 var(--space-2) 0',
+        fontSize: 'var(--font-size-lg)',
+        fontWeight: 'var(--font-weight-semibold)',
+        color: 'var(--text)'
+      }}>Consistent</h3>
+      <p style={{
+        margin: 0,
+        fontSize: 'var(--font-size-sm)',
+        color: 'var(--text-secondary)',
+        lineHeight: 'var(--line-height-normal)'
+      }}>
+        Single source of truth for all visual properties
+      </p>
+    </div>
+
+    <div>
+      <div style={{
+        fontSize: '3rem',
+        marginBottom: 'var(--space-2)'
+      }}>⚡</div>
+      <h3 style={{
+        margin: '0 0 var(--space-2) 0',
+        fontSize: 'var(--font-size-lg)',
+        fontWeight: 'var(--font-weight-semibold)',
+        color: 'var(--text)'
+      }}>Scalable</h3>
+      <p style={{
+        margin: 0,
+        fontSize: 'var(--font-size-sm)',
+        color: 'var(--text-secondary)',
+        lineHeight: 'var(--line-height-normal)'
+      }}>
+        Easy to update across entire applications
+      </p>
+    </div>
+
+    <div>
+      <div style={{
+        fontSize: '3rem',
+        marginBottom: 'var(--space-2)'
+      }}>🔧</div>
+      <h3 style={{
+        margin: '0 0 var(--space-2) 0',
+        fontSize: 'var(--font-size-lg)',
+        fontWeight: 'var(--font-weight-semibold)',
+        color: 'var(--text)'
+      }}>Maintainable</h3>
+      <p style={{
+        margin: 0,
+        fontSize: 'var(--font-size-sm)',
+        color: 'var(--text-secondary)',
+        lineHeight: 'var(--line-height-normal)'
+      }}>
+        Reduce code duplication and improve developer experience
+      </p>
+    </div>
+
+  </div>
+</div>
+
+## 📚 Token Categories
+
+Explore our comprehensive token system organized into logical categories for easy navigation and implementation.
+
+<div style={{
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+  gap: 'var(--space-6)',
+  marginBottom: 'var(--space-8)'
+}}>
+  {[
+    {
+      title: 'Colors',
+      icon: '🎨',
+      description: 'Comprehensive color palette with semantic naming',
+      tokens: '21 color families, 11 shades each',
+      highlights: ['OKLCH color space', 'Light/Dark themes', 'Semantic variants'],
+      path: '?path=/docs/packages-themes-colors--docs'
+    },
+    {
+      title: 'Typography',
+      icon: '📝',
+      description: 'Type scale, weights, and spacing for perfect readability',
+      tokens: '9 font sizes, 5 weights, 4 line heights',
+      highlights: ['Modular scale', 'Web fonts', 'Responsive sizing'],
+      path: '?path=/docs/packages-themes-typography--docs'
+    },
+    {
+      title: 'Spacing',
+      icon: '📏',
+      description: '4px-based spacing system for consistent layouts',
+      tokens: '17 spacing values from 1px to 128px',
+      highlights: ['4px grid system', 'Consistent rhythm', 'Predictable scaling'],
+      path: '?path=/docs/packages-themes-spacing--docs'
+    },
+    {
+      title: 'Borders',
+      icon: '🔲',
+      description: 'Border radius and width tokens for cohesive designs',
+      tokens: '8 radius values, 5 width options',
+      highlights: ['Rounded corners', 'Consistent borders', 'Design flexibility'],
+      path: '?path=/docs/packages-themes-borders--docs'
+    },
+    {
+      title: 'Shadows',
+      icon: '🌑',
+      description: 'Elevation system using carefully crafted shadows',
+      tokens: '9 shadow levels plus special effects',
+      highlights: ['Elevation hierarchy', 'Focus states', 'Depth perception'],
+      path: '?path=/docs/packages-themes-shadows--docs'
+    },
+    {
+      title: 'Animations',
+      icon: '⚡',
+      description: 'Duration, easing, and transform tokens for smooth motion',
+      tokens: '6 durations, 6 easings, 18 transform values',
+      highlights: ['Smooth transitions', 'Consistent timing', 'Performance optimized'],
+      path: '?path=/docs/packages-themes-animations--docs'
+    },
+    {
+      title: 'Layout',
+      icon: '📐',
+      description: 'Container widths, breakpoints, and z-index scales',
+      tokens: '11 containers, 6 breakpoints, 12 z-levels',
+      highlights: ['Responsive design', 'Container queries', 'Layer management'],
+      path: '?path=/docs/packages-themes-layout--docs'
+    },
+    {
+      title: 'Utilities',
+      icon: '🛠️',
+      description: 'Opacity, aspect ratios, and viewport units',
+      tokens: '15 opacity levels, 5 ratios, 10 viewport units',
+      highlights: ['Modern CSS features', 'Responsive utilities', 'Accessibility support'],
+      path: '?path=/docs/packages-themes-utilities--docs'
+    }
+  ].map((category) => (
+    <div key={category.title} style={{
+      background: 'var(--surface)',
+      border: '1px solid var(--border)',
+      borderRadius: '12px',
+      padding: 'var(--space-6)',
+      cursor: 'pointer',
+      transition: 'all 0.3s ease',
+      textDecoration: 'none'
+    }}
+    onClick={() => window.location.href = category.path}
+    onMouseEnter={(e) => {
+      e.currentTarget.style.transform = 'translateY(-4px)';
+      e.currentTarget.style.boxShadow = 'var(--shadow-lg)';
+      e.currentTarget.style.borderColor = 'var(--primary-border)';
+    }}
+    onMouseLeave={(e) => {
+      e.currentTarget.style.transform = 'translateY(0)';
+      e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
+      e.currentTarget.style.borderColor = 'var(--border)';
+    }}
+    title={`Explore ${category.title} tokens`}
+    >
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 'var(--space-3)',
+        marginBottom: 'var(--space-4)'
+      }}>
+        <span style={{ fontSize: '2rem' }}>{category.icon}</span>
+        <h3 style={{
+          margin: 0,
+          fontSize: 'var(--font-size-xl)',
+          fontWeight: 'var(--font-weight-semibold)',
+          color: 'var(--text)'
+        }}>
+          {category.title}
+        </h3>
+      </div>
+
+      <p style={{
+        margin: '0 0 var(--space-4) 0',
+        fontSize: 'var(--font-size-base)',
+        color: 'var(--text-secondary)',
+        lineHeight: 'var(--line-height-normal)'
+      }}>
+        {category.description}
+      </p>
+
+      <div style={{
+        background: 'var(--surface-subtle)',
+        borderRadius: '6px',
+        padding: 'var(--space-3)',
+        marginBottom: 'var(--space-4)'
+      }}>
+        <div style={{
+          fontSize: 'var(--font-size-sm)',
+          fontWeight: 'var(--font-weight-medium)',
+          color: 'var(--text)',
+          marginBottom: 'var(--space-1)'
+        }}>
+          Available Tokens
+        </div>
+        <div style={{
+          fontSize: 'var(--font-size-sm)',
+          color: 'var(--text-tertiary)'
+        }}>
+          {category.tokens}
+        </div>
+      </div>
+
+      <div style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: 'var(--space-2)'
+      }}>
+        {category.highlights.map((highlight) => (
+          <span key={highlight} style={{
+            fontSize: 'var(--font-size-xs)',
+            background: 'var(--primary-surface)',
+            color: 'var(--primary-text)',
+            padding: '2px 8px',
+            borderRadius: '12px',
+            border: '1px solid var(--primary-border)'
+          }}>
+            {highlight}
+          </span>
+        ))}
+      </div>
+    </div>
+
+))}
+
+</div>
+
+## 🚀 Getting Started
+
+### Quick Start Guide
+
+Start using design tokens in your components immediately with these simple steps:
+
+<div style={{
+  background: 'var(--surface)',
+  border: '1px solid var(--border)',
+  borderRadius: '8px',
+  padding: 'var(--space-6)',
+  marginBottom: 'var(--space-6)'
+}}>
+  <h4 style={{
+    margin: '0 0 var(--space-4) 0',
+    fontSize: 'var(--font-size-lg)',
+    fontWeight: 'var(--font-weight-semibold)',
+    color: 'var(--text)'
+  }}>
+    1. Import the Theme
+  </h4>
+
+{' '}
+<div
+  style={{
+    background: 'var(--surface-subtle)',
+    borderRadius: '6px',
+    padding: 'var(--space-4)',
+    marginBottom: 'var(--space-4)',
+    fontFamily: 'monospace',
+    fontSize: 'var(--font-size-sm)',
+    color: 'var(--text)',
+    border: '1px solid var(--border-subtle)',
+  }}
+>
+  {`import '@your-org/theme/css/index.css';`}
+</div>
+
+{' '}
+<h4
+  style={{
+    margin: '0 0 var(--space-4) 0',
+    fontSize: 'var(--font-size-lg)',
+    fontWeight: 'var(--font-weight-semibold)',
+    color: 'var(--text)',
+  }}
+>
+  2. Use Tokens in CSS
+</h4>
+
+  <div style={{
+    background: 'var(--surface-subtle)',
+    borderRadius: '6px',
+    padding: 'var(--space-4)',
+    marginBottom: 'var(--space-4)',
+    fontFamily: 'monospace',
+    fontSize: 'var(--font-size-sm)',
+    color: 'var(--text)',
+    border: '1px solid var(--border-subtle)'
+  }}>
+    {`.button {
+  background: var(--primary-base);
+  color: var(--primary-text);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.button:hover {
+background: var(--primary-hover);
+box-shadow: var(--shadow-md);
+transform: translateY(-1px);
+}`}
+
+  </div>
+
+{' '}
+<h4
+  style={{
+    margin: '0 0 var(--space-4) 0',
+    fontSize: 'var(--font-size-lg)',
+    fontWeight: 'var(--font-weight-semibold)',
+    color: 'var(--text)',
+  }}
+>
+  3. Explore Documentation
+</h4>
+
+  <p style={{
+    margin: 0,
+    fontSize: 'var(--font-size-base)',
+    color: 'var(--text-secondary)',
+    lineHeight: 'var(--line-height-normal)'
+  }}>
+    Click on any token category above to explore interactive examples, copy CSS variables, and see real-world usage patterns.
+  </p>
+</div>
+
+## 🎨 Theme System
+
+Our token system supports multiple themes that can be switched dynamically:
+
+<div style={{
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+  gap: 'var(--space-4)',
+  marginBottom: 'var(--space-8)'
+}}>
+  {[
+    {
+      name: 'Light Theme',
+      description: 'Clean, bright interface for daytime use',
+      preview: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
+      usage: 'Default theme for most applications'
+    },
+    {
+      name: 'Dark Theme',
+      description: 'Elegant dark interface for low-light environments',
+      preview: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
+      usage: 'Reduced eye strain, modern aesthetic'
+    },
+    {
+      name: 'Blue Theme',
+      description: 'Professional blue-tinted interface',
+      preview: 'linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)',
+      usage: 'Corporate environments, accessibility'
+    }
+  ].map((theme) => (
+    <div key={theme.name} style={{
+      background: 'var(--surface)',
+      border: '1px solid var(--border)',
+      borderRadius: '8px',
+      padding: 'var(--space-4)',
+      cursor: 'pointer',
+      transition: 'all 0.2s ease'
+    }}
+    onMouseEnter={(e) => {
+      e.currentTarget.style.transform = 'scale(1.02)';
+      e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+    }}
+    onMouseLeave={(e) => {
+      e.currentTarget.style.transform = 'scale(1)';
+      e.currentTarget.style.boxShadow = 'none';
+    }}
+    >
+      <div style={{
+        background: theme.preview,
+        height: '60px',
+        borderRadius: '6px',
+        marginBottom: 'var(--space-3)',
+        border: '1px solid var(--border-subtle)'
+      }} />
+
+      <h4 style={{
+        margin: '0 0 var(--space-2) 0',
+        fontSize: 'var(--font-size-base)',
+        fontWeight: 'var(--font-weight-semibold)',
+        color: 'var(--text)'
+      }}>
+        {theme.name}
+      </h4>
+
+      <p style={{
+        margin: '0 0 var(--space-2) 0',
+        fontSize: 'var(--font-size-sm)',
+        color: 'var(--text-secondary)',
+        lineHeight: 'var(--line-height-normal)'
+      }}>
+        {theme.description}
+      </p>
+
+      <div style={{
+        fontSize: 'var(--font-size-xs)',
+        color: 'var(--text-tertiary)',
+        fontStyle: 'italic'
+      }}>
+        {theme.usage}
+      </div>
+    </div>
+
+))}
+
+</div>
+
+## 🏗️ Architecture
+
+Understanding how our design token system is structured:
+
+<div style={{
+  background: 'var(--surface)',
+  border: '1px solid var(--border)',
+  borderRadius: '12px',
+  padding: 'var(--space-6)',
+  marginBottom: 'var(--space-8)'
+}}>
+  <h3 style={{
+    margin: '0 0 var(--space-4) 0',
+    fontSize: 'var(--font-size-xl)',
+    fontWeight: 'var(--font-weight-semibold)',
+    color: 'var(--text)'
+  }}>
+    Token Hierarchy
+  </h3>
+
+  <div style={{
+    display: 'grid',
+    gap: 'var(--space-4)'
+  }}>
+    {[
+      {
+        level: 'Primitive Tokens',
+        description: 'Raw values like specific colors, sizes, and numbers',
+        example: '--color-blue-500: oklch(67.3% 0.196 240.34)',
+        layer: '🟦'
+      },
+      {
+        level: 'Semantic Tokens',
+        description: 'Contextual meaning applied to primitive tokens',
+        example: '--primary-base: var(--color-blue-500)',
+        layer: '🟨'
+      },
+      {
+        level: 'Component Tokens',
+        description: 'Specific to component implementations',
+        example: '--button-primary-bg: var(--primary-base)',
+        layer: '🟩'
+      }
+    ].map((layer, index) => (
+      <div key={layer.level} style={{
+        display: 'grid',
+        gridTemplateColumns: '40px 200px 1fr 1fr',
+        gap: 'var(--space-4)',
+        alignItems: 'center',
+        padding: 'var(--space-4)',
+        background: index === 1 ? 'var(--surface-subtle)' : 'transparent',
+        borderRadius: '6px'
+      }}>
+        <div style={{
+          fontSize: '1.5rem',
+          textAlign: 'center'
+        }}>
+          {layer.layer}
+        </div>
+
+        <div>
+          <h4 style={{
+            margin: 0,
+            fontSize: 'var(--font-size-base)',
+            fontWeight: 'var(--font-weight-semibold)',
+            color: 'var(--text)'
+          }}>
+            {layer.level}
+          </h4>
+        </div>
+
+        <div style={{
+          fontSize: 'var(--font-size-sm)',
+          color: 'var(--text-secondary)',
+          lineHeight: 'var(--line-height-normal)'
+        }}>
+          {layer.description}
+        </div>
+
+        <div style={{
+          fontSize: 'var(--font-size-xs)',
+          fontFamily: 'monospace',
+          color: 'var(--text-tertiary)',
+          background: 'var(--surface-subtle)',
+          padding: 'var(--space-2)',
+          borderRadius: '4px',
+          border: '1px solid var(--border-subtle)'
+        }}>
+          {layer.example}
+        </div>
+      </div>
+    ))}
+
+  </div>
+</div>
+
+## 💡 Why Use Design Tokens?
+
+<div style={{
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+  gap: 'var(--space-6)',
+  marginBottom: 'var(--space-8)'
+}}>
+  <div style={{
+    background: 'var(--success-surface)',
+    border: '1px solid var(--success-border)',
+    borderRadius: '8px',
+    padding: 'var(--space-5)'
+  }}>
+    <h4 style={{
+      color: 'var(--success-text)',
+      marginBottom: 'var(--space-3)',
+      display: 'flex',
+      alignItems: 'center',
+      gap: 'var(--space-2)'
+    }}>
+      <span>🎯</span> Design Consistency
+    </h4>
+    <p style={{
+      margin: 0,
+      color: 'var(--success-text)',
+      fontSize: 'var(--font-size-sm)',
+      lineHeight: 'var(--line-height-normal)'
+    }}>
+      Ensure visual consistency across teams, platforms, and time. When you update a token, every component using it updates automatically.
+    </p>
+  </div>
+
+{' '}
+<div
+  style={{
+    background: 'var(--info-surface)',
+    border: '1px solid var(--info-border)',
+    borderRadius: '8px',
+    padding: 'var(--space-5)',
+  }}
+>
+  <h4
+    style={{
+      color: 'var(--info-text)',
+      marginBottom: 'var(--space-3)',
+      display: 'flex',
+      alignItems: 'center',
+      gap: 'var(--space-2)',
+    }}
+  >
+    <span>⚡</span> Developer Experience
+  </h4>
+  <p
+    style={{
+      margin: 0,
+      color: 'var(--info-text)',
+      fontSize: 'var(--font-size-sm)',
+      lineHeight: 'var(--line-height-normal)',
+    }}
+  >
+    Autocomplete, type safety, and clear naming conventions make development
+    faster and reduce errors. No more guessing hex values!
+  </p>
+</div>
+
+  <div style={{
+    background: 'var(--warning-surface)',
+    border: '1px solid var(--warning-border)',
+    borderRadius: '8px',
+    padding: 'var(--space-5)'
+  }}>
+    <h4 style={{
+      color: 'var(--warning-text)',
+      marginBottom: 'var(--space-3)',
+      display: 'flex',
+      alignItems: 'center',
+      gap: 'var(--space-2)'
+    }}>
+      <span>🔧</span> Maintainability
+    </h4>
+    <p style={{
+      margin: 0,
+      color: 'var(--warning-text)',
+      fontSize: 'var(--font-size-sm)',
+      lineHeight: 'var(--line-height-normal)'
+    }}>
+      Centralized control means easier updates, better collaboration, and reduced technical debt. Change once, update everywhere.
+    </p>
+  </div>
+</div>
+
+## 📖 Resources
+
+Ready to dive deeper? Here are additional resources to help you master our design token system:
+
+<div style={{
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+  gap: 'var(--space-4)',
+  marginBottom: 'var(--space-8)'
+}}>
+  {[
+    {
+      title: 'Token Reference',
+      description: 'Complete list of all available tokens',
+      icon: '📚',
+      action: 'Browse categories above'
+    },
+    {
+      title: 'Implementation Guide',
+      description: 'How to use tokens in your components',
+      icon: '🔨',
+      action: 'See examples in each category'
+    },
+    {
+      title: 'Migration Guide',
+      description: 'Moving from hardcoded values to tokens',
+      icon: '🚀',
+      action: 'Start with spacing and colors'
+    },
+    {
+      title: 'Best Practices',
+      description: 'Tips for effective token usage',
+      icon: '💡',
+      action: 'Read best practices in each section'
+    }
+  ].map((resource) => (
+    <div key={resource.title} style={{
+      background: 'var(--surface)',
+      border: '1px solid var(--border)',
+      borderRadius: '8px',
+      padding: 'var(--space-4)',
+      textAlign: 'center',
+      cursor: 'pointer',
+      transition: 'all 0.2s ease'
+    }}
+    onMouseEnter={(e) => {
+      e.currentTarget.style.borderColor = 'var(--primary-border)';
+      e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
+    }}
+    onMouseLeave={(e) => {
+      e.currentTarget.style.borderColor = 'var(--border)';
+      e.currentTarget.style.backgroundColor = 'var(--surface)';
+    }}
+    >
+      <div style={{
+        fontSize: '2rem',
+        marginBottom: 'var(--space-2)'
+      }}>
+        {resource.icon}
+      </div>
+
+      <h4 style={{
+        margin: '0 0 var(--space-2) 0',
+        fontSize: 'var(--font-size-base)',
+        fontWeight: 'var(--font-weight-semibold)',
+        color: 'var(--text)'
+      }}>
+        {resource.title}
+      </h4>
+
+      <p style={{
+        margin: '0 0 var(--space-2) 0',
+        fontSize: 'var(--font-size-sm)',
+        color: 'var(--text-secondary)',
+        lineHeight: 'var(--line-height-normal)'
+      }}>
+        {resource.description}
+      </p>
+
+      <div style={{
+        fontSize: 'var(--font-size-xs)',
+        color: 'var(--primary-text)',
+        fontWeight: 'var(--font-weight-medium)'
+      }}>
+        {resource.action}
+      </div>
+    </div>
+
+))}
+
+</div>
+
+---
+
+_Design tokens are the foundation of scalable design systems. Start with one category and gradually adopt more tokens as you build confidence with the system._

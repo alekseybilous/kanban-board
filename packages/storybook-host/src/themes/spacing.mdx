@@ -1,0 +1,416 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="packages/themes/tokens/Spacing" />
+
+# Spacing System
+
+Our spacing system is built on a 4px base grid, providing consistent rhythm and visual harmony across all components.
+
+## 🎯 Interactive Spacing Ruler
+
+Click any spacing value to copy it to your clipboard.
+
+<div style={{
+  background: 'linear-gradient(90deg, var(--surface) 0%, var(--surface-subtle) 100%)',
+  borderRadius: '12px',
+  padding: 'var(--space-6)',
+  marginBottom: 'var(--space-8)',
+  border: '1px solid var(--border)'
+}}>
+  <div style={{ marginBottom: 'var(--space-4)', textAlign: 'center' }}>
+    <h3 style={{ margin: 0, color: 'var(--text)', fontSize: '1.25rem' }}>Spacing Scale</h3>
+    <p style={{ margin: 'var(--space-2) 0 0', color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
+      Hover over any block to see the spacing value
+    </p>
+  </div>
+
+  <div style={{
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 'var(--space-3)',
+    background: 'var(--surface)',
+    padding: 'var(--space-4)',
+    borderRadius: '8px',
+    border: '1px solid var(--border-subtle)'
+  }}>
+    {[
+      { token: 'space-1', value: '4px', desc: 'Minimal' },
+      { token: 'space-2', value: '8px', desc: 'Compact' },
+      { token: 'space-3', value: '12px', desc: 'Small' },
+      { token: 'space-4', value: '16px', desc: 'Medium' },
+      { token: 'space-6', value: '24px', desc: 'Large' },
+      { token: 'space-8', value: '32px', desc: 'XL' },
+      { token: 'space-12', value: '48px', desc: 'XXL' },
+      { token: 'space-16', value: '64px', desc: 'Huge' }
+    ].map((space, index) => (
+      <div key={space.token} style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
+        <div style={{
+          fontFamily: 'monospace',
+          fontSize: '0.8rem',
+          color: 'var(--text-tertiary)',
+          width: '80px',
+          textAlign: 'right'
+        }}>
+          {space.value}
+        </div>
+        <div
+          style={{
+            width: `var(--${space.token})`,
+            height: '24px',
+            background: `hsl(${200 + index * 20}, 70%, 55%)`,
+            borderRadius: '4px',
+            cursor: 'pointer',
+            transition: 'all 0.2s ease',
+            minWidth: '2px',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+            position: 'relative'
+          }}
+          onClick={() => navigator.clipboard?.writeText(`var(--${space.token})`)}
+          onMouseEnter={(e) => {
+            e.target.style.transform = 'translateY(-2px)';
+            e.target.style.boxShadow = '0 4px 8px rgba(0,0,0,0.15)';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.transform = 'translateY(0)';
+            e.target.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+          }}
+          title={`Click to copy var(--${space.token})`}
+        />
+        <div style={{
+          fontFamily: 'monospace',
+          fontSize: '0.85rem',
+          fontWeight: '500',
+          color: 'var(--primary-base)',
+          width: '100px'
+        }}>
+          --{space.token}
+        </div>
+        <div style={{
+          fontSize: '0.8rem',
+          color: 'var(--text-secondary)',
+          fontStyle: 'italic'
+        }}>
+          {space.desc}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+## 📦 Padding Showcase
+
+See how different padding values affect component appearance.
+
+<div
+  style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+    gap: 'var(--space-4)',
+    marginBottom: 'var(--space-8)',
+  }}
+>
+  {[
+    {
+      name: 'Tight',
+      padding: 'var(--space-2)',
+      token: 'space-2',
+      bg: 'var(--success-surface)',
+    },
+    {
+      name: 'Cozy',
+      padding: 'var(--space-4)',
+      token: 'space-4',
+      bg: 'var(--primary-surface)',
+    },
+    {
+      name: 'Comfortable',
+      padding: 'var(--space-6)',
+      token: 'space-6',
+      bg: 'var(--warning-surface)',
+    },
+    {
+      name: 'Spacious',
+      padding: 'var(--space-8)',
+      token: 'space-8',
+      bg: 'var(--danger-surface)',
+    },
+  ].map((card) => (
+    <div
+      key={card.name}
+      style={{
+        background: card.bg,
+        border: `2px solid ${card.bg.replace('surface', 'border')}`,
+        borderRadius: '8px',
+        cursor: 'pointer',
+        transition: 'transform 0.2s ease',
+      }}
+      onClick={() =>
+        navigator.clipboard?.writeText(`padding: var(--${card.token})`)
+      }
+      onMouseEnter={(e) => (e.target.style.transform = 'scale(1.02)')}
+      onMouseLeave={(e) => (e.target.style.transform = 'scale(1)')}
+      title={`Click to copy padding: var(--${card.token})`}
+    >
+      <div style={{ padding: card.padding }}>
+        <div
+          style={{
+            background: 'var(--surface)',
+            padding: 'var(--space-3)',
+            borderRadius: '4px',
+            border: '1px solid var(--border)',
+          }}
+        >
+          <h4
+            style={{
+              margin: '0 0 var(--space-2) 0',
+              fontSize: '1rem',
+              color: 'var(--text)',
+            }}
+          >
+            {card.name} Card
+          </h4>
+          <p
+            style={{
+              margin: 0,
+              fontSize: '0.875rem',
+              color: 'var(--text-secondary)',
+            }}
+          >
+            Using var(--{card.token}) padding
+          </p>
+        </div>
+      </div>
+      <div
+        style={{
+          padding: 'var(--space-2)',
+          background: 'rgba(0,0,0,0.05)',
+          fontSize: '0.75rem',
+          fontFamily: 'monospace',
+          textAlign: 'center',
+          color: 'var(--text-tertiary)',
+        }}
+      >
+        --{card.token}
+      </div>
+    </div>
+  ))}
+</div>
+
+## 🔗 Gap Visualization
+
+Interactive demonstration of gap spacing in flex layouts.
+
+<div
+  style={{
+    background: 'var(--surface-subtle)',
+    borderRadius: '8px',
+    padding: 'var(--space-6)',
+    marginBottom: 'var(--space-8)',
+  }}
+>
+  {[
+    {
+      name: 'Minimal Gap',
+      gap: 'var(--space-1)',
+      token: 'space-1',
+      color: '#ef4444',
+    },
+    {
+      name: 'Small Gap',
+      gap: 'var(--space-2)',
+      token: 'space-2',
+      color: '#f97316',
+    },
+    {
+      name: 'Medium Gap',
+      gap: 'var(--space-4)',
+      token: 'space-4',
+      color: '#eab308',
+    },
+    {
+      name: 'Large Gap',
+      gap: 'var(--space-6)',
+      token: 'space-6',
+      color: '#22c55e',
+    },
+    {
+      name: 'XL Gap',
+      gap: 'var(--space-8)',
+      token: 'space-8',
+      color: '#3b82f6',
+    },
+  ].map((example) => (
+    <div key={example.name} style={{ marginBottom: 'var(--space-6)' }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 'var(--space-3)',
+          marginBottom: 'var(--space-3)',
+          cursor: 'pointer',
+        }}
+        onClick={() =>
+          navigator.clipboard?.writeText(`gap: var(--${example.token})`)
+        }
+        title={`Click to copy gap: var(--${example.token})`}
+      >
+        <div
+          style={{
+            width: '12px',
+            height: '12px',
+            background: example.color,
+            borderRadius: '50%',
+          }}
+        />
+        <span style={{ fontWeight: '500', fontSize: '0.9rem' }}>
+          {example.name}
+        </span>
+        <span
+          style={{
+            fontFamily: 'monospace',
+            fontSize: '0.8rem',
+            color: 'var(--text-tertiary)',
+          }}
+        >
+          var(--{example.token})
+        </span>
+      </div>
+      <div style={{ display: 'flex', gap: example.gap, flexWrap: 'wrap' }}>
+        {[1, 2, 3, 4, 5].map((num) => (
+          <div
+            key={num}
+            style={{
+              width: '50px',
+              height: '50px',
+              background: example.color,
+              borderRadius: '6px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'white',
+              fontWeight: 'bold',
+              fontSize: '0.9rem',
+            }}
+          >
+            {num}
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>
+
+## 📏 Spacing Scale Reference
+
+<div style={{
+  background: 'var(--surface)',
+  border: '1px solid var(--border)',
+  borderRadius: '8px',
+  overflow: 'hidden',
+  marginBottom: 'var(--space-8)'
+}}>
+  <div style={{
+    background: 'var(--surface-subtle)',
+    padding: 'var(--space-4)',
+    borderBottom: '1px solid var(--border)'
+  }}>
+    <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--text)' }}>Complete Spacing Scale</h3>
+  </div>
+
+  <div style={{ padding: 'var(--space-4)' }}>
+    <div style={{ display: 'grid', gap: 'var(--space-2)' }}>
+      {[
+        { token: 'space-0', value: '0px', usage: 'No spacing' },
+        { token: 'space-px', value: '1px', usage: 'Hairline borders' },
+        { token: 'space-0_5', value: '2px', usage: 'Minimal separation' },
+        { token: 'space-1', value: '4px', usage: 'Tight spacing' },
+        { token: 'space-2', value: '8px', usage: 'Small spacing' },
+        { token: 'space-3', value: '12px', usage: 'Medium-small' },
+        { token: 'space-4', value: '16px', usage: 'Standard spacing' },
+        { token: 'space-6', value: '24px', usage: 'Large spacing' },
+        { token: 'space-8', value: '32px', usage: 'Section spacing' },
+        { token: 'space-12', value: '48px', usage: 'Component separation' },
+        { token: 'space-16', value: '64px', usage: 'Page sections' },
+        { token: 'space-20', value: '80px', usage: 'Major sections' }
+      ].map((space) => (
+        <div key={space.token} style={{
+          display: 'grid',
+          gridTemplateColumns: '100px 60px 1fr',
+          alignItems: 'center',
+          gap: 'var(--space-3)',
+          padding: 'var(--space-2)',
+          borderRadius: '4px',
+          cursor: 'pointer',
+          transition: 'background-color 0.15s ease'
+        }}
+        onClick={() => navigator.clipboard?.writeText(`var(--${space.token})`)}
+        onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--surface-hover)'}
+        onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+        title={`Click to copy var(--${space.token})`}
+        >
+          <span style={{
+            fontFamily: 'monospace',
+            fontSize: '0.8rem',
+            fontWeight: '500',
+            color: 'var(--primary-base)'
+          }}>
+            --{space.token}
+          </span>
+          <span style={{
+            fontSize: '0.75rem',
+            color: 'var(--text-tertiary)',
+            textAlign: 'right'
+          }}>
+            {space.value}
+          </span>
+          <span style={{
+            fontSize: '0.8rem',
+            color: 'var(--text-secondary)'
+          }}>
+            {space.usage}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+## 💡 Usage Guidelines
+
+### ✅ Do's
+
+- Use the 4px grid system consistently
+- Prefer semantic tokens (xs, sm, md, lg, xl) for better maintainability
+- Scale spacing proportionally across breakpoints
+- Maintain consistent spacing between similar elements
+
+### ❌ Don'ts
+
+- Avoid arbitrary pixel values outside the scale
+- Don't mix different spacing approaches in the same component
+- Avoid too many different spacing values in one layout
+- Don't forget about touch target minimums (44px)
+
+### 🎨 Best Practices
+
+```css
+/* Button spacing */
+.button {
+  padding: var(--space-sm) var(--space-md); /* 8px 16px */
+}
+
+/* Card layout */
+.card {
+  padding: var(--space-lg); /* 24px */
+  gap: var(--space-md); /* 16px between elements */
+}
+
+/* Page sections */
+.section {
+  margin-bottom: var(--space-xl); /* 32px */
+}
+```
+
+---
+
+_This spacing system ensures consistent, scalable, and accessible layouts across your entire application._

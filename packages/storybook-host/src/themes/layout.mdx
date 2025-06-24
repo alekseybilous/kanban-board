@@ -1,0 +1,1061 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="packages/themes/tokens/Layout" />
+
+# Layout System
+
+Build responsive, structured layouts with our comprehensive system of containers, breakpoints, and z-index layers.
+
+## 📐 Container Widths
+
+Responsive container sizes for structured content layouts.
+
+<div style={{
+  background: 'linear-gradient(135deg, var(--surface) 0%, var(--surface-subtle) 100%)',
+  borderRadius: '12px',
+  padding: 'var(--space-8)',
+  marginBottom: 'var(--space-8)',
+  border: '1px solid var(--border)'
+}}>
+  <div style={{ marginBottom: 'var(--space-6)', textAlign: 'center' }}>
+    <h2 style={{ margin: 0, color: 'var(--text)', fontSize: '1.5rem' }}>Container Width Scale</h2>
+    <p style={{ margin: 'var(--space-2) 0 0', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+      Click any container to copy its CSS variable
+    </p>
+  </div>
+
+  <div style={{
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 'var(--space-4)',
+    alignItems: 'center'
+  }}>
+    {[
+      { token: 'container-xs', value: '20rem', px: '320px', name: 'XS', usage: 'Mobile forms, alerts' },
+      { token: 'container-sm', value: '30rem', px: '480px', name: 'SM', usage: 'Small cards, modals' },
+      { token: 'container-md', value: '40rem', px: '640px', name: 'MD', usage: 'Content blocks, forms' },
+      { token: 'container-lg', value: '50rem', px: '800px', name: 'LG', usage: 'Articles, main content' },
+      { token: 'container-xl', value: '60rem', px: '960px', name: 'XL', usage: 'Wide content, dashboards' },
+      { token: 'container-2xl', value: '70rem', px: '1120px', name: '2XL', usage: 'Large layouts' },
+      { token: 'container-3xl', value: '80rem', px: '1280px', name: '3XL', usage: 'Desktop layouts' },
+      { token: 'container-4xl', value: '90rem', px: '1440px', name: '4XL', usage: 'Large screens' },
+      { token: 'container-5xl', value: '100rem', px: '1600px', name: '5XL', usage: 'Ultra-wide content' },
+      { token: 'container-6xl', value: '110rem', px: '1760px', name: '6XL', usage: 'Maximum width' },
+      { token: 'container-7xl', value: '120rem', px: '1920px', name: '7XL', usage: 'Full HD displays' }
+    ].map((container, index) => (
+      <div key={container.token} style={{
+        width: '100%',
+        maxWidth: '800px',
+        position: 'relative'
+      }}>
+        <div
+          style={{
+            width: `${Math.min(100, (parseInt(container.px) / 800) * 100)}%`,
+            height: '60px',
+            background: `hsl(${200 + index * 12}, 65%, 55%)`,
+            borderRadius: '6px',
+            cursor: 'pointer',
+            transition: 'all 0.2s ease',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '0 var(--space-4)',
+            color: 'white',
+            fontWeight: '500',
+            position: 'relative',
+            overflow: 'hidden'
+          }}
+          onClick={() => navigator.clipboard?.writeText(`var(--${container.token})`)}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'scale(1.02)';
+            e.currentTarget.style.filter = 'brightness(1.1)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'scale(1)';
+            e.currentTarget.style.filter = 'brightness(1)';
+          }}
+          title={`Click to copy var(--${container.token})`}
+        >
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 'var(--space-3)'
+          }}>
+            <span style={{
+              fontSize: 'var(--font-size-lg)',
+              fontWeight: 'var(--font-weight-bold)'
+            }}>
+              {container.name}
+            </span>
+            <span style={{
+              fontSize: 'var(--font-size-sm)',
+              opacity: 0.9
+            }}>
+              {container.px}
+            </span>
+          </div>
+
+          <div style={{
+            fontSize: 'var(--font-size-xs)',
+            opacity: 0.8,
+            textAlign: 'right'
+          }}>
+            {container.usage}
+          </div>
+
+          {/* Width indicator */}
+          <div style={{
+            position: 'absolute',
+            bottom: '4px',
+            left: '4px',
+            right: '4px',
+            height: '2px',
+            background: 'rgba(255,255,255,0.3)',
+            borderRadius: '1px'
+          }} />
+        </div>
+
+        <div style={{
+          marginTop: 'var(--space-2)',
+          textAlign: 'center'
+        }}>
+          <code style={{
+            fontSize: 'var(--font-size-xs)',
+            fontFamily: 'monospace',
+            color: 'var(--text-tertiary)'
+          }}>
+            --{container.token} • {container.value}
+          </code>
+        </div>
+      </div>
+    ))}
+
+  </div>
+</div>
+
+## 📱 Responsive Breakpoints
+
+Media query breakpoints for responsive design.
+
+<div style={{
+  background: 'var(--surface)',
+  border: '1px solid var(--border)',
+  borderRadius: '12px',
+  padding: 'var(--space-6)',
+  marginBottom: 'var(--space-8)'
+}}>
+  <h3 style={{
+    margin: '0 0 var(--space-4) 0',
+    fontSize: 'var(--font-size-xl)',
+    fontWeight: 'var(--font-weight-semibold)',
+    color: 'var(--text)',
+    textAlign: 'center'
+  }}>
+    Breakpoint System
+  </h3>
+
+  <div style={{
+    display: 'grid',
+    gap: 'var(--space-4)'
+  }}>
+    {[
+      {
+        token: 'breakpoint-xs',
+        value: '30em',
+        px: '480px',
+        name: 'XS',
+        device: '📱 Large Mobile',
+        color: '#ef4444'
+      },
+      {
+        token: 'breakpoint-sm',
+        value: '40em',
+        px: '640px',
+        name: 'SM',
+        device: '📱 Small Tablet',
+        color: '#f97316'
+      },
+      {
+        token: 'breakpoint-md',
+        value: '48em',
+        px: '768px',
+        name: 'MD',
+        device: '📱 Tablet',
+        color: '#eab308'
+      },
+      {
+        token: 'breakpoint-lg',
+        value: '64em',
+        px: '1024px',
+        name: 'LG',
+        device: '💻 Small Desktop',
+        color: '#22c55e'
+      },
+      {
+        token: 'breakpoint-xl',
+        value: '80em',
+        px: '1280px',
+        name: 'XL',
+        device: '💻 Desktop',
+        color: '#3b82f6'
+      },
+      {
+        token: 'breakpoint-2xl',
+        value: '96em',
+        px: '1536px',
+        name: '2XL',
+        device: '🖥️ Large Desktop',
+        color: '#8b5cf6'
+      }
+    ].map((breakpoint, index) => (
+      <div key={breakpoint.token} style={{
+        display: 'grid',
+        gridTemplateColumns: '100px 1fr 150px 200px',
+        alignItems: 'center',
+        gap: 'var(--space-4)',
+        padding: 'var(--space-4)',
+        background: 'var(--surface-subtle)',
+        borderRadius: '8px',
+        cursor: 'pointer',
+        transition: 'all 0.2s ease'
+      }}
+      onClick={() => navigator.clipboard?.writeText(`@media (min-width: var(--${breakpoint.token})) { }`)}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
+        e.currentTarget.style.borderLeft = `4px solid ${breakpoint.color}`;
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.backgroundColor = 'var(--surface-subtle)';
+        e.currentTarget.style.borderLeft = 'none';
+      }}
+      title={`Click to copy media query for ${breakpoint.name}`}
+      >
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 'var(--space-2)'
+        }}>
+          <div style={{
+            width: '12px',
+            height: '12px',
+            background: breakpoint.color,
+            borderRadius: '50%'
+          }} />
+          <span style={{
+            fontSize: 'var(--font-size-base)',
+            fontWeight: 'var(--font-weight-semibold)',
+            color: 'var(--text)'
+          }}>
+            {breakpoint.name}
+          </span>
+        </div>
+
+        <div style={{
+          height: '20px',
+          background: 'var(--surface)',
+          borderRadius: '10px',
+          position: 'relative',
+          overflow: 'hidden'
+        }}>
+          <div style={{
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            bottom: 0,
+            width: `${Math.min(100, (parseInt(breakpoint.px) / 1536) * 100)}%`,
+            background: breakpoint.color,
+            borderRadius: '10px',
+            transition: 'width 0.3s ease'
+          }} />
+        </div>
+
+        <div style={{
+          fontSize: 'var(--font-size-sm)',
+          color: 'var(--text-secondary)'
+        }}>
+          {breakpoint.device}
+        </div>
+
+        <code style={{
+          fontSize: 'var(--font-size-xs)',
+          fontFamily: 'monospace',
+          color: 'var(--primary-base)'
+        }}>
+          --{breakpoint.token} ({breakpoint.px})
+        </code>
+      </div>
+    ))}
+
+  </div>
+</div>
+
+## 🏗️ Layout Examples
+
+Common layout patterns using our container system.
+
+<div style={{
+  display: 'grid',
+  gap: 'var(--space-6)',
+  marginBottom: 'var(--space-8)'
+}}>
+  {/* Centered Content */}
+  <div>
+    <h3 style={{
+      margin: '0 0 var(--space-4) 0',
+      fontSize: 'var(--font-size-xl)',
+      fontWeight: 'var(--font-weight-semibold)',
+      color: 'var(--text)'
+    }}>
+      Centered Content Layout
+    </h3>
+
+    <div style={{
+      background: 'var(--surface-subtle)',
+      borderRadius: '8px',
+      padding: 'var(--space-4)',
+      marginBottom: 'var(--space-4)'
+    }}>
+      <div style={{
+        maxWidth: 'var(--container-md)',
+        margin: '0 auto',
+        background: 'var(--surface)',
+        padding: 'var(--space-6)',
+        borderRadius: '6px',
+        border: '2px dashed var(--primary-border)',
+        textAlign: 'center',
+        cursor: 'pointer'
+      }}
+      onClick={() => navigator.clipboard?.writeText('max-width: var(--container-md);\nmargin: 0 auto;')}
+      title="Click to copy CSS"
+      >
+        <h4 style={{
+          margin: '0 0 var(--space-2) 0',
+          fontSize: 'var(--font-size-lg)',
+          fontWeight: 'var(--font-weight-semibold)',
+          color: 'var(--text)'
+        }}>
+          Centered Container (MD)
+        </h4>
+        <p style={{
+          margin: 0,
+          fontSize: 'var(--font-size-sm)',
+          color: 'var(--text-secondary)'
+        }}>
+          max-width: var(--container-md)
+        </p>
+      </div>
+    </div>
+
+    <code style={{
+      fontSize: 'var(--font-size-xs)',
+      fontFamily: 'monospace',
+      color: 'var(--text-tertiary)',
+      background: 'var(--surface-subtle)',
+      padding: 'var(--space-2)',
+      borderRadius: '4px',
+      display: 'block'
+    }}>
+      max-width: var(--container-md); margin: 0 auto;
+    </code>
+
+  </div>
+
+{/* Responsive Grid */}
+
+  <div>
+    <h3 style={{
+      margin: '0 0 var(--space-4) 0',
+      fontSize: 'var(--font-size-xl)',
+      fontWeight: 'var(--font-weight-semibold)',
+      color: 'var(--text)'
+    }}>
+      Responsive Grid Layout
+    </h3>
+
+    <div style={{
+      background: 'var(--surface-subtle)',
+      borderRadius: '8px',
+      padding: 'var(--space-4)',
+      marginBottom: 'var(--space-4)'
+    }}>
+      <div style={{
+        maxWidth: 'var(--container-lg)',
+        margin: '0 auto',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+        gap: 'var(--space-4)'
+      }}>
+        {[1, 2, 3, 4].map((item) => (
+          <div key={item} style={{
+            background: 'var(--surface)',
+            padding: 'var(--space-4)',
+            borderRadius: '6px',
+            border: '1px solid var(--border)',
+            textAlign: 'center'
+          }}>
+            <div style={{
+              fontSize: 'var(--font-size-sm)',
+              fontWeight: 'var(--font-weight-medium)',
+              color: 'var(--text)'
+            }}>
+              Grid Item {item}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <code style={{
+      fontSize: 'var(--font-size-xs)',
+      fontFamily: 'monospace',
+      color: 'var(--text-tertiary)',
+      background: 'var(--surface-subtle)',
+      padding: 'var(--space-2)',
+      borderRadius: '4px',
+      display: 'block',
+      whiteSpace: 'pre-wrap'
+    }}>
+      {`max-width: var(--container-lg);
+
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));`}
+</code>
+
+  </div>
+
+{/* Sidebar Layout */}
+
+  <div>
+    <h3 style={{
+      margin: '0 0 var(--space-4) 0',
+      fontSize: 'var(--font-size-xl)',
+      fontWeight: 'var(--font-weight-semibold)',
+      color: 'var(--text)'
+    }}>
+      Sidebar Layout
+    </h3>
+
+    <div style={{
+      background: 'var(--surface-subtle)',
+      borderRadius: '8px',
+      padding: 'var(--space-4)',
+      marginBottom: 'var(--space-4)'
+    }}>
+      <div style={{
+        maxWidth: 'var(--container-xl)',
+        margin: '0 auto',
+        display: 'grid',
+        gridTemplateColumns: '250px 1fr',
+        gap: 'var(--space-6)'
+      }}>
+        <div style={{
+          background: 'var(--primary-surface)',
+          padding: 'var(--space-4)',
+          borderRadius: '6px',
+          border: '1px solid var(--primary-border)'
+        }}>
+          <h4 style={{
+            margin: '0 0 var(--space-2) 0',
+            fontSize: 'var(--font-size-base)',
+            fontWeight: 'var(--font-weight-semibold)',
+            color: 'var(--primary-text)'
+          }}>
+            Sidebar
+          </h4>
+          <p style={{
+            margin: 0,
+            fontSize: 'var(--font-size-sm)',
+            color: 'var(--primary-text)',
+            opacity: 0.8
+          }}>
+            Fixed width: 250px
+          </p>
+        </div>
+
+        <div style={{
+          background: 'var(--surface)',
+          padding: 'var(--space-4)',
+          borderRadius: '6px',
+          border: '1px solid var(--border)'
+        }}>
+          <h4 style={{
+            margin: '0 0 var(--space-2) 0',
+            fontSize: 'var(--font-size-base)',
+            fontWeight: 'var(--font-weight-semibold)',
+            color: 'var(--text)'
+          }}>
+            Main Content
+          </h4>
+          <p style={{
+            margin: 0,
+            fontSize: 'var(--font-size-sm)',
+            color: 'var(--text-secondary)'
+          }}>
+            Flexible width (1fr)
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <code style={{
+      fontSize: 'var(--font-size-xs)',
+      fontFamily: 'monospace',
+      color: 'var(--text-tertiary)',
+      background: 'var(--surface-subtle)',
+      padding: 'var(--space-2)',
+      borderRadius: '4px',
+      display: 'block',
+      whiteSpace: 'pre-wrap'
+    }}>
+      {`max-width: var(--container-xl);
+
+display: grid;
+grid-template-columns: 250px 1fr;`}
+</code>
+
+  </div>
+</div>
+
+## 📏 Z-Index Scale
+
+Layering system for stacking context management.
+
+<div style={{
+  background: 'var(--surface)',
+  border: '1px solid var(--border)',
+  borderRadius: '12px',
+  padding: 'var(--space-6)',
+  marginBottom: 'var(--space-8)'
+}}>
+  <h3 style={{
+    margin: '0 0 var(--space-4) 0',
+    fontSize: 'var(--font-size-xl)',
+    fontWeight: 'var(--font-weight-semibold)',
+    color: 'var(--text)',
+    textAlign: 'center'
+  }}>
+    Z-Index Hierarchy
+  </h3>
+
+{' '}
+<div
+  style={{
+    position: 'relative',
+    height: '300px',
+    background: 'var(--surface-subtle)',
+    borderRadius: '8px',
+    overflow: 'hidden',
+  }}
+>
+  {[
+    {
+      token: 'z-tooltip',
+      value: '1800',
+      name: 'Tooltip',
+      color: '#1f2937',
+      size: '120px',
+    },
+    {
+      token: 'z-toast',
+      value: '1700',
+      name: 'Toast',
+      color: '#374151',
+      size: '140px',
+    },
+    {
+      token: 'z-skiplink',
+      value: '1600',
+      name: 'Skip Link',
+      color: '#4b5563',
+      size: '160px',
+    },
+    {
+      token: 'z-popover',
+      value: '1500',
+      name: 'Popover',
+      color: '#6b7280',
+      size: '180px',
+    },
+    {
+      token: 'z-modal',
+      value: '1400',
+      name: 'Modal',
+      color: '#9ca3af',
+      size: '200px',
+    },
+    {
+      token: 'z-overlay',
+      value: '1300',
+      name: 'Overlay',
+      color: '#d1d5db',
+      size: '220px',
+    },
+    {
+      token: 'z-banner',
+      value: '1200',
+      name: 'Banner',
+      color: '#e5e7eb',
+      size: '240px',
+    },
+    {
+      token: 'z-sticky',
+      value: '1100',
+      name: 'Sticky',
+      color: '#f3f4f6',
+      size: '260px',
+    },
+    {
+      token: 'z-dropdown',
+      value: '1000',
+      name: 'Dropdown',
+      color: '#f9fafb',
+      size: '280px',
+    },
+  ].map((layer, index) => (
+    <div
+      key={layer.token}
+      style={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        width: layer.size,
+        height: layer.size,
+        background: layer.color,
+        borderRadius: '8px',
+        transform: 'translate(-50%, -50%)',
+        zIndex: layer.value,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        cursor: 'pointer',
+        transition: 'all 0.2s ease',
+        border: '2px solid rgba(255,255,255,0.1)',
+        color: index < 5 ? 'white' : 'var(--text)',
+      }}
+      onClick={() => navigator.clipboard?.writeText(`var(--${layer.token})`)}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = 'translate(-50%, -50%) scale(1.05)';
+        e.currentTarget.style.borderColor = 'var(--primary-base)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = 'translate(-50%, -50%) scale(1)';
+        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+      }}
+      title={`Click to copy var(--${layer.token})`}
+    >
+      <div
+        style={{
+          fontSize: 'var(--font-size-sm)',
+          fontWeight: 'var(--font-weight-semibold)',
+          marginBottom: 'var(--space-1)',
+        }}
+      >
+        {layer.name}
+      </div>
+      <div
+        style={{
+          fontSize: 'var(--font-size-xs)',
+          fontFamily: 'monospace',
+          opacity: 0.8,
+        }}
+      >
+        z: {layer.value}
+      </div>
+    </div>
+  ))}
+</div>
+
+  <div style={{
+    marginTop: 'var(--space-4)',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+    gap: 'var(--space-3)'
+  }}>
+    {[
+      { token: 'z-hide', value: '-1', name: 'Hide', desc: 'Behind content' },
+      { token: 'z-auto', value: 'auto', name: 'Auto', desc: 'Default stacking' },
+      { token: 'z-base', value: '0', name: 'Base', desc: 'Ground level' },
+      { token: 'z-docked', value: '10', name: 'Docked', desc: 'Fixed elements' }
+    ].map((layer) => (
+      <div key={layer.token} style={{
+        background: 'var(--surface-subtle)',
+        padding: 'var(--space-3)',
+        borderRadius: '6px',
+        textAlign: 'center',
+        cursor: 'pointer'
+      }}
+      onClick={() => navigator.clipboard?.writeText(`var(--${layer.token})`)}
+      title={`Click to copy var(--${layer.token})`}
+      >
+        <div style={{
+          fontSize: 'var(--font-size-sm)',
+          fontWeight: 'var(--font-weight-medium)',
+          color: 'var(--text)',
+          marginBottom: 'var(--space-1)'
+        }}>
+          {layer.name}
+        </div>
+        <div style={{
+          fontSize: 'var(--font-size-xs)',
+          color: 'var(--text-tertiary)',
+          marginBottom: 'var(--space-1)'
+        }}>
+          {layer.desc}
+        </div>
+        <code style={{
+          fontSize: 'var(--font-size-xs)',
+          fontFamily: 'monospace',
+          color: 'var(--primary-base)'
+        }}>
+          --{layer.token}: {layer.value}
+        </code>
+      </div>
+    ))}
+  </div>
+</div>
+
+## 📱 Responsive Design Examples
+
+Practical examples of responsive layouts.
+
+<div style={{
+  display: 'grid',
+  gap: 'var(--space-6)',
+  marginBottom: 'var(--space-8)'
+}}>
+  {/* Card Grid */}
+  <div>
+    <h3 style={{
+      margin: '0 0 var(--space-4) 0',
+      fontSize: 'var(--font-size-xl)',
+      fontWeight: 'var(--font-weight-semibold)',
+      color: 'var(--text)'
+    }}>
+      Responsive Card Grid
+    </h3>
+
+    <div style={{
+      background: 'var(--surface-subtle)',
+      borderRadius: '8px',
+      padding: 'var(--space-4)',
+      marginBottom: 'var(--space-4)'
+    }}>
+      <div style={{
+        maxWidth: 'var(--container-lg)',
+        margin: '0 auto'
+      }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: 'var(--space-4)'
+        }}>
+          {[
+            { title: 'Feature Card', icon: '🚀', desc: 'Automatically adjusts from 1 to 4 columns' },
+            { title: 'Product Card', icon: '📦', desc: 'Minimum 280px width per card' },
+            { title: 'Service Card', icon: '⚙️', desc: 'Responsive breakpoints included' }
+          ].map((card) => (
+            <div key={card.title} style={{
+              background: 'var(--surface)',
+              padding: 'var(--space-4)',
+              borderRadius: '6px',
+              border: '1px solid var(--border)',
+              textAlign: 'center'
+            }}>
+              <div style={{
+                fontSize: '2rem',
+                marginBottom: 'var(--space-2)'
+              }}>
+                {card.icon}
+              </div>
+              <h4 style={{
+                margin: '0 0 var(--space-2) 0',
+                fontSize: 'var(--font-size-base)',
+                fontWeight: 'var(--font-weight-semibold)',
+                color: 'var(--text)'
+              }}>
+                {card.title}
+              </h4>
+              <p style={{
+                margin: 0,
+                fontSize: 'var(--font-size-sm)',
+                color: 'var(--text-secondary)'
+              }}>
+                {card.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <code style={{
+      fontSize: 'var(--font-size-xs)',
+      fontFamily: 'monospace',
+      color: 'var(--text-tertiary)',
+      background: 'var(--surface-subtle)',
+      padding: 'var(--space-2)',
+      borderRadius: '4px',
+      display: 'block',
+      whiteSpace: 'pre-wrap'
+    }}>
+      {`max-width: var(--container-lg);
+
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));`}
+</code>
+
+  </div>
+
+{/* Dashboard Layout */}
+
+  <div>
+    <h3 style={{
+      margin: '0 0 var(--space-4) 0',
+      fontSize: 'var(--font-size-xl)',
+      fontWeight: 'var(--font-weight-semibold)',
+      color: 'var(--text)'
+    }}>
+      Dashboard Layout
+    </h3>
+
+    <div style={{
+      background: 'var(--surface-subtle)',
+      borderRadius: '8px',
+      padding: 'var(--space-4)',
+      marginBottom: 'var(--space-4)'
+    }}>
+      <div style={{
+        maxWidth: 'var(--container-2xl)',
+        margin: '0 auto',
+        display: 'grid',
+        gridTemplateAreas: '"header header" "sidebar main" "sidebar main"',
+        gridTemplateColumns: '240px 1fr',
+        gridTemplateRows: '60px 1fr',
+        gap: 'var(--space-4)',
+        minHeight: '400px'
+      }}>
+        <div style={{
+          gridArea: 'header',
+          background: 'var(--primary-surface)',
+          borderRadius: '6px',
+          border: '1px solid var(--primary-border)',
+          display: 'flex',
+          alignItems: 'center',
+          padding: '0 var(--space-4)',
+          color: 'var(--primary-text)'
+        }}>
+          <strong>Header / Navigation</strong>
+        </div>
+
+        <div style={{
+          gridArea: 'sidebar',
+          background: 'var(--surface)',
+          borderRadius: '6px',
+          border: '1px solid var(--border)',
+          padding: 'var(--space-4)'
+        }}>
+          <strong style={{ color: 'var(--text)' }}>Sidebar</strong>
+          <p style={{
+            margin: 'var(--space-2) 0 0',
+            fontSize: 'var(--font-size-sm)',
+            color: 'var(--text-secondary)'
+          }}>
+            Fixed 240px width
+          </p>
+        </div>
+
+        <div style={{
+          gridArea: 'main',
+          background: 'var(--surface)',
+          borderRadius: '6px',
+          border: '1px solid var(--border)',
+          padding: 'var(--space-4)'
+        }}>
+          <strong style={{ color: 'var(--text)' }}>Main Content Area</strong>
+          <p style={{
+            margin: 'var(--space-2) 0 0',
+            fontSize: 'var(--font-size-sm)',
+            color: 'var(--text-secondary)'
+          }}>
+            Flexible width, responds to screen size
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <code style={{
+      fontSize: 'var(--font-size-xs)',
+      fontFamily: 'monospace',
+      color: 'var(--text-tertiary)',
+      background: 'var(--surface-subtle)',
+      padding: 'var(--space-2)',
+      borderRadius: '4px',
+      display: 'block',
+      whiteSpace: 'pre-wrap'
+    }}>
+      {`max-width: var(--container-2xl);
+
+display: grid;
+grid-template-areas: "header header" "sidebar main";
+grid-template-columns: 240px 1fr;`}
+</code>
+
+  </div>
+</div>
+
+## 💡 Best Practices
+
+<div style={{
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+  gap: 'var(--space-6)',
+  marginBottom: 'var(--space-8)'
+}}>
+  <div style={{
+    background: 'var(--success-surface)',
+    border: '1px solid var(--success-border)',
+    borderRadius: '8px',
+    padding: 'var(--space-4)'
+  }}>
+    <h4 style={{
+      color: 'var(--success-text)',
+      marginBottom: 'var(--space-3)',
+      display: 'flex',
+      alignItems: 'center',
+      gap: 'var(--space-2)'
+    }}>
+      <span>✅</span> Do's
+    </h4>
+    <ul style={{
+      margin: 0,
+      paddingLeft: 'var(--space-4)',
+      color: 'var(--success-text)',
+      fontSize: 'var(--font-size-sm)',
+      lineHeight: 'var(--line-height-normal)'
+    }}>
+      <li>Use semantic container sizes</li>
+      <li>Design mobile-first</li>
+      <li>Test across breakpoints</li>
+      <li>Follow z-index hierarchy</li>
+      <li>Use CSS Grid for complex layouts</li>
+    </ul>
+  </div>
+
+  <div style={{
+    background: 'var(--danger-surface)',
+    border: '1px solid var(--danger-border)',
+    borderRadius: '8px',
+    padding: 'var(--space-4)'
+  }}>
+    <h4 style={{
+      color: 'var(--danger-text)',
+      marginBottom: 'var(--space-3)',
+      display: 'flex',
+      alignItems: 'center',
+      gap: 'var(--space-2)'
+    }}>
+      <span>❌</span> Don'ts
+    </h4>
+    <ul style={{
+      margin: 0,
+      paddingLeft: 'var(--space-4)',
+      color: 'var(--danger-text)',
+      fontSize: 'var(--font-size-sm)',
+      lineHeight: 'var(--line-height-normal)'
+    }}>
+      <li>Use arbitrary z-index values</li>
+      <li>Set fixed widths without max-width</li>
+      <li>Ignore mobile breakpoints</li>
+      <li>Create deep stacking contexts</li>
+      <li>Mix different layout systems</li>
+    </ul>
+  </div>
+</div>
+
+## 🔧 Quick Reference
+
+Ready-to-use layout patterns.
+
+<div style={{
+  background: 'var(--surface-subtle)',
+  borderRadius: '8px',
+  padding: 'var(--space-4)',
+  marginBottom: 'var(--space-8)'
+}}>
+  <h4 style={{ marginBottom: 'var(--space-3)', color: 'var(--text)' }}>Common Layout Patterns</h4>
+
+  <div style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+    gap: 'var(--space-3)'
+  }}>
+    {[
+      {
+        name: 'Centered Container',
+        css: 'max-width: var(--container-md);\nmargin: 0 auto;\npadding: 0 var(--space-4);'
+      },
+      {
+        name: 'Responsive Grid',
+        css: 'display: grid;\ngrid-template-columns: repeat(auto-fit, minmax(280px, 1fr));\ngap: var(--space-4);'
+      },
+      {
+        name: 'Sidebar Layout',
+        css: 'display: grid;\ngrid-template-columns: 250px 1fr;\ngap: var(--space-6);'
+      },
+      {
+        name: 'Modal Overlay',
+        css: 'position: fixed;\ntop: 0;\nleft: 0;\nright: 0;\nbottom: 0;\nz-index: var(--z-modal);'
+      },
+      {
+        name: 'Sticky Header',
+        css: 'position: sticky;\ntop: 0;\nz-index: var(--z-sticky);\nbackground: var(--surface);'
+      },
+      {
+        name: 'Card Stack',
+        css: 'display: flex;\nflex-direction: column;\ngap: var(--space-4);\nmax-width: var(--container-sm);'
+      }
+    ].map((pattern) => (
+      <div key={pattern.name} style={{
+        background: 'var(--surface)',
+        border: '1px solid var(--border-subtle)',
+        borderRadius: '6px',
+        padding: 'var(--space-3)',
+        cursor: 'pointer',
+        transition: 'all 0.2s ease'
+      }}
+      onClick={() => navigator.clipboard?.writeText(pattern.css)}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.borderColor = 'var(--primary-border)';
+        e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.borderColor = 'var(--border-subtle)';
+        e.currentTarget.style.backgroundColor = 'var(--surface)';
+      }}
+      title={`Click to copy CSS for ${pattern.name}`}
+      >
+        <div style={{
+          fontSize: 'var(--font-size-sm)',
+          fontWeight: 'var(--font-weight-medium)',
+          color: 'var(--text)',
+          marginBottom: 'var(--space-1)'
+        }}>
+          {pattern.name}
+        </div>
+        <div style={{
+          fontSize: 'var(--font-size-xs)',
+          fontFamily: 'monospace',
+          color: 'var(--text-tertiary)',
+          whiteSpace: 'pre-wrap'
+        }}>
+          {pattern.css}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+---
+
+_Well-structured layouts create intuitive user experiences and ensure your content looks great across all devices and screen sizes._

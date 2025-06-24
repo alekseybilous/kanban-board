@@ -1,0 +1,855 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="packages/themes/tokens/Utilities" />
+
+# Utility System
+
+Essential utility tokens for modern web development including opacity scales, aspect ratios, and viewport units.
+
+## 🎛️ Opacity Scale
+
+Control transparency with precision using our comprehensive opacity system.
+
+<div style={{
+  background: 'linear-gradient(135deg, var(--surface) 0%, var(--surface-subtle) 100%)',
+  borderRadius: '12px',
+  padding: 'var(--space-8)',
+  marginBottom: 'var(--space-8)',
+  border: '1px solid var(--border)'
+}}>
+  <div style={{ marginBottom: 'var(--space-6)', textAlign: 'center' }}>
+    <h2 style={{ margin: 0, color: 'var(--text)', fontSize: '1.5rem' }}>Interactive Opacity Explorer</h2>
+    <p style={{ margin: 'var(--space-2) 0 0', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+      Click any example to copy its CSS variable • Watch the transparency change
+    </p>
+  </div>
+
+  <div style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
+    gap: 'var(--space-4)'
+  }}>
+    {[
+      { token: 'opacity-0', value: '0', name: '0%', usage: 'Hidden' },
+      { token: 'opacity-5', value: '0.05', name: '5%', usage: 'Barely visible' },
+      { token: 'opacity-10', value: '0.1', name: '10%', usage: 'Very subtle' },
+      { token: 'opacity-20', value: '0.2', name: '20%', usage: 'Subtle overlay' },
+      { token: 'opacity-25', value: '0.25', name: '25%', usage: 'Light overlay' },
+      { token: 'opacity-30', value: '0.3', name: '30%', usage: 'Soft overlay' },
+      { token: 'opacity-40', value: '0.4', name: '40%', usage: 'Moderate' },
+      { token: 'opacity-50', value: '0.5', name: '50%', usage: 'Half transparent' },
+      { token: 'opacity-60', value: '0.6', name: '60%', usage: 'Prominent' },
+      { token: 'opacity-70', value: '0.7', name: '70%', usage: 'Strong' },
+      { token: 'opacity-75', value: '0.75', name: '75%', usage: 'Mostly opaque' },
+      { token: 'opacity-80', value: '0.8', name: '80%', usage: 'Very strong' },
+      { token: 'opacity-90', value: '0.9', name: '90%', usage: 'Nearly opaque' },
+      { token: 'opacity-95', value: '0.95', name: '95%', usage: 'Almost full' },
+      { token: 'opacity-100', value: '1', name: '100%', usage: 'Fully opaque' }
+    ].map((opacity, index) => (
+      <div key={opacity.token} style={{
+        textAlign: 'center'
+      }}>
+        <div
+          style={{
+            width: '100%',
+            height: '80px',
+            background: `hsl(${200 + index * 8}, 65%, 55%)`,
+            borderRadius: '8px',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            opacity: `var(--${opacity.token})`,
+            border: '2px solid var(--border)',
+            position: 'relative',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginBottom: 'var(--space-2)'
+          }}
+          onClick={() => navigator.clipboard?.writeText(`var(--${opacity.token})`)}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'scale(1.05)';
+            e.currentTarget.style.borderColor = 'var(--primary-base)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'scale(1)';
+            e.currentTarget.style.borderColor = 'var(--border)';
+          }}
+          title={`Click to copy var(--${opacity.token})`}
+        >
+          <span style={{
+            color: 'white',
+            fontWeight: 'var(--font-weight-bold)',
+            fontSize: 'var(--font-size-sm)',
+            textShadow: '0 1px 2px rgba(0,0,0,0.5)'
+          }}>
+            {opacity.name}
+          </span>
+        </div>
+
+        <div style={{
+          fontSize: 'var(--font-size-xs)',
+          fontFamily: 'monospace',
+          color: 'var(--primary-base)',
+          marginBottom: 'var(--space-1)'
+        }}>
+          --{opacity.token}
+        </div>
+
+        <div style={{
+          fontSize: 'var(--font-size-xs)',
+          color: 'var(--text-tertiary)',
+          marginBottom: 'var(--space-1)'
+        }}>
+          {opacity.value}
+        </div>
+
+        <div style={{
+          fontSize: 'var(--font-size-xs)',
+          color: 'var(--text-secondary)'
+        }}>
+          {opacity.usage}
+        </div>
+      </div>
+    ))}
+
+  </div>
+</div>
+
+## 📐 Aspect Ratios
+
+Maintain perfect proportions for media, cards, and layout containers.
+
+<div style={{
+  background: 'linear-gradient(135deg, var(--surface) 0%, var(--surface-subtle) 100%)',
+  borderRadius: '12px',
+  padding: 'var(--space-8)',
+  marginBottom: 'var(--space-8)',
+  border: '1px solid var(--border)'
+}}>
+  <div style={{ marginBottom: 'var(--space-6)', textAlign: 'center' }}>
+    <h2 style={{ margin: 0, color: 'var(--text)', fontSize: '1.5rem' }}>Aspect Ratio Gallery</h2>
+    <p style={{ margin: 'var(--space-2) 0 0', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+      Click any example to copy its CSS variable • Perfect for images and containers
+    </p>
+  </div>
+
+  <div style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+    gap: 'var(--space-6)',
+    alignItems: 'start'
+  }}>
+    {[
+      {
+        token: 'aspect-square',
+        value: '1 / 1',
+        name: 'Square',
+        description: 'Perfect squares for avatars, icons',
+        color: '#ef4444'
+      },
+      {
+        token: 'aspect-video',
+        value: '16 / 9',
+        name: 'Video',
+        description: 'Widescreen video content',
+        color: '#f97316'
+      },
+      {
+        token: 'aspect-photo',
+        value: '4 / 3',
+        name: 'Photo',
+        description: 'Traditional photo format',
+        color: '#eab308'
+      },
+      {
+        token: 'aspect-portrait',
+        value: '3 / 4',
+        name: 'Portrait',
+        description: 'Vertical orientation',
+        color: '#22c55e'
+      },
+      {
+        token: 'aspect-golden',
+        value: '1.618 / 1',
+        name: 'Golden',
+        description: 'Golden ratio proportions',
+        color: '#8b5cf6'
+      }
+    ].map((aspect) => (
+      <div key={aspect.token} style={{
+        background: 'var(--surface)',
+        borderRadius: '8px',
+        padding: 'var(--space-4)',
+        border: '1px solid var(--border)',
+        cursor: 'pointer',
+        transition: 'all 0.3s ease'
+      }}
+      onClick={() => navigator.clipboard?.writeText(`var(--${aspect.token})`)}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = 'translateY(-4px)';
+        e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = 'translateY(0)';
+        e.currentTarget.style.boxShadow = 'none';
+      }}
+      title={`Click to copy var(--${aspect.token})`}
+      >
+        {/* Aspect ratio demonstration */}
+        <div style={{
+          aspectRatio: `var(--${aspect.token})`,
+          background: `linear-gradient(135deg, ${aspect.color}, ${aspect.color}aa)`,
+          borderRadius: '6px',
+          marginBottom: 'var(--space-3)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: 'white',
+          fontWeight: 'var(--font-weight-bold)',
+          fontSize: 'var(--font-size-sm)',
+          textShadow: '0 1px 2px rgba(0,0,0,0.3)',
+          minHeight: '60px'
+        }}>
+          {aspect.name}
+        </div>
+
+        <h3 style={{
+          margin: '0 0 var(--space-2) 0',
+          fontSize: 'var(--font-size-base)',
+          fontWeight: 'var(--font-weight-semibold)',
+          color: 'var(--text)'
+        }}>
+          {aspect.name} Ratio
+        </h3>
+
+        <p style={{
+          margin: '0 0 var(--space-3) 0',
+          fontSize: 'var(--font-size-sm)',
+          color: 'var(--text-secondary)',
+          lineHeight: 'var(--line-height-normal)'
+        }}>
+          {aspect.description}
+        </p>
+
+        <div style={{
+          borderTop: '1px solid var(--border-subtle)',
+          paddingTop: 'var(--space-2)',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center'
+        }}>
+          <code style={{
+            fontSize: 'var(--font-size-xs)',
+            fontFamily: 'monospace',
+            color: 'var(--primary-base)'
+          }}>
+            --{aspect.token}
+          </code>
+          <span style={{
+            fontSize: 'var(--font-size-xs)',
+            color: 'var(--text-tertiary)',
+            fontFamily: 'monospace'
+          }}>
+            {aspect.value}
+          </span>
+        </div>
+      </div>
+    ))}
+
+  </div>
+</div>
+
+## 📱 Viewport Units
+
+Modern viewport units for responsive layouts and full-screen experiences.
+
+<div style={{
+  background: 'linear-gradient(135deg, var(--surface) 0%, var(--surface-subtle) 100%)',
+  borderRadius: '12px',
+  padding: 'var(--space-8)',
+  marginBottom: 'var(--space-8)',
+  border: '1px solid var(--border)'
+}}>
+  <div style={{ marginBottom: 'var(--space-6)', textAlign: 'center' }}>
+    <h2 style={{ margin: 0, color: 'var(--text)', fontSize: '1.5rem' }}>Viewport Unit Reference</h2>
+    <p style={{ margin: 'var(--space-2) 0 0', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+      Essential units for responsive design • Click to copy CSS variables
+    </p>
+  </div>
+
+{/* Legacy Viewport Units */}
+
+  <div style={{ marginBottom: 'var(--space-8)' }}>
+    <h3 style={{
+      margin: '0 0 var(--space-4) 0',
+      fontSize: 'var(--font-size-lg)',
+      fontWeight: 'var(--font-weight-semibold)',
+      color: 'var(--text)'
+    }}>
+      Legacy Viewport Units
+    </h3>
+
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+      gap: 'var(--space-4)'
+    }}>
+      {[
+        {
+          token: 'vw-full',
+          value: '100vw',
+          name: 'Full Width',
+          description: 'Full viewport width',
+          icon: '↔️'
+        },
+        {
+          token: 'vh-full',
+          value: '100vh',
+          name: 'Full Height',
+          description: 'Full viewport height',
+          icon: '↕️'
+        },
+        {
+          token: 'vmin-full',
+          value: '100vmin',
+          name: 'Minimum',
+          description: 'Smaller of vw or vh',
+          icon: '📱'
+        },
+        {
+          token: 'vmax-full',
+          value: '100vmax',
+          name: 'Maximum',
+          description: 'Larger of vw or vh',
+          icon: '🖥️'
+        }
+      ].map((unit) => (
+        <div key={unit.token} style={{
+          background: 'var(--surface)',
+          border: '1px solid var(--border)',
+          borderRadius: '8px',
+          padding: 'var(--space-4)',
+          cursor: 'pointer',
+          transition: 'all 0.2s ease',
+          textAlign: 'center'
+        }}
+        onClick={() => navigator.clipboard?.writeText(`var(--${unit.token})`)}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.borderColor = 'var(--primary-border)';
+          e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.borderColor = 'var(--border)';
+          e.currentTarget.style.backgroundColor = 'var(--surface)';
+        }}
+        title={`Click to copy var(--${unit.token})`}
+        >
+          <div style={{
+            fontSize: '2rem',
+            marginBottom: 'var(--space-2)'
+          }}>
+            {unit.icon}
+          </div>
+
+          <h4 style={{
+            margin: '0 0 var(--space-1) 0',
+            fontSize: 'var(--font-size-base)',
+            fontWeight: 'var(--font-weight-semibold)',
+            color: 'var(--text)'
+          }}>
+            {unit.name}
+          </h4>
+
+          <p style={{
+            margin: '0 0 var(--space-2) 0',
+            fontSize: 'var(--font-size-sm)',
+            color: 'var(--text-secondary)'
+          }}>
+            {unit.description}
+          </p>
+
+          <code style={{
+            fontSize: 'var(--font-size-xs)',
+            fontFamily: 'monospace',
+            color: 'var(--primary-base)',
+            display: 'block',
+            marginBottom: 'var(--space-1)'
+          }}>
+            --{unit.token}
+          </code>
+
+          <span style={{
+            fontSize: 'var(--font-size-xs)',
+            color: 'var(--text-tertiary)',
+            fontFamily: 'monospace'
+          }}>
+            {unit.value}
+          </span>
+        </div>
+      ))}
+    </div>
+
+  </div>
+
+{/* Modern Dynamic Viewport Units */}
+
+  <div>
+    <h3 style={{
+      margin: '0 0 var(--space-4) 0',
+      fontSize: 'var(--font-size-lg)',
+      fontWeight: 'var(--font-weight-semibold)',
+      color: 'var(--text)'
+    }}>
+      Modern Dynamic Viewport Units
+    </h3>
+
+    <div style={{
+      background: 'var(--info-surface)',
+      border: '1px solid var(--info-border)',
+      borderRadius: '8px',
+      padding: 'var(--space-4)',
+      marginBottom: 'var(--space-4)'
+    }}>
+      <p style={{
+        margin: 0,
+        fontSize: 'var(--font-size-sm)',
+        color: 'var(--info-text)',
+        lineHeight: 'var(--line-height-normal)'
+      }}>
+        <strong>Modern browsers only:</strong> These units account for dynamic interfaces like mobile browser toolbars that show/hide.
+      </p>
+    </div>
+
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+      gap: 'var(--space-4)'
+    }}>
+      {[
+        {
+          token: 'dvh-full',
+          value: '100dvh',
+          name: 'Dynamic Height',
+          description: 'Adjusts with UI changes',
+          icon: '📲',
+          badge: 'Recommended'
+        },
+        {
+          token: 'dvw-full',
+          value: '100dvw',
+          name: 'Dynamic Width',
+          description: 'Responsive to scrollbars',
+          icon: '📱',
+          badge: 'Modern'
+        },
+        {
+          token: 'svh-full',
+          value: '100svh',
+          name: 'Small Height',
+          description: 'Minimum UI state',
+          icon: '📱',
+          badge: 'Compact'
+        },
+        {
+          token: 'svw-full',
+          value: '100svw',
+          name: 'Small Width',
+          description: 'With scrollbar space',
+          icon: '📱',
+          badge: 'Safe'
+        },
+        {
+          token: 'lvh-full',
+          value: '100lvh',
+          name: 'Large Height',
+          description: 'Maximum UI state',
+          icon: '📱',
+          badge: 'Expanded'
+        },
+        {
+          token: 'lvw-full',
+          value: '100lvw',
+          name: 'Large Width',
+          description: 'Without scrollbar',
+          icon: '📱',
+          badge: 'Full'
+        }
+      ].map((unit) => (
+        <div key={unit.token} style={{
+          background: 'var(--surface)',
+          border: '1px solid var(--border)',
+          borderRadius: '8px',
+          padding: 'var(--space-4)',
+          cursor: 'pointer',
+          transition: 'all 0.2s ease',
+          position: 'relative'
+        }}
+        onClick={() => navigator.clipboard?.writeText(`var(--${unit.token})`)}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.borderColor = 'var(--primary-border)';
+          e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.borderColor = 'var(--border)';
+          e.currentTarget.style.backgroundColor = 'var(--surface)';
+        }}
+        title={`Click to copy var(--${unit.token})`}
+        >
+          <div style={{
+            position: 'absolute',
+            top: 'var(--space-2)',
+            right: 'var(--space-2)',
+            background: 'var(--primary-base)',
+            color: 'white',
+            fontSize: 'var(--font-size-xs)',
+            fontWeight: 'var(--font-weight-medium)',
+            padding: '2px 6px',
+            borderRadius: '3px'
+          }}>
+            {unit.badge}
+          </div>
+
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 'var(--space-2)',
+            marginBottom: 'var(--space-2)'
+          }}>
+            <span style={{ fontSize: '1.5rem' }}>{unit.icon}</span>
+            <h4 style={{
+              margin: 0,
+              fontSize: 'var(--font-size-base)',
+              fontWeight: 'var(--font-weight-semibold)',
+              color: 'var(--text)'
+            }}>
+              {unit.name}
+            </h4>
+          </div>
+
+          <p style={{
+            margin: '0 0 var(--space-3) 0',
+            fontSize: 'var(--font-size-sm)',
+            color: 'var(--text-secondary)',
+            lineHeight: 'var(--line-height-normal)'
+          }}>
+            {unit.description}
+          </p>
+
+          <div style={{
+            borderTop: '1px solid var(--border-subtle)',
+            paddingTop: 'var(--space-2)',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+          }}>
+            <code style={{
+              fontSize: 'var(--font-size-xs)',
+              fontFamily: 'monospace',
+              color: 'var(--primary-base)'
+            }}>
+              --{unit.token}
+            </code>
+            <span style={{
+              fontSize: 'var(--font-size-xs)',
+              color: 'var(--text-tertiary)',
+              fontFamily: 'monospace'
+            }}>
+              {unit.value}
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</div>
+
+## 🎯 Real-World Examples
+
+See how utility tokens enhance common UI patterns.
+
+<div style={{
+  display: 'grid',
+  gap: 'var(--space-6)',
+  marginBottom: 'var(--space-8)'
+}}>
+  {/* Opacity Examples */}
+  <div>
+    <h3 style={{
+      margin: '0 0 var(--space-4) 0',
+      fontSize: 'var(--font-size-xl)',
+      fontWeight: 'var(--font-weight-semibold)',
+      color: 'var(--text)'
+    }}>
+      Opacity in Action
+    </h3>
+
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+      gap: 'var(--space-4)'
+    }}>
+      {[
+        { name: 'Loading Overlay', opacity: 'opacity-80', usage: 'Modal backgrounds' },
+        { name: 'Disabled State', opacity: 'opacity-50', usage: 'Inactive buttons' },
+        { name: 'Hover Effect', opacity: 'opacity-90', usage: 'Interactive feedback' }
+      ].map((example) => (
+        <div key={example.name} style={{
+          background: 'var(--surface)',
+          border: '1px solid var(--border)',
+          borderRadius: '8px',
+          padding: 'var(--space-4)',
+          position: 'relative',
+          overflow: 'hidden',
+          cursor: 'pointer'
+        }}
+        onClick={() => navigator.clipboard?.writeText(`var(--${example.opacity})`)}
+        title={`Click to copy var(--${example.opacity})`}
+        >
+          <div style={{
+            background: 'linear-gradient(135deg, var(--primary-base), var(--primary-hover))',
+            borderRadius: '6px',
+            padding: 'var(--space-4)',
+            marginBottom: 'var(--space-3)',
+            color: 'white',
+            textAlign: 'center',
+            position: 'relative'
+          }}>
+            <div style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'var(--surface)',
+              opacity: `var(--${example.opacity})`,
+              borderRadius: '6px'
+            }} />
+            <span style={{ position: 'relative', fontWeight: 'var(--font-weight-medium)' }}>
+              {example.name}
+            </span>
+          </div>
+
+          <div style={{
+            fontSize: 'var(--font-size-sm)',
+            color: 'var(--text-secondary)',
+            marginBottom: 'var(--space-2)'
+          }}>
+            {example.usage}
+          </div>
+
+          <code style={{
+            fontSize: 'var(--font-size-xs)',
+            fontFamily: 'monospace',
+            color: 'var(--primary-base)'
+          }}>
+            opacity: var(--{example.opacity});
+          </code>
+        </div>
+      ))}
+    </div>
+
+  </div>
+
+{/* Aspect Ratio Examples */}
+
+  <div>
+    <h3 style={{
+      margin: '0 0 var(--space-4) 0',
+      fontSize: 'var(--font-size-xl)',
+      fontWeight: 'var(--font-weight-semibold)',
+      color: 'var(--text)'
+    }}>
+      Aspect Ratio Applications
+    </h3>
+
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+      gap: 'var(--space-4)'
+    }}>
+      {[
+        { name: 'Video Thumbnail', aspect: 'aspect-video', content: '🎥' },
+        { name: 'Profile Avatar', aspect: 'aspect-square', content: '👤' },
+        { name: 'Photo Gallery', aspect: 'aspect-photo', content: '📸' }
+      ].map((example) => (
+        <div key={example.name} style={{
+          background: 'var(--surface)',
+          border: '1px solid var(--border)',
+          borderRadius: '8px',
+          padding: 'var(--space-4)',
+          cursor: 'pointer'
+        }}
+        onClick={() => navigator.clipboard?.writeText(`var(--${example.aspect})`)}
+        title={`Click to copy var(--${example.aspect})`}
+        >
+          <div style={{
+            aspectRatio: `var(--${example.aspect})`,
+            background: 'var(--surface-subtle)',
+            borderRadius: '6px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '2rem',
+            marginBottom: 'var(--space-3)',
+            border: '2px dashed var(--border-subtle)'
+          }}>
+            {example.content}
+          </div>
+
+          <h4 style={{
+            margin: '0 0 var(--space-1) 0',
+            fontSize: 'var(--font-size-base)',
+            fontWeight: 'var(--font-weight-semibold)',
+            color: 'var(--text)'
+          }}>
+            {example.name}
+          </h4>
+
+          <code style={{
+            fontSize: 'var(--font-size-xs)',
+            fontFamily: 'monospace',
+            color: 'var(--primary-base)'
+          }}>
+            aspect-ratio: var(--{example.aspect});
+          </code>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</div>
+
+## 💡 Best Practices
+
+<div style={{
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+  gap: 'var(--space-6)',
+  marginBottom: 'var(--space-8)'
+}}>
+  <div style={{
+    background: 'var(--success-surface)',
+    border: '1px solid var(--success-border)',
+    borderRadius: '8px',
+    padding: 'var(--space-4)'
+  }}>
+    <h4 style={{
+      color: 'var(--success-text)',
+      marginBottom: 'var(--space-3)',
+      display: 'flex',
+      alignItems: 'center',
+      gap: 'var(--space-2)'
+    }}>
+      <span>✅</span> Do's
+    </h4>
+    <ul style={{
+      margin: 0,
+      paddingLeft: 'var(--space-4)',
+      color: 'var(--success-text)',
+      fontSize: 'var(--font-size-sm)',
+      lineHeight: 'var(--line-height-normal)'
+    }}>
+      <li>Use dynamic viewport units for mobile-first design</li>
+      <li>Apply opacity for layering and depth</li>
+      <li>Match aspect ratios to content type</li>
+      <li>Prefer CSS variables for maintainability</li>
+      <li>Test opacity on different backgrounds</li>
+    </ul>
+  </div>
+
+  <div style={{
+    background: 'var(--danger-surface)',
+    border: '1px solid var(--danger-border)',
+    borderRadius: '8px',
+    padding: 'var(--space-4)'
+  }}>
+    <h4 style={{
+      color: 'var(--danger-text)',
+      marginBottom: 'var(--space-3)',
+      display: 'flex',
+      alignItems: 'center',
+      gap: 'var(--space-2)'
+    }}>
+      <span>❌</span> Don'ts
+    </h4>
+    <ul style={{
+      margin: 0,
+      paddingLeft: 'var(--space-4)',
+      color: 'var(--danger-text)',
+      fontSize: 'var(--font-size-sm)',
+      lineHeight: 'var(--line-height-normal)'
+    }}>
+      <li>Hardcode opacity values in components</li>
+      <li>Use viewport units without fallbacks</li>
+      <li>Force aspect ratios on all images</li>
+      <li>Overuse transparency effects</li>
+      <li>Ignore accessibility with low opacity</li>
+    </ul>
+  </div>
+</div>
+
+## 🔧 Quick Reference
+
+Common utility patterns ready to copy and use.
+
+<div style={{
+  background: 'var(--surface-subtle)',
+  borderRadius: '8px',
+  padding: 'var(--space-4)',
+  marginBottom: 'var(--space-8)'
+}}>
+  <h4 style={{ marginBottom: 'var(--space-3)', color: 'var(--text)' }}>Common Utility Patterns</h4>
+
+  <div style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+    gap: 'var(--space-3)'
+  }}>
+    {[
+      { name: 'Modal Overlay', css: 'opacity: var(--opacity-80);' },
+      { name: 'Disabled Button', css: 'opacity: var(--opacity-50);' },
+      { name: 'Video Container', css: 'aspect-ratio: var(--aspect-video);' },
+      { name: 'Square Avatar', css: 'aspect-ratio: var(--aspect-square);' },
+      { name: 'Full Height', css: 'height: var(--dvh-full);' },
+      { name: 'Full Width', css: 'width: var(--dvw-full);' }
+    ].map((pattern) => (
+      <div key={pattern.name} style={{
+        background: 'var(--surface)',
+        border: '1px solid var(--border-subtle)',
+        borderRadius: '6px',
+        padding: 'var(--space-3)',
+        cursor: 'pointer',
+        transition: 'all 0.2s ease'
+      }}
+      onClick={() => navigator.clipboard?.writeText(pattern.css)}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.borderColor = 'var(--primary-border)';
+        e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.borderColor = 'var(--border-subtle)';
+        e.currentTarget.style.backgroundColor = 'var(--surface)';
+      }}
+      title={`Click to copy CSS for ${pattern.name}`}
+      >
+        <div style={{
+          fontSize: 'var(--font-size-sm)',
+          fontWeight: 'var(--font-weight-medium)',
+          color: 'var(--text)',
+          marginBottom: 'var(--space-1)'
+        }}>
+          {pattern.name}
+        </div>
+        <div style={{
+          fontSize: 'var(--font-size-xs)',
+          fontFamily: 'monospace',
+          color: 'var(--text-tertiary)'
+        }}>
+          {pattern.css}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+---
+
+_Utility tokens provide the foundation for consistent, maintainable design systems that adapt beautifully across all devices and interaction states._

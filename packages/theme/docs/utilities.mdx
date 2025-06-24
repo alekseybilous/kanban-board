@@ -1,0 +1,459 @@
+# Utilities
+
+Utility tokens provide common values for opacity, aspect ratios, viewport units, and other helper properties used across components.
+
+## Opacity Scale
+
+Standardized opacity values for consistent transparency effects.
+
+| Token           | Value | Usage                              |
+| --------------- | ----- | ---------------------------------- |
+| `--opacity-0`   | 0     | Completely transparent, hidden     |
+| `--opacity-5`   | 0.05  | Nearly transparent, subtle overlay |
+| `--opacity-10`  | 0.1   | Very transparent, light overlay    |
+| `--opacity-20`  | 0.2   | Transparent, disabled states       |
+| `--opacity-25`  | 0.25  | Mostly transparent                 |
+| `--opacity-30`  | 0.3   | Transparent, hover overlays        |
+| `--opacity-40`  | 0.4   | Semi-transparent                   |
+| `--opacity-50`  | 0.5   | Half transparent, loading states   |
+| `--opacity-60`  | 0.6   | Semi-opaque                        |
+| `--opacity-70`  | 0.7   | Mostly opaque                      |
+| `--opacity-75`  | 0.75  | Three-quarters opaque              |
+| `--opacity-80`  | 0.8   | Slightly transparent               |
+| `--opacity-90`  | 0.9   | Nearly opaque                      |
+| `--opacity-95`  | 0.95  | Almost fully opaque                |
+| `--opacity-100` | 1     | Completely opaque, normal          |
+
+## Aspect Ratios
+
+Predefined aspect ratios for consistent media and container proportions.
+
+| Token               | Value     | Usage                               |
+| ------------------- | --------- | ----------------------------------- |
+| `--aspect-square`   | 1 / 1     | Square content, avatars, thumbnails |
+| `--aspect-video`    | 16 / 9    | Video content, hero images          |
+| `--aspect-photo`    | 4 / 3     | Photo content, traditional images   |
+| `--aspect-portrait` | 3 / 4     | Portrait images, mobile screenshots |
+| `--aspect-golden`   | 1.618 / 1 | Golden ratio, pleasing proportions  |
+
+## Viewport Units
+
+Responsive units that adapt to viewport dimensions.
+
+### Standard Viewport Units
+
+| Token         | Value   | Usage                           |
+| ------------- | ------- | ------------------------------- |
+| `--vw-full`   | 100vw   | Full viewport width             |
+| `--vh-full`   | 100vh   | Full viewport height            |
+| `--vmin-full` | 100vmin | Full minimum viewport dimension |
+| `--vmax-full` | 100vmax | Full maximum viewport dimension |
+
+### Dynamic Viewport Units (Modern Browsers)
+
+| Token        | Value  | Usage                                                  |
+| ------------ | ------ | ------------------------------------------------------ |
+| `--dvh-full` | 100dvh | Dynamic viewport height (accounts for mobile browsers) |
+| `--dvw-full` | 100dvw | Dynamic viewport width                                 |
+| `--svh-full` | 100svh | Small viewport height (mobile keyboard visible)        |
+| `--svw-full` | 100svw | Small viewport width                                   |
+| `--lvh-full` | 100lvh | Large viewport height (mobile keyboard hidden)         |
+| `--lvw-full` | 100lvw | Large viewport width                                   |
+
+## Opacity Usage
+
+### Component States
+
+```css
+/* Disabled elements */
+.disabled {
+  opacity: var(--opacity-50);
+  pointer-events: none;
+}
+
+/* Loading states */
+.loading {
+  opacity: var(--opacity-70);
+}
+
+/* Hover overlays */
+.hover-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--surface);
+  opacity: var(--opacity-0);
+  transition: opacity var(--duration-normal) var(--ease-out);
+}
+
+.hover-overlay:hover::before {
+  opacity: var(--opacity-10);
+}
+```
+
+### Image and Media
+
+```css
+/* Image fade-in */
+.image-fade {
+  opacity: var(--opacity-0);
+  transition: opacity var(--duration-slow) var(--ease-out);
+}
+
+.image-fade.loaded {
+  opacity: var(--opacity-100);
+}
+
+/* Placeholder content */
+.placeholder {
+  opacity: var(--opacity-30);
+}
+
+/* Backdrop overlays */
+.backdrop {
+  background: var(--color-black);
+  opacity: var(--opacity-50);
+}
+```
+
+### Text and Content
+
+```css
+/* Secondary text */
+.text-muted {
+  opacity: var(--opacity-70);
+}
+
+/* Subtle elements */
+.subtle {
+  opacity: var(--opacity-60);
+}
+
+/* Ghost elements */
+.ghost {
+  opacity: var(--opacity-25);
+}
+```
+
+## Aspect Ratio Usage
+
+### Media Containers
+
+```css
+/* Video container */
+.video-container {
+  aspect-ratio: var(--aspect-video);
+  background: var(--surface);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+}
+
+/* Square avatar */
+.avatar {
+  aspect-ratio: var(--aspect-square);
+  border-radius: var(--border-radius-full);
+  overflow: hidden;
+}
+
+/* Photo gallery */
+.photo-grid-item {
+  aspect-ratio: var(--aspect-photo);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+}
+```
+
+### Card Layouts
+
+```css
+/* Square cards */
+.card-square {
+  aspect-ratio: var(--aspect-square);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Golden ratio cards */
+.card-golden {
+  aspect-ratio: var(--aspect-golden);
+  padding: var(--space-6);
+}
+
+/* Portrait orientation */
+.card-portrait {
+  aspect-ratio: var(--aspect-portrait);
+}
+```
+
+### Responsive Aspect Ratios
+
+```css
+.responsive-media {
+  aspect-ratio: var(--aspect-square);
+}
+
+@media (min-width: 48em) {
+  .responsive-media {
+    aspect-ratio: var(--aspect-photo);
+  }
+}
+
+@media (min-width: 64em) {
+  .responsive-media {
+    aspect-ratio: var(--aspect-video);
+  }
+}
+```
+
+## Viewport Units Usage
+
+### Full-Height Layouts
+
+```css
+/* Hero sections */
+.hero {
+  height: var(--vh-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mobile-optimized hero */
+.hero-mobile {
+  height: var(--dvh-full); /* Accounts for mobile browser UI */
+}
+
+/* Sidebar height */
+.sidebar {
+  height: var(--vh-full);
+  position: sticky;
+  top: 0;
+}
+```
+
+### Full-Width Elements
+
+```css
+/* Breakout from container */
+.full-width {
+  width: var(--vw-full);
+  margin-left: calc(-1 * var(--vw-full) / 2 + 50%);
+}
+
+/* Full-width background */
+.full-bg::before {
+  content: '';
+  position: absolute;
+  left: calc(-1 * var(--vw-full) / 2 + 50%);
+  width: var(--vw-full);
+  height: 100%;
+  z-index: -1;
+}
+```
+
+### Modal and Overlay Sizing
+
+```css
+/* Full-screen modal */
+.modal-fullscreen {
+  width: var(--vw-full);
+  height: var(--vh-full);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+/* Adaptive mobile modal */
+.modal-mobile {
+  height: var(--svh-full); /* Small viewport height */
+  max-height: var(--lvh-full); /* Large viewport height */
+}
+```
+
+## Utility Classes
+
+### Opacity Utilities
+
+```css
+.opacity-0 {
+  opacity: var(--opacity-0);
+}
+.opacity-5 {
+  opacity: var(--opacity-5);
+}
+.opacity-10 {
+  opacity: var(--opacity-10);
+}
+.opacity-25 {
+  opacity: var(--opacity-25);
+}
+.opacity-50 {
+  opacity: var(--opacity-50);
+}
+.opacity-75 {
+  opacity: var(--opacity-75);
+}
+.opacity-100 {
+  opacity: var(--opacity-100);
+}
+
+/* Interactive opacity */
+.hover-opacity-75:hover {
+  opacity: var(--opacity-75);
+}
+.hover-opacity-50:hover {
+  opacity: var(--opacity-50);
+}
+.focus-opacity-75:focus {
+  opacity: var(--opacity-75);
+}
+```
+
+### Aspect Ratio Utilities
+
+```css
+.aspect-square {
+  aspect-ratio: var(--aspect-square);
+}
+.aspect-video {
+  aspect-ratio: var(--aspect-video);
+}
+.aspect-photo {
+  aspect-ratio: var(--aspect-photo);
+}
+.aspect-portrait {
+  aspect-ratio: var(--aspect-portrait);
+}
+.aspect-golden {
+  aspect-ratio: var(--aspect-golden);
+}
+```
+
+### Viewport Utilities
+
+```css
+.w-screen {
+  width: var(--vw-full);
+}
+.h-screen {
+  height: var(--vh-full);
+}
+.h-screen-dynamic {
+  height: var(--dvh-full);
+}
+.h-screen-small {
+  height: var(--svh-full);
+}
+.h-screen-large {
+  height: var(--lvh-full);
+}
+
+.min-h-screen {
+  min-height: var(--vh-full);
+}
+.min-h-screen-dynamic {
+  min-height: var(--dvh-full);
+}
+```
+
+## Advanced Patterns
+
+### Glassmorphism Effect
+
+```css
+.glass {
+  background: rgba(255, 255, 255, var(--opacity-10));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, var(--opacity-20));
+}
+
+[data-theme='dark'] .glass {
+  background: rgba(0, 0, 0, var(--opacity-20));
+  border-color: rgba(255, 255, 255, var(--opacity-10));
+}
+```
+
+### Progressive Image Loading
+
+```css
+.progressive-image {
+  opacity: var(--opacity-0);
+  transition: opacity var(--duration-slow) var(--ease-out);
+  aspect-ratio: var(--aspect-photo);
+  background: var(--surface-subtle);
+}
+
+.progressive-image.loaded {
+  opacity: var(--opacity-100);
+}
+
+.progressive-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, var(--opacity-20)),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+```
+
+### Responsive Containers
+
+```css
+.responsive-container {
+  width: min(100% - var(--space-8), var(--container-lg));
+  margin-inline: auto;
+}
+
+.breakout-container {
+  width: min(100vw, var(--container-xl));
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+```
+
+## Best Practices
+
+### Opacity Guidelines
+
+- **Use sparingly** - Too many transparent elements can reduce readability
+- **Maintain contrast** - Ensure sufficient contrast for accessibility
+- **Layer carefully** - Multiple transparent layers can compound readability issues
+- **Consider themes** - Test opacity values in light and dark modes
+
+### Aspect Ratio Guidelines
+
+- **Choose semantically** - Match aspect ratios to content type
+- **Plan for content** - Ensure content fits well within chosen ratios
+- **Consider responsive behavior** - Aspect ratios may need to change at different screen sizes
+- **Provide fallbacks** - Use min-height for browsers that don't support aspect-ratio
+
+### Viewport Unit Guidelines
+
+- **Test on mobile** - Mobile browsers have complex viewport behaviors
+- **Use dynamic units** - Prefer `dvh` over `vh` for mobile-friendly layouts
+- **Consider accessibility** - Large viewport-based sizes can be problematic for some users
+- **Provide alternatives** - Have fallbacks for browsers without dynamic viewport support
+
+### Performance Considerations
+
+- **Minimize repaints** - Opacity changes are generally performant
+- **Use will-change sparingly** - Only when necessary for smooth animations
+- **Test on devices** - Viewport calculations can impact performance on low-end devices
+
+This utility system provides flexible, consistent values for common styling needs while maintaining excellent performance and accessibility.

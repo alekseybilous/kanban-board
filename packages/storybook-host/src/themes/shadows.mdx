@@ -1,0 +1,914 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="packages/themes/tokens/Shadows" />
+
+# Shadow System
+
+Elevate your interface with our carefully crafted shadow system that adds depth, hierarchy, and visual polish to components.
+
+## 🎨 Shadow Scale Explorer
+
+Experience how shadows create depth and elevation in UI design.
+
+<div style={{
+  background: 'linear-gradient(135deg, var(--surface) 0%, var(--surface-subtle) 100%)',
+  borderRadius: '12px',
+  padding: 'var(--space-8)',
+  marginBottom: 'var(--space-8)',
+  border: '1px solid var(--border)'
+}}>
+  <div style={{ marginBottom: 'var(--space-6)', textAlign: 'center' }}>
+    <h2 style={{ margin: 0, color: 'var(--text)', fontSize: '1.5rem' }}>Interactive Shadow Gallery</h2>
+    <p style={{ margin: 'var(--space-2) 0 0', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+      Click any card to copy its shadow CSS variable
+    </p>
+  </div>
+
+  <div style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gap: 'var(--space-6)'
+  }}>
+    {[
+      {
+        token: 'shadow-xs',
+        name: 'Extra Small',
+        elevation: '2px',
+        usage: 'Subtle elevation for cards',
+        color: '#f3f4f6'
+      },
+      {
+        token: 'shadow-sm',
+        name: 'Small',
+        elevation: '4px',
+        usage: 'Default cards, inputs',
+        color: '#e5e7eb'
+      },
+      {
+        token: 'shadow-md',
+        name: 'Medium',
+        elevation: '8px',
+        usage: 'Hover states, raised buttons',
+        color: '#d1d5db'
+      },
+      {
+        token: 'shadow-lg',
+        name: 'Large',
+        elevation: '16px',
+        usage: 'Modals, dropdown menus',
+        color: '#9ca3af'
+      },
+      {
+        token: 'shadow-xl',
+        name: 'Extra Large',
+        elevation: '24px',
+        usage: 'Floating panels, popovers',
+        color: '#6b7280'
+      },
+      {
+        token: 'shadow-2xl',
+        name: '2X Large',
+        elevation: '48px',
+        usage: 'Overlays, notifications',
+        color: '#4b5563'
+      }
+    ].map((shadow, index) => (
+      <div
+        key={shadow.token}
+        style={{
+          position: 'relative',
+          transform: 'translateY(0)',
+          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = `translateY(-${index * 2 + 2}px)`;
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'translateY(0)';
+        }}
+      >
+        <div
+          style={{
+            background: 'var(--surface)',
+            borderRadius: '8px',
+            padding: 'var(--space-6)',
+            boxShadow: `var(--${shadow.token})`,
+            cursor: 'pointer',
+            transition: 'box-shadow 0.3s ease',
+            minHeight: '180px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between'
+          }}
+          onClick={() => navigator.clipboard?.writeText(`var(--${shadow.token})`)}
+          title={`Click to copy var(--${shadow.token})`}
+        >
+          <div>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: 'var(--space-4)'
+            }}>
+              <h3 style={{
+                margin: 0,
+                fontSize: 'var(--font-size-lg)',
+                fontWeight: 'var(--font-weight-semibold)',
+                color: 'var(--text)'
+              }}>
+                {shadow.name}
+              </h3>
+              <div style={{
+                background: shadow.color,
+                width: '32px',
+                height: '32px',
+                borderRadius: 'var(--border-radius-md)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: 'var(--font-size-xs)',
+                fontWeight: 'var(--font-weight-bold)',
+                color: index > 2 ? 'white' : 'var(--text)'
+              }}>
+                {index + 1}
+              </div>
+            </div>
+
+            <p style={{
+              margin: '0 0 var(--space-3) 0',
+              fontSize: 'var(--font-size-sm)',
+              color: 'var(--text-secondary)',
+              lineHeight: 'var(--line-height-normal)'
+            }}>
+              {shadow.usage}
+            </p>
+          </div>
+
+          <div style={{
+            borderTop: '1px solid var(--border-subtle)',
+            paddingTop: 'var(--space-3)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+          }}>
+            <code style={{
+              fontSize: 'var(--font-size-xs)',
+              fontFamily: 'monospace',
+              color: 'var(--primary-base)'
+            }}>
+              --{shadow.token}
+            </code>
+            <span style={{
+              fontSize: 'var(--font-size-xs)',
+              color: 'var(--text-tertiary)'
+            }}>
+              {shadow.elevation} elevation
+            </span>
+          </div>
+        </div>
+      </div>
+    ))}
+
+  </div>
+</div>
+
+## 🎯 Special Shadows
+
+Unique shadow effects for specific use cases.
+
+<div style={{
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+  gap: 'var(--space-6)',
+  marginBottom: 'var(--space-8)'
+}}>
+  {/* Inner Shadow */}
+  <div style={{
+    background: 'var(--surface)',
+    border: '1px solid var(--border)',
+    borderRadius: '8px',
+    padding: 'var(--space-6)',
+    cursor: 'pointer'
+  }}
+  onClick={() => navigator.clipboard?.writeText('var(--shadow-inner)')}
+  title="Click to copy var(--shadow-inner)"
+  >
+    <h3 style={{
+      margin: '0 0 var(--space-3) 0',
+      fontSize: 'var(--font-size-lg)',
+      fontWeight: 'var(--font-weight-semibold)',
+      color: 'var(--text)'
+    }}>
+      Inner Shadow
+    </h3>
+
+    <div style={{
+      background: 'var(--surface-subtle)',
+      borderRadius: '6px',
+      padding: 'var(--space-4)',
+      marginBottom: 'var(--space-4)',
+      boxShadow: 'var(--shadow-inner)',
+      minHeight: '80px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }}>
+      <p style={{
+        margin: 0,
+        fontSize: 'var(--font-size-sm)',
+        color: 'var(--text-secondary)',
+        textAlign: 'center'
+      }}>
+        Pressed or recessed appearance
+      </p>
+    </div>
+
+    <code style={{
+      fontSize: 'var(--font-size-xs)',
+      fontFamily: 'monospace',
+      color: 'var(--primary-base)'
+    }}>
+      --shadow-inner
+    </code>
+
+  </div>
+
+{/* Focus Shadow */}
+
+  <div style={{
+    background: 'var(--surface)',
+    border: '1px solid var(--border)',
+    borderRadius: '8px',
+    padding: 'var(--space-6)',
+    cursor: 'pointer'
+  }}
+  onClick={() => navigator.clipboard?.writeText('var(--shadow-focus)')}
+  title="Click to copy var(--shadow-focus)"
+  >
+    <h3 style={{
+      margin: '0 0 var(--space-3) 0',
+      fontSize: 'var(--font-size-lg)',
+      fontWeight: 'var(--font-weight-semibold)',
+      color: 'var(--text)'
+    }}>
+      Focus Shadow
+    </h3>
+
+    <button style={{
+      width: '100%',
+      background: 'var(--primary-base)',
+      color: 'white',
+      border: 'none',
+      borderRadius: 'var(--border-radius-md)',
+      padding: 'var(--space-3) var(--space-4)',
+      marginBottom: 'var(--space-4)',
+      fontSize: 'var(--font-size-sm)',
+      fontWeight: 'var(--font-weight-medium)',
+      cursor: 'pointer',
+      boxShadow: 'var(--shadow-focus)',
+      transition: 'all 0.2s ease'
+    }}
+    onMouseEnter={(e) => e.target.style.opacity = '0.9'}
+    onMouseLeave={(e) => e.target.style.opacity = '1'}
+    >
+      Focused Button Example
+    </button>
+
+    <code style={{
+      fontSize: 'var(--font-size-xs)',
+      fontFamily: 'monospace',
+      color: 'var(--primary-base)'
+    }}>
+      --shadow-focus
+    </code>
+
+  </div>
+
+{/* No Shadow */}
+
+  <div style={{
+    background: 'var(--surface)',
+    border: '1px solid var(--border)',
+    borderRadius: '8px',
+    padding: 'var(--space-6)',
+    cursor: 'pointer'
+  }}
+  onClick={() => navigator.clipboard?.writeText('var(--shadow-none)')}
+  title="Click to copy var(--shadow-none)"
+  >
+    <h3 style={{
+      margin: '0 0 var(--space-3) 0',
+      fontSize: 'var(--font-size-lg)',
+      fontWeight: 'var(--font-weight-semibold)',
+      color: 'var(--text)'
+    }}>
+      No Shadow
+    </h3>
+
+    <div style={{
+      background: 'var(--surface-subtle)',
+      border: '1px solid var(--border)',
+      borderRadius: '6px',
+      padding: 'var(--space-4)',
+      marginBottom: 'var(--space-4)',
+      boxShadow: 'var(--shadow-none)',
+      minHeight: '80px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }}>
+      <p style={{
+        margin: 0,
+        fontSize: 'var(--font-size-sm)',
+        color: 'var(--text-secondary)',
+        textAlign: 'center'
+      }}>
+        Flat appearance with no elevation
+      </p>
+    </div>
+
+    <code style={{
+      fontSize: 'var(--font-size-xs)',
+      fontFamily: 'monospace',
+      color: 'var(--primary-base)'
+    }}>
+      --shadow-none
+    </code>
+
+  </div>
+</div>
+
+## 🎭 Real-World Examples
+
+See how shadows enhance different UI components.
+
+<div style={{
+  display: 'grid',
+  gap: 'var(--space-6)',
+  marginBottom: 'var(--space-8)'
+}}>
+  {/* Card Gallery */}
+  <div>
+    <h3 style={{
+      margin: '0 0 var(--space-4) 0',
+      fontSize: 'var(--font-size-xl)',
+      fontWeight: 'var(--font-weight-semibold)',
+      color: 'var(--text)'
+    }}>
+      Card Elevations
+    </h3>
+
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+      gap: 'var(--space-4)'
+    }}>
+      {[
+        { title: 'Resting Card', shadow: 'shadow-sm', desc: 'Default card state' },
+        { title: 'Hover Card', shadow: 'shadow-md', desc: 'Interactive hover state' },
+        { title: 'Active Card', shadow: 'shadow-lg', desc: 'Selected or active state' }
+      ].map((card) => (
+        <div key={card.title} style={{
+          background: 'var(--surface)',
+          borderRadius: 'var(--border-radius-lg)',
+          padding: 'var(--space-6)',
+          boxShadow: `var(--${card.shadow})`,
+          cursor: 'pointer',
+          transition: 'all 0.3s ease'
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = 'translateY(-4px)';
+          e.currentTarget.style.boxShadow = 'var(--shadow-lg)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'translateY(0)';
+          e.currentTarget.style.boxShadow = `var(--${card.shadow})`;
+        }}
+        onClick={() => navigator.clipboard?.writeText(`var(--${card.shadow})`)}
+        title={`Click to copy var(--${card.shadow})`}
+        >
+          <h4 style={{
+            margin: '0 0 var(--space-2) 0',
+            fontSize: 'var(--font-size-lg)',
+            fontWeight: 'var(--font-weight-semibold)',
+            color: 'var(--text)'
+          }}>
+            {card.title}
+          </h4>
+          <p style={{
+            margin: '0 0 var(--space-3) 0',
+            fontSize: 'var(--font-size-sm)',
+            color: 'var(--text-secondary)'
+          }}>
+            {card.desc}
+          </p>
+          <code style={{
+            fontSize: 'var(--font-size-xs)',
+            fontFamily: 'monospace',
+            color: 'var(--primary-base)'
+          }}>
+            --{card.shadow}
+          </code>
+        </div>
+      ))}
+    </div>
+
+  </div>
+
+{/* Modal Example */}
+
+  <div>
+    <h3 style={{
+      margin: '0 0 var(--space-4) 0',
+      fontSize: 'var(--font-size-xl)',
+      fontWeight: 'var(--font-weight-semibold)',
+      color: 'var(--text)'
+    }}>
+      Modal & Overlay
+    </h3>
+
+    <div style={{
+      position: 'relative',
+      background: 'var(--surface-subtle)',
+      borderRadius: '8px',
+      padding: 'var(--space-8)',
+      minHeight: '300px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }}>
+      <div style={{
+        background: 'var(--surface)',
+        borderRadius: 'var(--border-radius-lg)',
+        padding: 'var(--space-6)',
+        boxShadow: 'var(--shadow-xl)',
+        maxWidth: '400px',
+        width: '100%',
+        cursor: 'pointer'
+      }}
+      onClick={() => navigator.clipboard?.writeText('var(--shadow-xl)')}
+      title="Click to copy var(--shadow-xl)"
+      >
+        <h4 style={{
+          margin: '0 0 var(--space-3) 0',
+          fontSize: 'var(--font-size-xl)',
+          fontWeight: 'var(--font-weight-semibold)',
+          color: 'var(--text)'
+        }}>
+          Modal Dialog
+        </h4>
+        <p style={{
+          margin: '0 0 var(--space-4) 0',
+          fontSize: 'var(--font-size-base)',
+          color: 'var(--text-secondary)',
+          lineHeight: 'var(--line-height-normal)'
+        }}>
+          This modal uses <code style={{
+            fontSize: 'var(--font-size-sm)',
+            fontFamily: 'monospace',
+            color: 'var(--primary-base)',
+            background: 'var(--surface-subtle)',
+            padding: '2px 6px',
+            borderRadius: '3px'
+          }}>--shadow-xl</code> to create a floating appearance above the content.
+        </p>
+        <div style={{
+          display: 'flex',
+          gap: 'var(--space-3)',
+          justifyContent: 'flex-end'
+        }}>
+          <button style={{
+            background: 'transparent',
+            color: 'var(--text)',
+            border: '1px solid var(--border)',
+            borderRadius: 'var(--border-radius-md)',
+            padding: 'var(--space-2) var(--space-4)',
+            fontSize: 'var(--font-size-sm)',
+            fontWeight: 'var(--font-weight-medium)',
+            cursor: 'pointer'
+          }}>
+            Cancel
+          </button>
+          <button style={{
+            background: 'var(--primary-base)',
+            color: 'white',
+            border: 'none',
+            borderRadius: 'var(--border-radius-md)',
+            padding: 'var(--space-2) var(--space-4)',
+            fontSize: 'var(--font-size-sm)',
+            fontWeight: 'var(--font-weight-medium)',
+            cursor: 'pointer'
+          }}>
+            Confirm
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+{/* Dropdown Example */}
+
+  <div>
+    <h3 style={{
+      margin: '0 0 var(--space-4) 0',
+      fontSize: 'var(--font-size-xl)',
+      fontWeight: 'var(--font-weight-semibold)',
+      color: 'var(--text)'
+    }}>
+      Dropdown Menu
+    </h3>
+
+    <div style={{
+      position: 'relative',
+      display: 'inline-block'
+    }}>
+      <button style={{
+        background: 'var(--surface)',
+        color: 'var(--text)',
+        border: '1px solid var(--border)',
+        borderRadius: 'var(--border-radius-md)',
+        padding: 'var(--space-3) var(--space-4)',
+        fontSize: 'var(--font-size-sm)',
+        fontWeight: 'var(--font-weight-medium)',
+        cursor: 'pointer',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 'var(--space-2)'
+      }}>
+        Options
+        <span style={{ fontSize: '0.8rem' }}>▼</span>
+      </button>
+
+      <div style={{
+        position: 'absolute',
+        top: 'calc(100% + var(--space-2))',
+        left: 0,
+        background: 'var(--surface)',
+        borderRadius: 'var(--border-radius-md)',
+        boxShadow: 'var(--shadow-lg)',
+        minWidth: '200px',
+        padding: 'var(--space-1)',
+        zIndex: 10,
+        cursor: 'pointer'
+      }}
+      onClick={() => navigator.clipboard?.writeText('var(--shadow-lg)')}
+      title="Click to copy var(--shadow-lg)"
+      >
+        {['Profile', 'Settings', 'Notifications', 'Sign Out'].map((item) => (
+          <div key={item} style={{
+            padding: 'var(--space-3)',
+            fontSize: 'var(--font-size-sm)',
+            color: 'var(--text)',
+            borderRadius: 'var(--border-radius-sm)',
+            transition: 'background-color 0.2s ease',
+            cursor: 'pointer'
+          }}
+          onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--surface-hover)'}
+          onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+          >
+            {item}
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</div>
+
+## 📊 Shadow Anatomy
+
+Understanding how our shadows are constructed.
+
+<div style={{
+  background: 'var(--surface)',
+  border: '1px solid var(--border)',
+  borderRadius: '12px',
+  padding: 'var(--space-6)',
+  marginBottom: 'var(--space-8)'
+}}>
+  <h3 style={{
+    margin: '0 0 var(--space-4) 0',
+    fontSize: 'var(--font-size-xl)',
+    fontWeight: 'var(--font-weight-semibold)',
+    color: 'var(--text)'
+  }}>
+    Shadow Composition
+  </h3>
+
+  <div style={{
+    display: 'grid',
+    gap: 'var(--space-4)'
+  }}>
+    {[
+      {
+        name: 'Extra Small',
+        token: 'shadow-xs',
+        value: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+        parts: ['1px vertical offset', '2px blur', '5% opacity']
+      },
+      {
+        name: 'Small',
+        token: 'shadow-sm',
+        value: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+        parts: ['Dual layer shadow', '10% opacity', 'Negative spread for depth']
+      },
+      {
+        name: 'Medium',
+        token: 'shadow-md',
+        value: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+        parts: ['4px vertical offset', '6px blur', 'Layered for realism']
+      }
+    ].map((shadow) => (
+      <div key={shadow.token} style={{
+        background: 'var(--surface-subtle)',
+        borderRadius: '8px',
+        padding: 'var(--space-4)',
+        display: 'grid',
+        gridTemplateColumns: '120px 1fr',
+        gap: 'var(--space-4)',
+        alignItems: 'center',
+        cursor: 'pointer'
+      }}
+      onClick={() => navigator.clipboard?.writeText(`var(--${shadow.token})`)}
+      title={`Click to copy var(--${shadow.token})`}
+      >
+        <div style={{
+          background: 'var(--surface)',
+          borderRadius: '6px',
+          height: '60px',
+          boxShadow: `var(--${shadow.token})`,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: 'var(--font-size-sm)',
+          fontWeight: 'var(--font-weight-medium)',
+          color: 'var(--text)'
+        }}>
+          {shadow.name}
+        </div>
+
+        <div>
+          <code style={{
+            fontSize: 'var(--font-size-xs)',
+            fontFamily: 'monospace',
+            color: 'var(--primary-base)',
+            marginBottom: 'var(--space-2)',
+            display: 'block'
+          }}>
+            --{shadow.token}
+          </code>
+          <div style={{
+            fontSize: 'var(--font-size-xs)',
+            color: 'var(--text-tertiary)',
+            marginBottom: 'var(--space-1)'
+          }}>
+            {shadow.value}
+          </div>
+          <div style={{
+            display: 'flex',
+            gap: 'var(--space-2)',
+            flexWrap: 'wrap'
+          }}>
+            {shadow.parts.map((part) => (
+              <span key={part} style={{
+                fontSize: 'var(--font-size-xs)',
+                color: 'var(--text-secondary)',
+                background: 'var(--surface)',
+                padding: '2px 8px',
+                borderRadius: '3px',
+                border: '1px solid var(--border-subtle)'
+              }}>
+                {part}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    ))}
+
+  </div>
+</div>
+
+## 🎯 Interactive States
+
+Shadow behavior for different interaction states.
+
+<div
+  style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gap: 'var(--space-6)',
+    marginBottom: 'var(--space-8)',
+  }}
+>
+  {[
+    {
+      state: 'Default',
+      shadow: 'shadow-sm',
+      bg: 'var(--surface)',
+      desc: 'Resting state',
+    },
+    {
+      state: 'Hover',
+      shadow: 'shadow-md',
+      bg: 'var(--surface-hover)',
+      desc: 'Interactive feedback',
+    },
+    {
+      state: 'Active/Pressed',
+      shadow: 'shadow-xs',
+      bg: 'var(--surface)',
+      desc: 'Pressed down effect',
+    },
+    {
+      state: 'Focused',
+      shadow: 'shadow-focus',
+      bg: 'var(--surface)',
+      desc: 'Keyboard navigation',
+    },
+  ].map((state) => (
+    <div
+      key={state.state}
+      style={{
+        textAlign: 'center',
+      }}
+    >
+      <button
+        style={{
+          width: '100%',
+          background: state.bg,
+          color: 'var(--text)',
+          border: '1px solid var(--border)',
+          borderRadius: 'var(--border-radius-md)',
+          padding: 'var(--space-4) var(--space-6)',
+          fontSize: 'var(--font-size-base)',
+          fontWeight: 'var(--font-weight-medium)',
+          cursor: 'pointer',
+          boxShadow: `var(--${state.shadow})`,
+          transition: 'all 0.2s ease',
+          marginBottom: 'var(--space-3)',
+        }}
+        onClick={() => navigator.clipboard?.writeText(`var(--${state.shadow})`)}
+        title={`Click to copy var(--${state.shadow})`}
+      >
+        {state.state} State
+      </button>
+      <div
+        style={{
+          fontSize: 'var(--font-size-sm)',
+          color: 'var(--text-secondary)',
+          marginBottom: 'var(--space-1)',
+        }}
+      >
+        {state.desc}
+      </div>
+      <code
+        style={{
+          fontSize: 'var(--font-size-xs)',
+          fontFamily: 'monospace',
+          color: 'var(--primary-base)',
+        }}
+      >
+        --{state.shadow}
+      </code>
+    </div>
+  ))}
+</div>
+
+## 💡 Best Practices
+
+<div style={{
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+  gap: 'var(--space-6)',
+  marginBottom: 'var(--space-8)'
+}}>
+  <div style={{
+    background: 'var(--success-surface)',
+    border: '1px solid var(--success-border)',
+    borderRadius: '8px',
+    padding: 'var(--space-4)'
+  }}>
+    <h4 style={{
+      color: 'var(--success-text)',
+      marginBottom: 'var(--space-3)',
+      display: 'flex',
+      alignItems: 'center',
+      gap: 'var(--space-2)'
+    }}>
+      <span>✅</span> Do's
+    </h4>
+    <ul style={{
+      margin: 0,
+      paddingLeft: 'var(--space-4)',
+      color: 'var(--success-text)',
+      fontSize: 'var(--font-size-sm)',
+      lineHeight: 'var(--line-height-normal)'
+    }}>
+      <li>Use consistent elevation hierarchy</li>
+      <li>Apply shadows to show interactive states</li>
+      <li>Consider light/dark theme compatibility</li>
+      <li>Use focus shadows for accessibility</li>
+      <li>Match shadow intensity to elevation</li>
+    </ul>
+  </div>
+
+  <div style={{
+    background: 'var(--danger-surface)',
+    border: '1px solid var(--danger-border)',
+    borderRadius: '8px',
+    padding: 'var(--space-4)'
+  }}>
+    <h4 style={{
+      color: 'var(--danger-text)',
+      marginBottom: 'var(--space-3)',
+      display: 'flex',
+      alignItems: 'center',
+      gap: 'var(--space-2)'
+    }}>
+      <span>❌</span> Don'ts
+    </h4>
+    <ul style={{
+      margin: 0,
+      paddingLeft: 'var(--space-4)',
+      color: 'var(--danger-text)',
+      fontSize: 'var(--font-size-sm)',
+      lineHeight: 'var(--line-height-normal)'
+    }}>
+      <li>Overuse shadows on every element</li>
+      <li>Mix different shadow systems</li>
+      <li>Use shadows as borders</li>
+      <li>Apply heavy shadows to small elements</li>
+      <li>Ignore performance impact of shadows</li>
+    </ul>
+  </div>
+</div>
+
+## 🔧 Quick Reference
+
+Common shadow patterns ready to copy and use.
+
+<div style={{
+  background: 'var(--surface-subtle)',
+  borderRadius: '8px',
+  padding: 'var(--space-4)',
+  marginBottom: 'var(--space-8)'
+}}>
+  <h4 style={{ marginBottom: 'var(--space-3)', color: 'var(--text)' }}>Common Shadow Patterns</h4>
+
+  <div style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gap: 'var(--space-3)'
+  }}>
+    {[
+      { name: 'Card', css: 'box-shadow: var(--shadow-sm);' },
+      { name: 'Button Hover', css: 'box-shadow: var(--shadow-md);' },
+      { name: 'Modal', css: 'box-shadow: var(--shadow-xl);' },
+      { name: 'Dropdown', css: 'box-shadow: var(--shadow-lg);' },
+      { name: 'Focus Ring', css: 'box-shadow: var(--shadow-focus);' },
+      { name: 'Input Field', css: 'box-shadow: var(--shadow-inner);' }
+    ].map((pattern) => (
+      <div key={pattern.name} style={{
+        background: 'var(--surface)',
+        border: '1px solid var(--border-subtle)',
+        borderRadius: '6px',
+        padding: 'var(--space-3)',
+        cursor: 'pointer',
+        transition: 'all 0.2s ease'
+      }}
+      onClick={() => navigator.clipboard?.writeText(pattern.css)}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.borderColor = 'var(--primary-border)';
+        e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.borderColor = 'var(--border-subtle)';
+        e.currentTarget.style.backgroundColor = 'var(--surface)';
+      }}
+      title={`Click to copy CSS for ${pattern.name}`}
+      >
+        <div style={{
+          fontSize: 'var(--font-size-sm)',
+          fontWeight: 'var(--font-weight-medium)',
+          color: 'var(--text)',
+          marginBottom: 'var(--space-1)'
+        }}>
+          {pattern.name}
+        </div>
+        <div style={{
+          fontSize: 'var(--font-size-xs)',
+          fontFamily: 'monospace',
+          color: 'var(--text-tertiary)'
+        }}>
+          {pattern.css}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+---
+
+_Shadows bring depth and hierarchy to flat interfaces, guiding users through your design with subtle visual cues._

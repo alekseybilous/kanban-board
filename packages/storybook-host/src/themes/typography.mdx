@@ -1,0 +1,963 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="packages/themes/tokens/Typography" />
+
+# Typography System
+
+Craft beautiful, readable interfaces with our comprehensive typography system that scales seamlessly across all devices.
+
+## 🎨 Type Scale Explorer
+
+Experience our fluid type scale with interactive, real-world examples.
+
+<div style={{
+  background: 'var(--surface)',
+  border: '1px solid var(--border)',
+  borderRadius: '12px',
+  overflow: 'hidden',
+  marginBottom: 'var(--space-8)'
+}}>
+  {/* Header */}
+  <div style={{
+    background: 'linear-gradient(135deg, var(--primary-surface) 0%, var(--primary-surface) 100%)',
+    padding: 'var(--space-6)',
+    borderBottom: '1px solid var(--border-subtle)'
+  }}>
+    <h3 style={{
+      margin: '0 0 var(--space-2) 0',
+      color: 'var(--primary-text)',
+      fontSize: 'var(--font-size-xl)'
+    }}>
+      Interactive Type Scale
+    </h3>
+    <p style={{
+      margin: 0,
+      color: 'var(--primary-text)',
+      opacity: 0.8,
+      fontSize: 'var(--font-size-sm)'
+    }}>
+      Hover to preview • Click to copy token
+    </p>
+  </div>
+
+{/* Type Scale Items */}
+
+  <div style={{ padding: 'var(--space-6)' }}>
+    {[
+      {
+        token: 'font-size-4xl',
+        px: '36px',
+        label: 'Display',
+        sample: 'Build Amazing Products',
+        usage: 'Hero headlines, page titles',
+        color: '#3b82f6'
+      },
+      {
+        token: 'font-size-3xl',
+        px: '30px',
+        label: 'Heading 1',
+        sample: 'Section Headlines That Stand Out',
+        usage: 'Major section headers',
+        color: '#8b5cf6'
+      },
+      {
+        token: 'font-size-2xl',
+        px: '24px',
+        label: 'Heading 2',
+        sample: 'Important Content Sections',
+        usage: 'Subsection headers',
+        color: '#ec4899'
+      },
+      {
+        token: 'font-size-xl',
+        px: '20px',
+        label: 'Heading 3',
+        sample: 'Component and Card Titles',
+        usage: 'Component headers',
+        color: '#f59e0b'
+      },
+      {
+        token: 'font-size-lg',
+        px: '18px',
+        label: 'Large Text',
+        sample: 'Emphasized body text for better readability',
+        usage: 'Lead paragraphs, introductions',
+        color: '#10b981'
+      },
+      {
+        token: 'font-size-base',
+        px: '16px',
+        label: 'Body',
+        sample: 'Regular paragraph text that forms the foundation of your content',
+        usage: 'Default body text',
+        color: '#6b7280'
+      },
+      {
+        token: 'font-size-sm',
+        px: '14px',
+        label: 'Small',
+        sample: 'Secondary information and UI labels that need less emphasis',
+        usage: 'Captions, labels, helper text',
+        color: '#6b7280'
+      },
+      {
+        token: 'font-size-xs',
+        px: '12px',
+        label: 'Tiny',
+        sample: 'Fine print, timestamps, and technical details',
+        usage: 'Metadata, legal text',
+        color: '#9ca3af'
+      }
+    ].map((type, index) => (
+      <div
+        key={type.token}
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '100px 1fr 120px',
+          gap: 'var(--space-4)',
+          padding: 'var(--space-4)',
+          marginBottom: index === 7 ? 0 : 'var(--space-3)',
+          borderRadius: '8px',
+          cursor: 'pointer',
+          transition: 'all 0.2s ease',
+          position: 'relative',
+          overflow: 'hidden'
+        }}
+        onClick={() => navigator.clipboard?.writeText(`var(--${type.token})`)}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
+          e.currentTarget.style.transform = 'translateX(8px)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.backgroundColor = 'transparent';
+          e.currentTarget.style.transform = 'translateX(0)';
+        }}
+        title={`Click to copy var(--${type.token})`}
+      >
+        {/* Left indicator */}
+        <div style={{
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          bottom: 0,
+          width: '3px',
+          background: type.color,
+          opacity: 0.6,
+          transition: 'opacity 0.2s ease'
+        }} />
+
+        {/* Label */}
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          paddingLeft: 'var(--space-3)'
+        }}>
+          <div style={{
+            fontSize: 'var(--font-size-xs)',
+            fontWeight: 'var(--font-weight-semibold)',
+            color: type.color,
+            textTransform: 'uppercase',
+            letterSpacing: '0.5px',
+            marginBottom: '2px'
+          }}>
+            {type.label}
+          </div>
+          <div style={{
+            fontSize: 'var(--font-size-xs)',
+            color: 'var(--text-tertiary)',
+            fontFamily: 'monospace'
+          }}>
+            {type.px}
+          </div>
+        </div>
+
+        {/* Sample */}
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center'
+        }}>
+          <div style={{
+            fontSize: `var(--${type.token})`,
+            color: 'var(--text)',
+            lineHeight: '1.2',
+            marginBottom: '4px',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis'
+          }}>
+            {type.sample}
+          </div>
+          <div style={{
+            fontSize: 'var(--font-size-xs)',
+            color: 'var(--text-secondary)',
+            opacity: 0.8
+          }}>
+            {type.usage}
+          </div>
+        </div>
+
+        {/* Token */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-end'
+        }}>
+          <code style={{
+            fontSize: 'var(--font-size-xs)',
+            fontFamily: 'monospace',
+            color: 'var(--text-tertiary)',
+            background: 'var(--surface-subtle)',
+            padding: '2px 8px',
+            borderRadius: '4px'
+          }}>
+            --{type.token.replace('font-size-', '')}
+          </code>
+        </div>
+      </div>
+    ))}
+
+  </div>
+</div>
+
+## ⚡ Font Weight Showcase
+
+Explore the full spectrum of font weights for perfect emphasis.
+
+<div style={{
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+  gap: 'var(--space-4)',
+  marginBottom: 'var(--space-8)'
+}}>
+  {[
+    { token: 'font-weight-thin', value: '100', sample: 'Aa', color: '#f3f4f6' },
+    { token: 'font-weight-extralight', value: '200', sample: 'Aa', color: '#e5e7eb' },
+    { token: 'font-weight-light', value: '300', sample: 'Aa', color: '#d1d5db' },
+    { token: 'font-weight-normal', value: '400', sample: 'Aa', color: '#9ca3af' },
+    { token: 'font-weight-medium', value: '500', sample: 'Aa', color: '#6b7280' },
+    { token: 'font-weight-semibold', value: '600', sample: 'Aa', color: '#4b5563' },
+    { token: 'font-weight-bold', value: '700', sample: 'Aa', color: '#374151' },
+    { token: 'font-weight-extrabold', value: '800', sample: 'Aa', color: '#1f2937' },
+    { token: 'font-weight-black', value: '900', sample: 'Aa', color: '#111827' }
+  ].map((weight) => (
+    <div
+      key={weight.token}
+      style={{
+        background: 'var(--surface)',
+        border: '1px solid var(--border)',
+        borderRadius: '8px',
+        padding: 'var(--space-4)',
+        cursor: 'pointer',
+        transition: 'all 0.2s ease',
+        position: 'relative',
+        overflow: 'hidden'
+      }}
+      onClick={() => navigator.clipboard?.writeText(`var(--${weight.token})`)}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = 'translateY(-2px)';
+        e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = 'translateY(0)';
+        e.currentTarget.style.boxShadow = 'none';
+      }}
+      title={`Click to copy var(--${weight.token})`}
+    >
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 'var(--space-4)'
+      }}>
+        {/* Large Sample */}
+        <div style={{
+          fontSize: '3rem',
+          fontWeight: `var(--${weight.token})`,
+          color: 'var(--text)',
+          lineHeight: 1,
+          minWidth: '80px'
+        }}>
+          {weight.sample}
+        </div>
+
+        {/* Info */}
+        <div style={{ flex: 1 }}>
+          <div style={{
+            fontSize: 'var(--font-size-base)',
+            fontWeight: `var(--${weight.token})`,
+            color: 'var(--text)',
+            marginBottom: 'var(--space-1)'
+          }}>
+            {weight.token.replace('font-weight-', '').charAt(0).toUpperCase() +
+             weight.token.replace('font-weight-', '').slice(1)}
+          </div>
+          <div style={{
+            fontSize: 'var(--font-size-xs)',
+            color: 'var(--text-tertiary)',
+            fontFamily: 'monospace'
+          }}>
+            {weight.value} • --{weight.token.replace('font-weight-', '')}
+          </div>
+        </div>
+
+        {/* Visual Weight Indicator */}
+        <div style={{
+          width: '40px',
+          height: '40px',
+          background: weight.color,
+          borderRadius: 'var(--border-radius-md)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: 'var(--font-size-xs)',
+          fontWeight: 'var(--font-weight-bold)',
+          color: parseInt(weight.value) > 400 ? 'white' : 'var(--text)'
+        }}>
+          {weight.value}
+        </div>
+      </div>
+    </div>
+
+))}
+
+</div>
+
+## 📐 Line Height Comparison
+
+See how line height affects readability in real content.
+
+<div style={{
+  background: 'var(--surface)',
+  border: '1px solid var(--border)',
+  borderRadius: '12px',
+  padding: 'var(--space-6)',
+  marginBottom: 'var(--space-8)'
+}}>
+  <div style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+    gap: 'var(--space-6)'
+  }}>
+    {[
+      {
+        token: 'line-height-tight',
+        value: '1.25',
+        name: 'Tight',
+        icon: '⬜',
+        color: '#ef4444',
+        text: 'Perfect for headings and UI elements where vertical space is precious. This tight line height creates a compact, powerful appearance.'
+      },
+      {
+        token: 'line-height-normal',
+        value: '1.5',
+        name: 'Normal',
+        icon: '⬛',
+        color: '#3b82f6',
+        text: 'The goldilocks of line heights. Ideal for body text, this spacing provides excellent readability without wasting vertical space.'
+      },
+      {
+        token: 'line-height-relaxed',
+        value: '1.75',
+        name: 'Relaxed',
+        icon: '⬜',
+        color: '#10b981',
+        text: 'Generous spacing for long-form content. This relaxed line height reduces eye strain and improves readability for extended reading.'
+      }
+    ].map((lineHeight) => (
+      <div
+        key={lineHeight.token}
+        style={{
+          padding: 'var(--space-4)',
+          borderRadius: '8px',
+          cursor: 'pointer',
+          transition: 'all 0.2s ease',
+          border: '1px solid transparent'
+        }}
+        onClick={() => navigator.clipboard?.writeText(`var(--${lineHeight.token})`)}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
+          e.currentTarget.style.borderColor = lineHeight.color;
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.backgroundColor = 'transparent';
+          e.currentTarget.style.borderColor = 'transparent';
+        }}
+        title={`Click to copy var(--${lineHeight.token})`}
+      >
+        {/* Header */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 'var(--space-2)',
+          marginBottom: 'var(--space-3)'
+        }}>
+          <div style={{
+            width: '8px',
+            height: '8px',
+            backgroundColor: lineHeight.color,
+            borderRadius: 'var(--border-radius-full)'
+          }} />
+          <h4 style={{
+            margin: 0,
+            fontSize: 'var(--font-size-base)',
+            fontWeight: 'var(--font-weight-semibold)',
+            color: 'var(--text)'
+          }}>
+            {lineHeight.name}
+          </h4>
+          <code style={{
+            fontSize: 'var(--font-size-xs)',
+            fontFamily: 'monospace',
+            color: 'var(--text-tertiary)',
+            marginLeft: 'auto'
+          }}>
+            {lineHeight.value}
+          </code>
+        </div>
+
+        {/* Sample Text */}
+        <p style={{
+          margin: '0 0 var(--space-3) 0',
+          fontSize: 'var(--font-size-base)',
+          lineHeight: `var(--${lineHeight.token})`,
+          color: 'var(--text-secondary)'
+        }}>
+          {lineHeight.text}
+        </p>
+
+        {/* Visual Representation */}
+        <div style={{
+          display: 'flex',
+          gap: '2px',
+          padding: 'var(--space-2)',
+          background: 'var(--surface-subtle)',
+          borderRadius: '4px'
+        }}>
+          {[1, 2, 3].map((i) => (
+            <div key={i} style={{
+              flex: 1,
+              height: '3px',
+              background: lineHeight.color,
+              opacity: 0.3 + (i * 0.2),
+              borderRadius: '1px'
+            }} />
+          ))}
+        </div>
+      </div>
+    ))}
+
+  </div>
+</div>
+
+## 🎯 Typography in Context
+
+Real-world component examples demonstrating typography hierarchy.
+
+<div style={{
+  display: 'grid',
+  gap: 'var(--space-6)',
+  marginBottom: 'var(--space-8)'
+}}>
+  {/* Blog Post Preview */}
+  <div style={{
+    background: 'var(--surface)',
+    border: '1px solid var(--border)',
+    borderRadius: '12px',
+    overflow: 'hidden'
+  }}>
+    <div style={{
+      aspectRatio: '21/9',
+      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      position: 'relative'
+    }}>
+      <div style={{
+        position: 'absolute',
+        top: 'var(--space-4)',
+        left: 'var(--space-4)',
+        display: 'flex',
+        gap: 'var(--space-2)'
+      }}>
+        <span style={{
+          background: 'rgba(255,255,255,0.2)',
+          backdropFilter: 'blur(10px)',
+          padding: 'var(--space-1) var(--space-3)',
+          borderRadius: 'var(--border-radius-full)',
+          fontSize: 'var(--font-size-xs)',
+          fontWeight: 'var(--font-weight-medium)',
+          color: 'white'
+        }}>
+          Design
+        </span>
+        <span style={{
+          background: 'rgba(255,255,255,0.2)',
+          backdropFilter: 'blur(10px)',
+          padding: 'var(--space-1) var(--space-3)',
+          borderRadius: 'var(--border-radius-full)',
+          fontSize: 'var(--font-size-xs)',
+          fontWeight: 'var(--font-weight-medium)',
+          color: 'white'
+        }}>
+          Tutorial
+        </span>
+      </div>
+    </div>
+
+    <div style={{ padding: 'var(--space-6)' }}>
+      <h2 style={{
+        margin: '0 0 var(--space-3) 0',
+        fontSize: 'var(--font-size-2xl)',
+        fontWeight: 'var(--font-weight-bold)',
+        lineHeight: 'var(--line-height-tight)',
+        color: 'var(--text)'
+      }}>
+        Mastering Typography in Modern Web Design
+      </h2>
+
+      <p style={{
+        margin: '0 0 var(--space-4) 0',
+        fontSize: 'var(--font-size-lg)',
+        fontWeight: 'var(--font-weight-normal)',
+        lineHeight: 'var(--line-height-normal)',
+        color: 'var(--text-secondary)'
+      }}>
+        Learn how to create beautiful, readable interfaces using our comprehensive typography system. From choosing the right typeface to establishing clear hierarchy.
+      </p>
+
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 'var(--space-4)',
+        marginBottom: 'var(--space-4)'
+      }}>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 'var(--space-2)'
+        }}>
+          <div style={{
+            width: '32px',
+            height: '32px',
+            background: 'var(--primary-base)',
+            borderRadius: 'var(--border-radius-full)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'white',
+            fontSize: 'var(--font-size-sm)',
+            fontWeight: 'var(--font-weight-semibold)'
+          }}>
+            JD
+          </div>
+          <div>
+            <div style={{
+              fontSize: 'var(--font-size-sm)',
+              fontWeight: 'var(--font-weight-medium)',
+              color: 'var(--text)'
+            }}>
+              Jane Doe
+            </div>
+            <div style={{
+              fontSize: 'var(--font-size-xs)',
+              color: 'var(--text-tertiary)'
+            }}>
+              Senior Designer
+            </div>
+          </div>
+        </div>
+
+        <div style={{
+          marginLeft: 'auto',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 'var(--space-3)',
+          fontSize: 'var(--font-size-sm)',
+          color: 'var(--text-tertiary)'
+        }}>
+          <span>5 min read</span>
+          <span>•</span>
+          <span>Mar 15, 2024</span>
+        </div>
+      </div>
+
+      <div style={{
+        display: 'flex',
+        gap: 'var(--space-3)'
+      }}>
+        <button style={{
+          background: 'var(--primary-base)',
+          color: 'white',
+          border: 'none',
+          borderRadius: 'var(--border-radius-md)',
+          padding: 'var(--space-3) var(--space-4)',
+          fontSize: 'var(--font-size-sm)',
+          fontWeight: 'var(--font-weight-medium)',
+          cursor: 'pointer',
+          transition: 'opacity 0.2s ease'
+        }}
+        onMouseEnter={(e) => e.target.style.opacity = '0.9'}
+        onMouseLeave={(e) => e.target.style.opacity = '1'}
+        >
+          Read Article
+        </button>
+        <button style={{
+          background: 'transparent',
+          color: 'var(--text)',
+          border: '1px solid var(--border)',
+          borderRadius: 'var(--border-radius-md)',
+          padding: 'var(--space-3) var(--space-4)',
+          fontSize: 'var(--font-size-sm)',
+          fontWeight: 'var(--font-weight-medium)',
+          cursor: 'pointer',
+          transition: 'all 0.2s ease'
+        }}
+        onMouseEnter={(e) => {
+          e.target.style.backgroundColor = 'var(--surface-hover)';
+          e.target.style.borderColor = 'var(--border-hover)';
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.backgroundColor = 'transparent';
+          e.target.style.borderColor = 'var(--border)';
+        }}
+        >
+          Save for Later
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+{/* Dashboard Stats */}
+
+  <div style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gap: 'var(--space-4)'
+  }}>
+    {[
+      { label: 'Total Revenue', value: '$124,563', change: '+12.5%', positive: true, icon: '💰' },
+      { label: 'Active Users', value: '8,942', change: '+23.1%', positive: true, icon: '👥' },
+      { label: 'Conversion Rate', value: '3.42%', change: '-0.4%', positive: false, icon: '📊' },
+      { label: 'Avg. Order Value', value: '$287', change: '+5.7%', positive: true, icon: '🛒' }
+    ].map((stat) => (
+      <div key={stat.label} style={{
+        background: 'var(--surface)',
+        border: '1px solid var(--border)',
+        borderRadius: '8px',
+        padding: 'var(--space-4)',
+        cursor: 'pointer',
+        transition: 'all 0.2s ease'
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = 'translateY(-2px)';
+        e.currentTarget.style.borderColor = 'var(--primary-border)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = 'translateY(0)';
+        e.currentTarget.style.borderColor = 'var(--border)';
+      }}
+      >
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          marginBottom: 'var(--space-3)'
+        }}>
+          <span style={{
+            fontSize: 'var(--font-size-xl)',
+            opacity: 0.8
+          }}>
+            {stat.icon}
+          </span>
+          <span style={{
+            fontSize: 'var(--font-size-xs)',
+            fontWeight: 'var(--font-weight-medium)',
+            color: stat.positive ? 'var(--success-text)' : 'var(--danger-text)',
+            background: stat.positive ? 'var(--success-surface)' : 'var(--danger-surface)',
+            padding: 'var(--space-1) var(--space-2)',
+            borderRadius: 'var(--border-radius-md)'
+          }}>
+            {stat.change}
+          </span>
+        </div>
+
+        <div style={{
+          fontSize: 'var(--font-size-xs)',
+          fontWeight: 'var(--font-weight-medium)',
+          color: 'var(--text-tertiary)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.5px',
+          marginBottom: 'var(--space-1)'
+        }}>
+          {stat.label}
+        </div>
+
+        <div style={{
+          fontSize: 'var(--font-size-2xl)',
+          fontWeight: 'var(--font-weight-bold)',
+          color: 'var(--text)',
+          lineHeight: 'var(--line-height-tight)'
+        }}>
+          {stat.value}
+        </div>
+      </div>
+    ))}
+
+  </div>
+</div>
+
+## 🎨 Typography Combinations
+
+Pre-designed type combinations for common UI patterns.
+
+<div style={{
+  background: 'var(--surface-subtle)',
+  borderRadius: '12px',
+  padding: 'var(--space-6)',
+  marginBottom: 'var(--space-8)'
+}}>
+  <div style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+    gap: 'var(--space-6)'
+  }}>
+    {[
+      {
+        name: 'Hero Section',
+        example: (
+          <div>
+            <h1 style={{
+              margin: '0 0 var(--space-2) 0',
+              fontSize: 'var(--font-size-4xl)',
+              fontWeight: 'var(--font-weight-bold)',
+              lineHeight: 'var(--line-height-tight)',
+              color: 'var(--text)'
+            }}>
+              Welcome Back
+            </h1>
+            <p style={{
+              margin: 0,
+              fontSize: 'var(--font-size-lg)',
+              fontWeight: 'var(--font-weight-normal)',
+              lineHeight: 'var(--line-height-normal)',
+              color: 'var(--text-secondary)'
+            }}>
+              Your dashboard is looking great today
+            </p>
+          </div>
+        ),
+        css: `font-size: var(--font-size-4xl);
+font-weight: var(--font-weight-bold);
+line-height: var(--line-height-tight);`
+      },
+      {
+        name: 'Card Header',
+        example: (
+          <div>
+            <h3 style={{
+              margin: '0 0 var(--space-1) 0',
+              fontSize: 'var(--font-size-xl)',
+              fontWeight: 'var(--font-weight-semibold)',
+              lineHeight: 'var(--line-height-tight)',
+              color: 'var(--text)'
+            }}>
+              Project Overview
+            </h3>
+            <p style={{
+              margin: 0,
+              fontSize: 'var(--font-size-sm)',
+              fontWeight: 'var(--font-weight-normal)',
+              color: 'var(--text-tertiary)'
+            }}>
+              Last updated 2 hours ago
+            </p>
+          </div>
+        ),
+        css: `font-size: var(--font-size-xl);
+font-weight: var(--font-weight-semibold);
+line-height: var(--line-height-tight);`
+      },
+      {
+        name: 'Form Field',
+        example: (
+          <div>
+            <label style={{
+              display: 'block',
+              marginBottom: 'var(--space-1)',
+              fontSize: 'var(--font-size-sm)',
+              fontWeight: 'var(--font-weight-medium)',
+              color: 'var(--text)'
+            }}>
+              Email Address
+            </label>
+            <div style={{
+              fontSize: 'var(--font-size-xs)',
+              color: 'var(--text-secondary)'
+            }}>
+              We'll never share your email
+            </div>
+          </div>
+        ),
+        css: `font-size: var(--font-size-sm);
+font-weight: var(--font-weight-medium);`
+      }
+    ].map((combo) => (
+      <div key={combo.name} style={{
+        background: 'var(--surface)',
+        border: '1px solid var(--border)',
+        borderRadius: '8px',
+        padding: 'var(--space-4)',
+        cursor: 'pointer',
+        transition: 'all 0.2s ease'
+      }}
+      onClick={() => navigator.clipboard?.writeText(combo.css)}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.borderColor = 'var(--primary-border)';
+        e.currentTarget.style.transform = 'translateY(-2px)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.borderColor = 'var(--border)';
+        e.currentTarget.style.transform = 'translateY(0)';
+      }}
+      title="Click to copy CSS"
+      >
+        <div style={{
+          fontSize: 'var(--font-size-xs)',
+          fontWeight: 'var(--font-weight-semibold)',
+          color: 'var(--primary-base)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.5px',
+          marginBottom: 'var(--space-3)'
+        }}>
+          {combo.name}
+        </div>
+
+        <div style={{ marginBottom: 'var(--space-3)' }}>
+          {combo.example}
+        </div>
+
+        <div style={{
+          fontSize: 'var(--font-size-xs)',
+          fontFamily: 'monospace',
+          color: 'var(--text-tertiary)',
+          background: 'var(--surface-subtle)',
+          padding: 'var(--space-2)',
+          borderRadius: '4px',
+          whiteSpace: 'pre-line'
+        }}>
+          {combo.css}
+        </div>
+      </div>
+    ))}
+
+  </div>
+</div>
+
+## 📚 Quick Reference
+
+Essential typography guidelines at a glance.
+
+<div style={{
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+  gap: 'var(--space-4)',
+  marginBottom: 'var(--space-8)'
+}}>
+  <div style={{
+    background: 'var(--surface)',
+    border: '1px solid var(--success-border)',
+    borderRadius: '8px',
+    padding: 'var(--space-4)'
+  }}>
+    <h4 style={{
+      margin: '0 0 var(--space-3) 0',
+      color: 'var(--success-text)',
+      fontSize: 'var(--font-size-base)',
+      fontWeight: 'var(--font-weight-semibold)'
+    }}>
+      ✅ Best Practices
+    </h4>
+    <ul style={{
+      margin: 0,
+      paddingLeft: 'var(--space-4)',
+      fontSize: 'var(--font-size-sm)',
+      color: 'var(--text)',
+      lineHeight: 'var(--line-height-relaxed)'
+    }}>
+      <li>Maintain consistent type scale</li>
+      <li>Use 2-3 font weights maximum</li>
+      <li>Ensure proper color contrast</li>
+      <li>Test readability at all sizes</li>
+      <li>Respect user font preferences</li>
+    </ul>
+  </div>
+
+{' '}
+<div
+  style={{
+    background: 'var(--surface)',
+    border: '1px solid var(--danger-border)',
+    borderRadius: '8px',
+    padding: 'var(--space-4)',
+  }}
+>
+  <h4
+    style={{
+      margin: '0 0 var(--space-3) 0',
+      color: 'var(--danger-text)',
+      fontSize: 'var(--font-size-base)',
+      fontWeight: 'var(--font-weight-semibold)',
+    }}
+  >
+    ❌ Common Mistakes
+  </h4>
+  <ul
+    style={{
+      margin: 0,
+      paddingLeft: 'var(--space-4)',
+      fontSize: 'var(--font-size-sm)',
+      color: 'var(--text)',
+      lineHeight: 'var(--line-height-relaxed)',
+    }}
+  >
+    <li>Too many font sizes</li>
+    <li>Poor hierarchy distinction</li>
+    <li>Insufficient line height</li>
+    <li>Text too small on mobile</li>
+    <li>Ignoring accessibility needs</li>
+  </ul>
+</div>
+
+  <div style={{
+    background: 'var(--surface)',
+    border: '1px solid var(--primary-border)',
+    borderRadius: '8px',
+    padding: 'var(--space-4)'
+  }}>
+    <h4 style={{
+      margin: '0 0 var(--space-3) 0',
+      color: 'var(--primary-text)',
+      fontSize: 'var(--font-size-base)',
+      fontWeight: 'var(--font-weight-semibold)'
+    }}>
+      🎯 Accessibility
+    </h4>
+    <ul style={{
+      margin: 0,
+      paddingLeft: 'var(--space-4)',
+      fontSize: 'var(--font-size-sm)',
+      color: 'var(--text)',
+      lineHeight: 'var(--line-height-relaxed)'
+    }}>
+      <li>Min 16px for body text</li>
+      <li>WCAG AA contrast ratios</li>
+      <li>45-75 chars per line</li>
+      <li>Scalable font units (rem)</li>
+      <li>Clear visual hierarchy</li>
+    </ul>
+  </div>
+</div>
+
+---
+
+_Beautiful typography is invisible — it lets the content shine while guiding readers effortlessly through your interface._
