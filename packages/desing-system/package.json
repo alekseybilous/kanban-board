@@ -19,10 +19,10 @@
     "!**/*.tsbuildinfo"
   ],
   "dependencies": {
+    "@kanban-board/eslint-config": "*",
     "@radix-ui/react-icons": "^1.3.2",
     "@radix-ui/react-popover": "^1.1.14",
     "@radix-ui/react-slot": "^1.2.3",
-    "clsx": "^2.1.1",
-    "@kanban-board/eslint-config": "*"
+    "clsx": "^2.1.1"
   }
 }

@@ -1,0 +1,152 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as ButtonStories from './Button.stories';
+
+<Meta of={ButtonStories} />
+
+# Button
+
+A versatile button component built with Radix UI and CSS modules. Supports multiple variants, sizes, and states while maintaining accessibility standards.
+
+## When to use
+
+- **Primary actions** - Save, Submit, Continue
+- **Secondary actions** - Cancel, Back, Learn More
+- **Form submissions** - Submit, reset, or cancel forms
+
+## Interactive Demo
+
+<Canvas of={ButtonStories.Default} />
+<Controls of={ButtonStories.Default} />
+
+## Variants
+
+Use different variants to create visual hierarchy and communicate action importance.
+
+<Canvas of={ButtonStories.Variants} />
+
+- **Primary** - Main call-to-action, use sparingly (1-2 per view)
+- **Secondary** - Supporting actions
+- **Outline** - Secondary actions with more emphasis
+- **Ghost** - Subtle actions with minimal visual weight
+- **Destructive** - Delete, remove, or destructive actions
+- **Success** - Positive confirmations
+- **Warning** - Actions requiring caution
+
+## Sizes
+
+Five sizes from extra small to extra large for different contexts.
+
+<Canvas of={ButtonStories.Sizes} />
+
+## States
+
+Different button states and layout options.
+
+<Canvas of={ButtonStories.States} />
+
+## Common Patterns
+
+Real-world usage examples showing proper button combinations.
+
+<Canvas of={ButtonStories.CommonPatterns} />
+
+### Form Actions
+
+Use **ghost** for cancel, **outline** for secondary saves, **primary** for main submission.
+
+### Confirmation Dialogs
+
+Use **outline** for safe actions (Cancel), **destructive** for dangerous actions (Delete).
+
+### Toolbars
+
+Use **ghost** with small size for compact actions.
+
+### Call-to-Action Sections
+
+Use **primary** with large size for main action, **outline** for alternatives.
+
+## Best Practices
+
+<Canvas of={ButtonStories.DoAndDont} />
+
+### ✅ Do
+
+- Use one primary button per view
+- Group related actions together
+- Use consistent sizing within groups
+- Follow logical action hierarchy (Cancel → Save)
+
+### ❌ Don't
+
+- Use multiple primary buttons competing for attention
+- Mix different sizes randomly
+- Overuse destructive variant for non-destructive actions
+
+## Accessibility
+
+The Button component follows WCAG accessibility guidelines:
+
+- **Keyboard Navigation** - Tab to navigate, Enter/Space to activate
+- **Screen Reader Support** - Semantic `<button>` element with proper ARIA
+- **Touch Targets** - Minimum 44px touch target size
+- **Motion Preferences** - Respects `prefers-reduced-motion`
+
+<Canvas of={ButtonStories.Accessibility} />
+
+## Usage
+
+```tsx
+import { Button } from '@kanban-board/desing-system';
+
+function ButtonDemo() {
+  return (
+    <div>
+      <Button
+        variant="primary"
+        size="md"
+        onClick={() => console.log('clicked')}
+      >
+        Save Changes
+      </Button>
+      <Button variant="outline" size="md">
+        Cancel
+      </Button>
+    </div>
+  );
+}
+```
+
+## Advanced Usage
+
+### Custom Elements with `asChild`
+
+Use the `asChild` prop to render button styles on custom elements:
+
+<Canvas of={ButtonStories.CustomElements} />
+
+```tsx
+<Button asChild>
+  <div role="button" tabIndex={0}>
+    Custom Div
+  </div>
+</Button>
+```
+
+### Form Integration
+
+<Canvas of={ButtonStories.FormIntegration} />
+
+```tsx
+<form>
+  <Button type="submit" variant="primary">
+    Submit
+  </Button>
+  <Button type="reset" variant="outline">
+    Reset
+  </Button>
+  <Button type="button" variant="ghost">
+    Cancel
+  </Button>
+</form>
+```

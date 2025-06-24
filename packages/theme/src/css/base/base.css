@@ -1,0 +1,26 @@
+:root {
+  /* Set base font size for rem calculations */
+  font-size: 100%; /* 16px default */
+}
+
+body {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: var(--border-width-2) solid var(--color-focus);
+  outline-offset: var(--focus-ring-offset);
+  border-radius: var(--border-radius-sm);
+}
+
+/* Selection styles */
+::selection {
+  background-color: var(--color-selection-bg);
+  color: var(--color-selection-text);
+}

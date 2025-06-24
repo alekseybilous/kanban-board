@@ -1,0 +1,37 @@
+:root {
+  /* Container Widths */
+  --container-xs: 20rem; /* 320px */
+  --container-sm: 30rem; /* 480px */
+  --container-md: 40rem; /* 640px */
+  --container-lg: 50rem; /* 800px */
+  --container-xl: 60rem; /* 960px */
+  --container-2xl: 70rem; /* 1120px */
+  --container-3xl: 80rem; /* 1280px */
+  --container-4xl: 90rem; /* 1440px */
+  --container-5xl: 100rem; /* 1600px */
+  --container-6xl: 110rem; /* 1760px */
+  --container-7xl: 120rem; /* 1920px */
+
+  /* Responsive Breakpoints */
+  --breakpoint-xs: 30em; /* 480px */
+  --breakpoint-sm: 40em; /* 640px */
+  --breakpoint-md: 48em; /* 768px */
+  --breakpoint-lg: 64em; /* 1024px */
+  --breakpoint-xl: 80em; /* 1280px */
+  --breakpoint-2xl: 96em; /* 1536px */
+
+  /* Z-Index Scale */
+  --z-hide: -1;
+  --z-auto: auto;
+  --z-base: 0;
+  --z-docked: 10;
+  --z-dropdown: 1000;
+  --z-sticky: 1100;
+  --z-banner: 1200;
+  --z-overlay: 1300;
+  --z-modal: 1400;
+  --z-popover: 1500;
+  --z-skiplink: 1600;
+  --z-toast: 1700;
+  --z-tooltip: 1800;
+}

@@ -1,0 +1,39 @@
+:root {
+  /* Opacity Scale */
+  --opacity-0: 0;
+  --opacity-5: 0.05;
+  --opacity-10: 0.1;
+  --opacity-20: 0.2;
+  --opacity-25: 0.25;
+  --opacity-30: 0.3;
+  --opacity-40: 0.4;
+  --opacity-50: 0.5;
+  --opacity-60: 0.6;
+  --opacity-70: 0.7;
+  --opacity-75: 0.75;
+  --opacity-80: 0.8;
+  --opacity-90: 0.9;
+  --opacity-95: 0.95;
+  --opacity-100: 1;
+
+  /* Aspect Ratios */
+  --aspect-square: 1 / 1;
+  --aspect-video: 16 / 9;
+  --aspect-photo: 4 / 3;
+  --aspect-portrait: 3 / 4;
+  --aspect-golden: 1.618 / 1;
+
+  /* Viewport Units */
+  --vw-full: 100vw;
+  --vh-full: 100vh;
+  --vmin-full: 100vmin;
+  --vmax-full: 100vmax;
+
+  /* Dynamic Viewport Units (modern browsers) */
+  --dvh-full: 100dvh;
+  --dvw-full: 100dvw;
+  --svh-full: 100svh;
+  --svw-full: 100svw;
+  --lvh-full: 100lvh;
+  --lvw-full: 100lvw;
+}

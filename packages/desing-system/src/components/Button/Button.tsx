@@ -1,58 +1,59 @@
-'use client';
-
 import { Slot } from '@radix-ui/react-slot';
-import { clsx } from 'clsx';
-import * as React from 'react';
+import clsx from 'clsx';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import { forwardRef } from 'react';
 
 import styles from './button.module.css';
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  /**
-   * If true, the button will render as a child component.
-   * This is useful for wrapping links or other components.
-   */
+export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
+export type ButtonVariant =
+  | 'primary'
+  | 'secondary'
+  | 'outline'
+  | 'ghost'
+  | 'destructive'
+  | 'success'
+  | 'warning';
+
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children?: ReactNode;
   asChild?: boolean;
-  /**
-   * The visual style of the button
-   */
-  variant?: 'primary' | 'secondary' | 'destructive' | 'ghost' | 'link';
-  /**
-   * The size of the button
-   */
-  size?: 'sm' | 'lg';
-  /**
-   * If true, the button will take up the full width of its container
-   */
+  variant?: ButtonVariant;
+  size?: ButtonSize;
   fullWidth?: boolean;
 }
 
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
+      children,
       className,
       variant = 'primary',
-      size = 'lg',
+      size = 'md',
       fullWidth = false,
       asChild = false,
+      type = 'button',
       ...props
     },
     ref
   ) => {
     const Comp = asChild ? Slot : 'button';
 
+    const buttonClassName = clsx(
+      styles.btn,
+      styles[variant],
+      styles[size],
+      {
+        [styles.full]: fullWidth,
+      },
+      className
+    );
+
     return (
-      <Comp
-        className={clsx(
-          styles.button,
-          styles[variant],
-          styles[size],
-          fullWidth && styles.fullWidth,
-          className
-        )}
-        ref={ref}
-        {...props}
-      />
+      <Comp ref={ref} type={type} className={buttonClassName} {...props}>
+        {children}
+      </Comp>
     );
   }
 );

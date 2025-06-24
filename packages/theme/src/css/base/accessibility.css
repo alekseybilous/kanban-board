@@ -1,0 +1,33 @@
+:root {
+  /* WCAG Guidelines */
+  --focus-ring-width: 0.125rem; /* 2px */
+  --focus-ring-offset: 0.125rem; /* 2px */
+  --touch-target-min: 2.75rem; /* 44px minimum */
+  --reading-width-max: 75ch; /* Optimal reading line length */
+
+  /* Motion Preferences */
+  --motion-reduce: 0s;
+  --motion-allow: var(--duration-normal);
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-normal: 0ms;
+    --duration-slow: 0ms;
+    --duration-slower: 0ms;
+    --duration-slowest: 0ms;
+  }
+}
+
+/* Print styles */
+@media print {
+  :root {
+    --shadow-sm: none;
+    --shadow-md: none;
+    --shadow-lg: none;
+    --shadow-xl: none;
+    --shadow-2xl: none;
+  }
+}
