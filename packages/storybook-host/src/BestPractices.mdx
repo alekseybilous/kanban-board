@@ -1,0 +1,445 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Guidelines/Best Practices" />
+
+# Best Practices
+
+Follow these guidelines to build consistent, maintainable, and high-quality user interfaces with our design system.
+
+## 🎨 Design Token Usage
+
+### ✅ Do: Use Semantic Tokens
+
+```css
+/* ✅ Good - Semantic meaning is clear */
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.error-state {
+  background-color: var(--danger-surface);
+  color: var(--danger-text);
+}
+```
+
+### ❌ Don't: Use Raw Color Values
+
+```css
+/* ❌ Avoid - Hard to maintain and theme */
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  color: #111827;
+}
+```
+
+### Token Selection Guide
+
+- **Text**: Use `--text`, `--text-secondary`, `--text-tertiary`
+- **Backgrounds**: Use `--surface`, `--canvas` variants
+- **Borders**: Use `--border`, `--border-subtle`, `--border-strong`
+- **Actions**: Use `--primary-*`, `--secondary-*` tokens
+- **States**: Use `--success-*`, `--warning-*`, `--danger-*` tokens
+
+## 🧩 Component Usage
+
+### ✅ Do: Compose Components
+
+```tsx
+// ✅ Good - Building with design system components
+function UserCard({ user }) {
+  return (
+    <Card>
+      <Avatar src={user.avatar} alt={user.name} />
+      <Text variant="h3">{user.name}</Text>
+      <Text variant="body2" color="secondary">
+        {user.role}
+      </Text>
+      <Button variant="primary" size="sm">
+        Contact
+      </Button>
+    </Card>
+  );
+}
+```
+
+### ❌ Don't: Reinvent Components
+
+```tsx
+// ❌ Avoid - Creating custom implementations
+function UserCard({ user }) {
+  return (
+    <div className="custom-card">
+      <img className="custom-avatar" src={user.avatar} />
+      <h3 className="custom-title">{user.name}</h3>
+      <div className="custom-button">Contact</div>
+    </div>
+  );
+}
+```
+
+## 🎭 Theming Guidelines
+
+### ✅ Do: Use Data Attributes
+
+```tsx
+// ✅ Good - Proper theme application
+function App() {
+  const [theme, setTheme] = useState('light');
+
+  return (
+    <div data-theme={theme}>
+      <ThemeToggle onToggle={setTheme} />
+      <MainContent />
+    </div>
+  );
+}
+```
+
+### ✅ Do: Respect System Preferences
+
+```tsx
+// ✅ Good - Detecting system preference
+function useSystemTheme() {
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light';
+    }
+    return 'light';
+  });
+
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
+    const listener = (e) => setTheme(e.matches ? 'dark' : 'light');
+    media.addEventListener('change', listener);
+    return () => media.removeEventListener('change', listener);
+  }, []);
+
+  return theme;
+}
+```
+
+## 📏 Layout & Spacing
+
+### ✅ Do: Use Spacing Tokens
+
+```tsx
+// ✅ Good - Consistent spacing
+<Stack gap="4">
+  <Text>Item 1</Text>
+  <Text>Item 2</Text>
+</Stack>
+
+// Or with CSS
+.container {
+  padding: var(--space-4);
+  gap: var(--space-2);
+}
+```
+
+### ✅ Do: Follow Grid System
+
+```tsx
+// ✅ Good - Responsive layout
+<Container maxWidth="lg">
+  <Grid cols={[1, 2, 3]}>
+    <GridItem>
+      <Card>Content 1</Card>
+    </GridItem>
+    <GridItem>
+      <Card>Content 2</Card>
+    </GridItem>
+    <GridItem>
+      <Card>Content 3</Card>
+    </GridItem>
+  </Grid>
+</Container>
+```
+
+## 🔤 Typography
+
+### ✅ Do: Use Typography Scale
+
+```tsx
+// ✅ Good - Semantic text hierarchy
+<article>
+  <Text variant="h1">Main Title</Text>
+  <Text variant="h2">Section Title</Text>
+  <Text variant="body1">Paragraph content</Text>
+  <Text variant="caption">Small details</Text>
+</article>
+```
+
+### ❌ Don't: Use Arbitrary Sizes
+
+```css
+/* ❌ Avoid - Random font sizes */
+.title {
+  font-size: 23px;
+}
+.subtitle {
+  font-size: 17px;
+}
+.body {
+  font-size: 14.5px;
+}
+```
+
+## 🎯 State Management
+
+### ✅ Do: Handle Loading States
+
+```tsx
+// ✅ Good - Clear loading indicators
+function SubmitButton({ onSubmit }) {
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async () => {
+    setLoading(true);
+    try {
+      await onSubmit();
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <Button onClick={handleSubmit} loading={loading} disabled={loading}>
+      {loading ? 'Saving...' : 'Save Changes'}
+    </Button>
+  );
+}
+```
+
+### ✅ Do: Provide Feedback
+
+```tsx
+// ✅ Good - User feedback for actions
+function DeleteButton({ onDelete, itemName }) {
+  const [status, setStatus] = useState('idle');
+
+  const handleDelete = async () => {
+    if (status === 'confirming') {
+      setStatus('deleting');
+      await onDelete();
+      setStatus('deleted');
+      setTimeout(() => setStatus('idle'), 2000);
+    } else {
+      setStatus('confirming');
+    }
+  };
+
+  const getButtonProps = () => {
+    switch (status) {
+      case 'confirming':
+        return { variant: 'destructive', children: 'Confirm Delete?' };
+      case 'deleting':
+        return {
+          variant: 'destructive',
+          loading: true,
+          children: 'Deleting...',
+        };
+      case 'deleted':
+        return { variant: 'success', children: 'Deleted!' };
+      default:
+        return { variant: 'destructive', children: 'Delete' };
+    }
+  };
+
+  return <Button {...getButtonProps()} onClick={handleDelete} />;
+}
+```
+
+## 🚀 Performance
+
+### ✅ Do: Import Only What You Need
+
+```tsx
+// ✅ Good - Tree-shakeable imports
+import { Button } from '@kanban-board/design-system';
+import { Card } from '@kanban-board/design-system';
+
+// Or even better with barrel exports
+import { Button, Card } from '@kanban-board/design-system';
+```
+
+### ❌ Don't: Import Everything
+
+```tsx
+// ❌ Avoid - Imports entire library
+import * as DS from '@kanban-board/design-system';
+```
+
+### ✅ Do: Optimize Bundle Size
+
+```tsx
+// ✅ Good - Lazy loading for large components
+const DataTable = lazy(() => import('@kanban-board/design-system/DataTable'));
+
+function Dashboard() {
+  return (
+    <Suspense fallback={<Skeleton height="400px" />}>
+      <DataTable data={data} />
+    </Suspense>
+  );
+}
+```
+
+## 🧪 Testing
+
+### ✅ Do: Test Accessibility
+
+```tsx
+// ✅ Good - Accessibility testing
+import { render } from '@testing-library/react';
+import { axe } from 'jest-axe';
+
+test('Button is accessible', async () => {
+  const { container } = render(<Button variant="primary">Click me</Button>);
+
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+```
+
+### ✅ Do: Test User Interactions
+
+```tsx
+// ✅ Good - User-centric testing
+import { render, screen, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
+test('Form submission works correctly', async () => {
+  const user = userEvent.setup();
+  const mockSubmit = jest.fn();
+
+  render(<ContactForm onSubmit={mockSubmit} />);
+
+  await user.type(screen.getByLabelText(/name/i), 'John Doe');
+  await user.type(screen.getByLabelText(/email/i), 'john@example.com');
+  await user.click(screen.getByRole('button', { name: /submit/i }));
+
+  expect(mockSubmit).toHaveBeenCalledWith({
+    name: 'John Doe',
+    email: 'john@example.com',
+  });
+});
+```
+
+## 🎨 Custom Styling
+
+### ✅ Do: Extend, Don't Override
+
+```tsx
+// ✅ Good - Extending with CSS variables
+const CustomButton = styled(Button)`
+  --button-radius: var(--radius-full);
+  --button-padding: var(--space-3) var(--space-6);
+`;
+
+// Or with className
+<Button className="rounded-full px-6 py-3">Custom Button</Button>;
+```
+
+### ❌ Don't: Fight the System
+
+```css
+/* ❌ Avoid - Overriding system styles */
+.custom-button {
+  background: red !important;
+  border: none !important;
+  padding: 10px !important;
+}
+```
+
+## 📱 Responsive Design
+
+### ✅ Do: Mobile-First Approach
+
+```css
+/* ✅ Good - Mobile-first responsive design */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+```
+
+### ✅ Do: Use Responsive Props
+
+```tsx
+// ✅ Good - Responsive component props
+<Grid
+  cols={[1, 2, 3]} // 1 on mobile, 2 on tablet, 3 on desktop
+  gap={['2', '4', '6']} // Different gaps per breakpoint
+>
+  <Card>Item 1</Card>
+  <Card>Item 2</Card>
+  <Card>Item 3</Card>
+</Grid>
+```
+
+## 🔧 Development Workflow
+
+### ✅ Do: Use Storybook for Development
+
+```tsx
+// ✅ Good - Develop components in isolation
+export default {
+  title: 'Components/Forms/ContactForm',
+  component: ContactForm,
+  parameters: {
+    docs: {
+      description: {
+        component: 'A reusable contact form with validation.',
+      },
+    },
+  },
+};
+
+export const Default = {};
+export const WithErrors = {
+  args: {
+    initialErrors: { email: 'Invalid email format' },
+  },
+};
+```
+
+### ✅ Do: Document Component APIs
+
+```tsx
+interface ButtonProps {
+  /** The button variant controls visual style */
+  variant?: 'primary' | 'secondary' | 'destructive';
+  /** Size affects padding and font size */
+  size?: 'sm' | 'md' | 'lg';
+  /** Shows loading spinner and disables interaction */
+  loading?: boolean;
+  /** Makes button expand to container width */
+  fullWidth?: boolean;
+  /** Button content */
+  children: React.ReactNode;
+  /** Click handler */
+  onClick?: () => void;
+}
+```
+
+---
+
+_Following these best practices ensures consistency, maintainability, and a great user experience across your applications._

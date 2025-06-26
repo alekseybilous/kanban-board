@@ -1,0 +1,236 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Theming/Custom Themes" />
+
+# Custom Themes
+
+Create your own unique themes by customizing our design token system. Build brand-specific experiences while maintaining consistency and accessibility.
+
+## 🎨 Creating a Custom Theme
+
+### Step 1: Define Your Color Palette
+
+```css
+[data-theme='custom'] {
+  /* Canvas Colors */
+  --canvas: #fef7ff;
+  --canvas-subtle: #fdf2fd;
+
+  /* Surface Colors */
+  --surface: #ffffff;
+  --surface-subtle: #faf5ff;
+  --surface-hover: #f3e8ff;
+  --surface-active: #e9d5ff;
+  --surface-disabled: #f9fafb;
+
+  /* Text Colors */
+  --text: #1f2937;
+  --text-secondary: #6b7280;
+  --text-tertiary: #9ca3af;
+  --text-disabled: #d1d5db;
+  --text-inverse: #ffffff;
+  --text-link: #7c3aed;
+  --text-link-hover: #6d28d9;
+
+  /* Primary Action */
+  --primary-base: #7c3aed;
+  --primary-hover: #6d28d9;
+  --primary-active: #5b21b6;
+  --primary-disabled: #c4b5fd;
+
+  --primary-surface: #f3e8ff;
+  --primary-surface-hover: #e9d5ff;
+  --primary-surface-active: #ddd6fe;
+
+  --primary-border: #7c3aed;
+  --primary-border-hover: #6d28d9;
+
+  --primary-text: #7c3aed;
+  --primary-text-hover: #6d28d9;
+  --primary-text-on-primary: #ffffff;
+}
+```
+
+### Step 2: Apply Your Theme
+
+```tsx
+function App() {
+  return <div data-theme="custom">{/* Your app content */}</div>;
+}
+```
+
+### Step 3: Test Accessibility
+
+```bash
+# Use tools like axe-core or lighthouse to test contrast ratios
+npm run test:a11y
+```
+
+## 🎯 Theme Variants
+
+### Corporate Theme
+
+```css
+[data-theme='corporate'] {
+  --primary-base: #1e40af;
+  --primary-hover: #1d4ed8;
+  --secondary-base: #6b7280;
+  --surface: #f8fafc;
+  --canvas: #f1f5f9;
+}
+```
+
+### Nature Theme
+
+```css
+[data-theme='nature'] {
+  --primary-base: #059669;
+  --primary-hover: #047857;
+  --secondary-base: #78716c;
+  --surface: #f0fdf4;
+  --canvas: #ecfdf5;
+}
+```
+
+### Sunset Theme
+
+```css
+[data-theme='sunset'] {
+  --primary-base: #ea580c;
+  --primary-hover: #dc2626;
+  --secondary-base: #a3a3a3;
+  --surface: #fff7ed;
+  --canvas: #fed7aa;
+}
+```
+
+## 🛠️ Advanced Customization
+
+### Dynamic Theme Switching
+
+```tsx
+import { useState } from 'react';
+
+const themes = ['light', 'dark', 'custom', 'corporate'];
+
+function ThemeSwitcher() {
+  const [currentTheme, setCurrentTheme] = useState('light');
+
+  return (
+    <div data-theme={currentTheme}>
+      <select
+        value={currentTheme}
+        onChange={(e) => setCurrentTheme(e.target.value)}
+      >
+        {themes.map((theme) => (
+          <option key={theme} value={theme}>
+            {theme.charAt(0).toUpperCase() + theme.slice(1)}
+          </option>
+        ))}
+      </select>
+
+      {/* Your themed content */}
+    </div>
+  );
+}
+```
+
+### System Preference Detection
+
+```tsx
+import { useEffect, useState } from 'react';
+
+function useSystemTheme() {
+  const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    setTheme(mediaQuery.matches ? 'dark' : 'light');
+
+    const handler = (e) => setTheme(e.matches ? 'dark' : 'light');
+    mediaQuery.addEventListener('change', handler);
+
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
+  return theme;
+}
+```
+
+### Persisting Theme Choice
+
+```tsx
+import { useState, useEffect } from 'react';
+
+function usePersistedTheme() {
+  const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    const saved = localStorage.getItem('theme');
+    if (saved) setTheme(saved);
+  }, []);
+
+  const updateTheme = (newTheme) => {
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
+
+  return [theme, updateTheme];
+}
+```
+
+## 🎨 Design Guidelines
+
+### Color Contrast Requirements
+
+- **Normal text**: 4.5:1 contrast ratio minimum
+- **Large text**: 3:1 contrast ratio minimum
+- **Interactive elements**: Clear visual distinction
+
+### Accessibility Checklist
+
+- ✅ Test with screen readers
+- ✅ Verify keyboard navigation
+- ✅ Check color contrast ratios
+- ✅ Test with reduced motion preferences
+- ✅ Validate focus indicators
+
+### Theme Testing
+
+```tsx
+// Test component with different themes
+const ThemeTest = () => (
+  <div style={{ display: 'grid', gap: '2rem' }}>
+    {['light', 'dark', 'blue', 'custom'].map((theme) => (
+      <div
+        key={theme}
+        data-theme={theme}
+        style={{ padding: '1rem', border: '1px solid var(--border)' }}
+      >
+        <h3>Theme: {theme}</h3>
+        <Button variant="primary">Primary Button</Button>
+        <Button variant="secondary">Secondary Button</Button>
+        <Input placeholder="Test input" />
+      </div>
+    ))}
+  </div>
+);
+```
+
+## 🚀 Best Practices
+
+1. **Start with base themes** - Extend existing themes rather than starting from scratch
+2. **Maintain semantic meaning** - Keep the purpose of each token consistent
+3. **Test thoroughly** - Verify accessibility and usability across all components
+4. **Document your choices** - Explain the reasoning behind your color selections
+5. **Version your themes** - Track changes and provide migration guides
+
+## 📚 Resources
+
+- [WCAG Color Contrast Guidelines](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html)
+- [Color Palette Generators](https://coolors.co/)
+- [Accessibility Testing Tools](https://www.deque.com/axe/)
+
+---
+
+_Ready to create your own theme? Start with our theme template and make it yours!_

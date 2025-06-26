@@ -1,0 +1,275 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Guidelines/Accessibility" />
+
+# Accessibility Guidelines
+
+Our design system is built with accessibility as a core principle, ensuring that all users can interact with your applications effectively.
+
+## 🎯 Accessibility Standards
+
+We follow **WCAG 2.1 AA** guidelines to ensure:
+
+- ✅ **Perceivable** - Information is presentable in ways users can perceive
+- ✅ **Operable** - Interface components are operable by all users
+- ✅ **Understandable** - Information and UI operation are understandable
+- ✅ **Robust** - Content works with various assistive technologies
+
+## 🎨 Color & Contrast
+
+### Contrast Ratios
+
+- **Normal text**: Minimum 4.5:1 contrast ratio
+- **Large text (18px+)**: Minimum 3:1 contrast ratio
+- **Interactive elements**: Clear visual distinction
+
+### Color Usage
+
+```css
+/* ✅ Good - Using semantic color tokens */
+.error-message {
+  color: var(--danger-text);
+  background-color: var(--danger-surface);
+}
+
+/* ❌ Avoid - Color as only indicator */
+.required-field {
+  color: red; /* Also provide text or icon indicator */
+}
+```
+
+### Testing Tools
+
+- [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
+- [Colour Contrast Analyser](https://www.tpgi.com/color-contrast-checker/)
+- Browser DevTools Accessibility Panel
+
+## ⌨️ Keyboard Navigation
+
+### Focus Management
+
+```tsx
+// ✅ Proper focus management
+function Modal({ isOpen, onClose }) {
+  const firstFocusRef = useRef();
+
+  useEffect(() => {
+    if (isOpen) {
+      firstFocusRef.current?.focus();
+    }
+  }, [isOpen]);
+
+  return (
+    <div role="dialog" aria-modal="true">
+      <button ref={firstFocusRef} onClick={onClose}>
+        Close
+      </button>
+    </div>
+  );
+}
+```
+
+### Focus Indicators
+
+```css
+/* ✅ Clear focus indicators */
+.btn:focus {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* ❌ Never remove focus indicators */
+.btn:focus {
+  outline: none; /* Don't do this */
+}
+```
+
+### Tab Order
+
+- Logical tab sequence through interactive elements
+- Skip links for main content areas
+- Proper heading hierarchy (h1 → h2 → h3)
+
+## 🔊 Screen Reader Support
+
+### Semantic HTML
+
+```tsx
+// ✅ Use semantic elements
+<nav>
+  <ul>
+    <li><a href="/home">Home</a></li>
+    <li><a href="/about">About</a></li>
+  </ul>
+</nav>
+
+// ✅ Proper headings
+<h1>Page Title</h1>
+<h2>Section Title</h2>
+<h3>Subsection</h3>
+```
+
+### ARIA Labels
+
+```tsx
+// ✅ Descriptive labels
+<button aria-label="Close dialog">×</button>
+
+<input
+  type="search"
+  aria-label="Search products"
+  placeholder="Enter search term"
+/>
+
+// ✅ Form associations
+<label htmlFor="email">Email Address</label>
+<input id="email" type="email" required />
+```
+
+### Live Regions
+
+```tsx
+// ✅ Announce dynamic content
+<div aria-live="polite" aria-atomic="true">
+  {statusMessage}
+</div>
+
+// ✅ Error announcements
+<div role="alert" aria-live="assertive">
+  {errorMessage}
+</div>
+```
+
+## 📱 Responsive & Mobile
+
+### Touch Targets
+
+- Minimum 44px × 44px touch targets
+- Adequate spacing between interactive elements
+- Easy-to-reach primary actions
+
+### Motion & Animation
+
+```css
+/* ✅ Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .animated-element {
+    animation: none;
+    transition: none;
+  }
+}
+```
+
+## 🧪 Testing Checklist
+
+### Automated Testing
+
+```bash
+# Install accessibility testing tools
+npm install --save-dev @axe-core/react jest-axe
+
+# Run accessibility tests
+npm run test:a11y
+```
+
+### Manual Testing
+
+- [ ] Navigate entire interface using only keyboard
+- [ ] Test with screen reader (NVDA, JAWS, VoiceOver)
+- [ ] Verify color contrast ratios
+- [ ] Check at 200% zoom level
+- [ ] Test with various viewport sizes
+
+### Component Testing
+
+```tsx
+import { render } from '@testing-library/react';
+import { axe, toHaveNoViolations } from 'jest-axe';
+
+expect.extend(toHaveNoViolations);
+
+test('Button should be accessible', async () => {
+  const { container } = render(<Button>Click me</Button>);
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+```
+
+## 🛠️ Implementation Examples
+
+### Accessible Form
+
+```tsx
+function ContactForm() {
+  const [errors, setErrors] = useState({});
+
+  return (
+    <form noValidate>
+      <fieldset>
+        <legend>Contact Information</legend>
+
+        <div>
+          <label htmlFor="name">Full Name *</label>
+          <input
+            id="name"
+            type="text"
+            required
+            aria-describedby={errors.name ? 'name-error' : undefined}
+            aria-invalid={!!errors.name}
+          />
+          {errors.name && (
+            <div id="name-error" role="alert">
+              {errors.name}
+            </div>
+          )}
+        </div>
+      </fieldset>
+    </form>
+  );
+}
+```
+
+### Accessible Modal
+
+```tsx
+function Modal({ isOpen, title, children, onClose }) {
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
+
+  return (
+    <div role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <h2 id="modal-title">{title}</h2>
+      {children}
+      <button onClick={onClose} aria-label="Close dialog">
+        ×
+      </button>
+    </div>
+  );
+}
+```
+
+## 📚 Resources
+
+- [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
+- [MDN Accessibility Guide](https://developer.mozilla.org/en-US/docs/Web/Accessibility)
+- [WebAIM Screen Reader Testing](https://webaim.org/articles/screenreader_testing/)
+- [Inclusive Design Principles](https://inclusivedesignprinciples.org/)
+
+---
+
+_Accessibility is not optional—it's essential for creating inclusive experiences that work for everyone._

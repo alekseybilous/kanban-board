@@ -1,0 +1,171 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Welcome/Quick Examples" />
+
+# Quick Examples
+
+Get up and running in minutes with these practical examples showing how to use our design system.
+
+## 🎯 Basic Button Usage
+
+```tsx
+import { Button } from '@kanban-board/design-system';
+
+// Primary action button
+<Button variant="primary">Save Changes</Button>
+
+// Secondary button
+<Button variant="secondary">Cancel</Button>
+
+// Destructive action
+<Button variant="destructive">Delete Item</Button>
+```
+
+## 🎨 Using Themes
+
+```tsx
+// Apply theme to your entire app
+function App() {
+  return (
+    <div data-theme="light">
+      <Header />
+      <MainContent />
+      <Footer />
+    </div>
+  );
+}
+
+// Switch themes dynamically
+const [theme, setTheme] = useState('light');
+
+<div data-theme={theme}>
+  <Button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+    Switch to {theme === 'light' ? 'Dark' : 'Light'} Mode
+  </Button>
+</div>;
+```
+
+## 🎨 Using Design Tokens
+
+```css
+/* In your CSS */
+.custom-card {
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-sm);
+}
+
+.custom-card:hover {
+  background-color: var(--surface-hover);
+}
+```
+
+## 🏗️ Building a Simple Form
+
+```tsx
+import { Button, Input, Card } from '@kanban-board/design-system';
+
+function LoginForm() {
+  return (
+    <Card className="p-6">
+      <h2 className="text-xl font-semibold mb-4">Sign In</h2>
+
+      <Input
+        label="Email"
+        type="email"
+        placeholder="Enter your email"
+        className="mb-4"
+      />
+
+      <Input
+        label="Password"
+        type="password"
+        placeholder="Enter your password"
+        className="mb-6"
+      />
+
+      <Button variant="primary" fullWidth>
+        Sign In
+      </Button>
+    </Card>
+  );
+}
+```
+
+## 🎭 Responsive Design
+
+```tsx
+// Components automatically adapt to different screen sizes
+<Container maxWidth="lg">
+  <Grid cols={[1, 2, 3]}>
+    {' '}
+    {/* 1 col mobile, 2 tablet, 3 desktop */}
+    <Card>Item 1</Card>
+    <Card>Item 2</Card>
+    <Card>Item 3</Card>
+  </Grid>
+</Container>
+```
+
+## 🎯 Common Patterns
+
+### Status Indicators
+
+```tsx
+<Badge variant="success">Completed</Badge>
+<Badge variant="warning">In Progress</Badge>
+<Badge variant="danger">Blocked</Badge>
+```
+
+### Loading States
+
+```tsx
+<Button loading>Saving...</Button>
+<Skeleton height="20px" />
+```
+
+### Interactive Elements
+
+```tsx
+<Tooltip content="This will save your changes">
+  <Button variant="primary">Save</Button>
+</Tooltip>
+```
+
+## 🎨 Theming Examples
+
+### Custom Theme Variables
+
+```css
+[data-theme='custom'] {
+  --primary-base: #9333ea;
+  --primary-hover: #7c2d12;
+  --surface: #fafafa;
+}
+```
+
+### Component Customization
+
+```tsx
+// Override component styles while maintaining theme compatibility
+<Button
+  className="bg-gradient-to-r from-purple-500 to-pink-500"
+  variant="primary"
+>
+  Gradient Button
+</Button>
+```
+
+## 🚀 Next Steps
+
+1. **Explore Components** → Check out our complete component library
+2. **Learn Theming** → Understand our theming system
+3. **Review Patterns** → See common UI patterns and best practices
+4. **Read Guidelines** → Follow our accessibility and design principles
+
+---
+
+_Ready to build something amazing? Dive into the components section!_

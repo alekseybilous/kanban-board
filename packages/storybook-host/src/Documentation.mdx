@@ -1,0 +1,101 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Welcome/Installation" />
+
+# Getting Started
+
+Welcome to our Design System! This comprehensive guide will help you understand and implement our design system in your projects.
+
+## 🎯 What is a Design System?
+
+A design system is a collection of reusable components, guided by clear standards, that can be assembled together to build any number of applications. Our design system includes:
+
+- **Foundation** - Design tokens (colors, typography, spacing, etc.)
+- **Components** - Reusable UI components
+- **Themes** - Visual variations and dark/light modes
+- **Patterns** - Common UI patterns and layouts
+- **Guidelines** - Best practices and usage recommendations
+
+## 🚀 Quick Start
+
+### 1. Install the Design System
+
+```bash
+npm install @your-org/design-system @your-org/theme
+```
+
+### 2. Import Base Styles
+
+```tsx
+import '@your-org/theme/css';
+```
+
+### 3. Use Components
+
+```tsx
+import { Button } from '@your-org/design-system';
+
+function App() {
+  return <Button variant="primary">Get Started</Button>;
+}
+```
+
+### 4. Apply a Theme
+
+```tsx
+// Set theme on your app root
+<div data-theme="light">
+  <App />
+</div>
+```
+
+## 📚 Navigation Guide
+
+### **Foundation**
+
+Start here to understand our design tokens - the building blocks of the system.
+
+- Colors, Typography, Spacing, etc.
+
+### **Themes**
+
+Learn about our theming system and available themes.
+
+- Light, Dark, Blue themes
+
+### **Components**
+
+Explore our component library with live examples.
+
+- Buttons, Forms, Cards, etc.
+
+### **Patterns**
+
+Discover common UI patterns and how to implement them.
+
+- Layouts, Navigation, Data Display
+
+## 🎨 Design Principles
+
+1. **Consistency** - Unified experience across all touchpoints
+2. **Accessibility** - WCAG 2.1 AA compliant by default
+3. **Scalability** - Built to grow with your product
+4. **Performance** - Optimized for speed and efficiency
+5. **Developer Experience** - Easy to use and maintain
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guidelines](./Contributing) for more information.
+
+## 📞 Support
+
+Need help?
+
+- Check the component documentation
+- Review the usage examples
+- Open an issue on GitHub
+- Contact the design system team
+
+---
+
+_Ready to build amazing experiences? Let's get started!_
