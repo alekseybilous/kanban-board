@@ -1,7 +1,7 @@
 .appLayout {
   display: grid;
   height: 100vh;
-  background-color: #f4f7fd;
+  background-color: var(--canvas-subtle);
 
   grid-template-columns: 1fr;
   grid-template-rows: 60px 1fr;

@@ -1,7 +1,7 @@
 .sidebar {
-  background-color: var(--color-background-subtle);
-  color: var(--color-text-muted);
-  border-right: 1px solid var(--color-border);
+  background-color: var(--canvas);
+  color: var(--text);
+  border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   padding: 2rem 0;
