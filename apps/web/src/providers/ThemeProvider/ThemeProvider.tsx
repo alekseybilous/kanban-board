@@ -11,6 +11,7 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
       attribute="data-theme"
       defaultTheme={themeConfig.defaultTheme}
       themes={[...themeConfig.themes]}
+      enableSystem={false}
       {...props}
     >
       {children}

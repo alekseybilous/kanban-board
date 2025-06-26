@@ -1,0 +1,10 @@
+{
+  "HomePage": {
+    "title": "DE TEXT HERE !!!!!!!"
+  },
+  "LocaleSwitcher": {
+    "de": "Deutsch",
+    "en": "English",
+    "label": "Sprache"
+  }
+}

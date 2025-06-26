@@ -3,6 +3,8 @@ import { ReactNode } from 'react';
 import { AppSidebar, Header } from '@/components';
 import { ThemeProvider } from '@/providers';
 import styles from './layout.module.css';
+import { NextIntlClientProvider } from 'next-intl';
+import { getLocale } from 'next-intl/server';
 
 export const metadata = {
   title: 'Kanban Board - Task Management',
@@ -14,19 +16,22 @@ type RootLayoutProps = {
   children?: ReactNode;
 };
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
+  const locale = await getLocale();
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body>
-        <ThemeProvider>
-          <div className={styles.appLayout}>
-            <AppSidebar />
+        <NextIntlClientProvider>
+          <ThemeProvider>
+            <div className={styles.appLayout}>
+              <AppSidebar />
 
-            <Header title="Dummy project" />
+              <Header title="Dummy project" />
 
-            <main className={styles.content}>{children}</main>
-          </div>
-        </ThemeProvider>
+              <main className={styles.content}>{children}</main>
+            </div>
+          </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
