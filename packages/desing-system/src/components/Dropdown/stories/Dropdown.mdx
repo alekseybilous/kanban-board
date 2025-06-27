@@ -1,0 +1,152 @@
+import { Canvas, Meta, Controls } from '@storybook/addon-docs/blocks';
+import * as DropdownStories from './Dropdown.stories';
+
+<Meta of={DropdownStories} />
+
+# Dropdown
+
+A versatile dropdown menu component built with Radix UI primitives, supporting various interaction patterns including checkboxes, radio groups, and submenus.
+
+## Overview
+
+<Canvas of={DropdownStories.Default} story={{ height: '300px' }} />
+
+<Controls sort="requiredFirst" />
+
+## Usage
+
+```tsx
+import {
+  DropdownRoot,
+  DropdownTrigger,
+  DropdownContent,
+  DropdownItem,
+  DropdownSeparator,
+} from '@kanban-board/design-system';
+
+<DropdownRoot>
+  <DropdownTrigger>Open Menu</DropdownTrigger>
+  <DropdownContent>
+    <DropdownItem>Profile</DropdownItem>
+    <DropdownItem>Settings</DropdownItem>
+    <DropdownSeparator />
+    <DropdownItem>Logout</DropdownItem>
+  </DropdownContent>
+</DropdownRoot>;
+```
+
+## Visual Examples
+
+<Canvas of={DropdownStories.Sizes} story={{ height: '300px' }} />
+
+<Canvas of={DropdownStories.Variants} story={{ height: '300px' }} />
+
+<Canvas of={DropdownStories.WithCheckboxes} story={{ height: '400px' }} />
+
+<Canvas of={DropdownStories.WithRadioGroup} story={{ height: '300px' }} />
+
+<Canvas of={DropdownStories.WithSubMenus} story={{ height: '400px' }} />
+
+## Components
+
+### DropdownRoot
+
+The root container that manages the dropdown state and provides context to child components.
+
+### DropdownTrigger
+
+The clickable element that opens the dropdown menu.
+
+### DropdownContent
+
+The dropdown container that holds all menu items and content.
+
+### DropdownItem
+
+A clickable menu item for standard actions.
+
+### DropdownCheckboxItem
+
+A menu item with checkbox functionality for toggling options.
+
+### DropdownRadioGroup
+
+Container for radio button menu items that allows single selection.
+
+### DropdownRadioItem
+
+A radio button menu item for single selection within a group.
+
+### DropdownLabel
+
+A non-interactive label for grouping related menu items.
+
+### DropdownSeparator
+
+A visual separator for organizing menu items into sections.
+
+### DropdownSub
+
+Container for creating nested submenus.
+
+### DropdownSubTrigger
+
+A menu item that opens a submenu when hovered or focused.
+
+### DropdownSubContent
+
+The content container for submenu items.
+
+## Design Tokens
+
+This component uses the following CSS variables from the theme:
+
+```css
+/* Colors */
+--surface
+--surface-hover
+--text
+--text-secondary
+--border
+--border-hover
+--border-focus
+--border-subtle
+--primary-base
+--primary-text
+--focus-ring
+
+/* Spacing */
+--space-1
+--space-1_5
+--space-2
+--space-2_5
+--space-3
+--space-4
+--space-6
+--space-8
+--space-10
+--space-12
+
+/* Typography */
+--font-size-xs
+--font-size-sm
+--font-size-base
+--font-weight-medium
+--font-weight-normal
+--line-height-normal
+
+/* Other */
+--border-radius-sm
+--border-radius-md
+--border-width-1
+--shadow-lg
+--opacity-50
+--duration-fast
+--ease-out
+--z-dropdown
+```
+
+## Related Components
+
+- [Select](/docs/components-select--docs) - For single value selection
+- [Button](/docs/components-button--docs) - For trigger styling patterns
