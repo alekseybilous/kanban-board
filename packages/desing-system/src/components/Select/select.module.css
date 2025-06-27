@@ -105,7 +105,6 @@
   animation: contentShow var(--duration-fast) var(--ease-out);
 }
 
-/* Content Size Variants */
 .content--small {
   font-size: var(--font-size-xs);
 }
@@ -165,7 +164,6 @@
   color: var(--primary-text);
 }
 
-/* Item Size Variants */
 .item--small {
   padding: var(--space-1_5) var(--space-2);
   font-size: var(--font-size-xs);

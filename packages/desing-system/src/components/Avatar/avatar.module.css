@@ -1,0 +1,69 @@
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+.image--small {
+  width: var(--space-8);
+  height: var(--space-8);
+}
+
+.image--medium {
+  width: var(--space-10);
+  height: var(--space-10);
+}
+
+.image--large {
+  width: var(--space-12);
+  height: var(--space-12);
+}
+
+.image--default {
+  border-radius: 50%;
+}
+
+.image--rounded {
+  border-radius: var(--border-radius-md);
+}
+
+.fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--surface-hover);
+  color: var(--text);
+  font-weight: var(--font-weight-medium);
+  border-radius: inherit;
+  user-select: none;
+  text-transform: uppercase;
+}
+
+.fallback--small {
+  width: var(--space-8);
+  height: var(--space-8);
+  font-size: var(--font-size-xs);
+}
+
+.fallback--medium {
+  width: var(--space-10);
+  height: var(--space-10);
+  font-size: var(--font-size-sm);
+}
+
+.fallback--large {
+  width: var(--space-12);
+  height: var(--space-12);
+  font-size: var(--font-size-base);
+}
+
+.fallback--default {
+  border-radius: 50%;
+}
+
+.fallback--rounded {
+  border-radius: var(--border-radius-md);
+}

@@ -1,0 +1,102 @@
+import { Canvas, Meta, Controls } from '@storybook/addon-docs/blocks';
+import * as AvatarStories from './Avatar.stories';
+
+<Meta of={AvatarStories} />
+
+# Avatar
+
+A profile picture component built with Radix UI primitives, featuring automatic fallbacks and customizable sizes and shapes.
+
+## Overview
+
+<Canvas of={AvatarStories.Default} />
+
+<Controls sort="requiredFirst" />
+
+## Usage
+
+```tsx
+import { Avatar } from '@kanban-board/design-system';
+
+// Simple usage
+<Avatar
+  src="https://example.com/avatar.jpg"
+  alt="John Doe"
+  fallback="JD"
+  size="medium"
+  variant="default"
+/>;
+
+// Using primitives for more control
+import {
+  AvatarRoot,
+  AvatarImage,
+  AvatarFallback,
+} from '@kanban-board/design-system';
+
+<AvatarRoot size="large" variant="rounded">
+  <AvatarImage src="https://example.com/avatar.jpg" alt="John Doe" />
+  <AvatarFallback>JD</AvatarFallback>
+</AvatarRoot>;
+```
+
+## Visual Examples
+
+<Canvas of={AvatarStories.Sizes} />
+
+<Canvas of={AvatarStories.Variants} />
+
+<Canvas of={AvatarStories.WithFallback} />
+
+<Canvas of={AvatarStories.FallbackVariants} />
+
+<Canvas of={AvatarStories.UsingPrimitives} />
+
+<Canvas of={AvatarStories.AvatarGroup} />
+
+## Components
+
+### Avatar
+
+A convenient wrapper component that combines all avatar primitives for simple usage.
+
+### AvatarRoot
+
+The root container that manages the avatar context and provides size/variant to child components.
+
+### AvatarImage
+
+The image element that displays the user's profile picture. Automatically falls back to AvatarFallback if the image fails to load.
+
+### AvatarFallback
+
+The fallback content displayed when the image is unavailable or fails to load. Typically shows user initials.
+
+## Design Tokens
+
+This component uses the following CSS variables from the theme:
+
+```css
+/* Colors */
+--surface-hover
+--text
+
+/* Spacing */
+--space-8
+--space-10
+--space-12
+
+/* Typography */
+--font-size-xs
+--font-size-sm
+--font-size-base
+--font-weight-medium
+
+/* Other */
+--border-radius-md
+```
+
+## Related Components
+
+- [Button](/docs/components-button--docs) - For user actions
+- [Dropdown](/docs/components-dropdown--docs) - For user menus

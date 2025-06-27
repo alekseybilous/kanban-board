@@ -17,7 +17,6 @@ import {
   type SelectVariant,
 } from './SelectContext';
 
-// Enhanced Root component that provides context
 export const SelectRoot: React.FC<
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Root> & {
     size?: SelectSize;

@@ -119,7 +119,6 @@ export const States: Story = {
 export const CommonPatterns: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      {/* Form Actions */}
       <div>
         <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: 600 }}>
           Form Actions
@@ -133,7 +132,6 @@ export const CommonPatterns: Story = {
         </div>
       </div>
 
-      {/* Confirmation Dialog */}
       <div>
         <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: 600 }}>
           Confirmation Dialog
@@ -146,7 +144,6 @@ export const CommonPatterns: Story = {
         </div>
       </div>
 
-      {/* Toolbar */}
       <div>
         <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: 600 }}>
           Toolbar Actions
@@ -164,7 +161,6 @@ export const CommonPatterns: Story = {
         </div>
       </div>
 
-      {/* CTA */}
       <div>
         <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: 600 }}>
           Call-to-Action
@@ -197,7 +193,6 @@ export const DoAndDont: Story = {
     <div
       style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}
     >
-      {/* Do */}
       <div>
         <h4 style={{ margin: '0 0 12px 0', color: '#059669' }}>✅ Do</h4>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -226,7 +221,6 @@ export const DoAndDont: Story = {
         </div>
       </div>
 
-      {/* Don't */}
       <div>
         <h4 style={{ margin: '0 0 12px 0', color: '#dc2626' }}>❌ Don't</h4>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
