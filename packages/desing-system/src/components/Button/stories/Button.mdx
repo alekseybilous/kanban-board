@@ -1,0 +1,98 @@
+import { Canvas, Meta, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ButtonStories from './Button.stories';
+
+<Meta of={ButtonStories} />
+
+# Button
+
+Interactive element that triggers actions when clicked. Essential for forms, dialogs, and user interactions.
+
+## Overview
+
+<Canvas of={ButtonStories.Default} />
+
+<Controls />
+
+## Usage
+
+```tsx
+import { Button } from '@kanban-board/design-system';
+
+function Example() {
+  return (
+    <Button
+      variant="primary"
+      size="medium"
+      onClick={() => console.log('Clicked!')}
+    >
+      Click me
+    </Button>
+  );
+}
+```
+
+## Variants
+
+Different visual styles for different types of actions.
+
+<Canvas of={ButtonStories.Variants} />
+
+## Sizes
+
+Five sizes to fit various UI contexts.
+
+<Canvas of={ButtonStories.Sizes} />
+
+## Props
+
+<ArgTypes />
+
+## Design Tokens
+
+This component uses the following CSS variables from the theme:
+
+```css
+/* Colors */
+--primary-base
+--primary-hover
+--primary-active
+--primary-text-on-primary
+--secondary-border
+--secondary-hover
+--danger-base
+--danger-hover
+--success-base
+--success-hover
+--warning-base
+--warning-hover
+--text
+--surface
+
+/* Spacing */
+--space-2
+--space-3
+--space-4
+--space-5
+--space-6
+
+/* Typography */
+--font-size-xs
+--font-size-sm
+--font-size-base
+--font-size-lg
+--font-size-xl
+--font-weight-medium
+
+/* Other */
+--border-radius-md
+--duration-fast
+--shadow-sm
+--focus-ring
+```
+
+## Related Components
+
+- [IconButton](./IconButton/IconButton.mdx) - For icon-only actions
+- [ButtonGroup](./ButtonGroup/ButtonGroup.mdx) - For grouping related actions
+- [Link](./Link/Link.mdx) - For navigation actions
+- [ToggleButton](./ToggleButton/ToggleButton.mdx) - For on/off states

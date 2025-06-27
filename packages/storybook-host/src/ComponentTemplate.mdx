@@ -1,0 +1,149 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Guidelines/Storybook template" />
+
+# ComponentName
+
+Brief description of what this component does and its primary use case. Keep it to 1-2 sentences.
+
+## Overview
+
+```tsx
+<Canvas />
+
+<Controls />
+```
+
+## Usage
+
+```tsx
+import { ComponentName } from '@kanban-board/design-system';
+
+function Example() {
+  return (
+    <ComponentName variant="primary" size="medium">
+      Content here
+    </ComponentName>
+  );
+}
+```
+
+## Variants
+
+Show all available visual styles of the component.
+
+```tsx
+<Canvas />
+```
+
+## Sizes
+
+Available size options for different contexts.
+
+```tsx
+<Canvas />
+```
+
+## Props
+
+| Prop        | Type                                  | Default     | Description            |
+| ----------- | ------------------------------------- | ----------- | ---------------------- |
+| `children`  | `ReactNode`                           | -           | Content to display     |
+| `variant`   | `'primary' \| 'secondary' \| 'ghost'` | `'primary'` | Visual style           |
+| `size`      | `'small' \| 'medium' \| 'large'`      | `'medium'`  | Component size         |
+| `disabled`  | `boolean`                             | `false`     | Disabled state         |
+| `className` | `string`                              | -           | Additional CSS classes |
+
+## Compound Components
+
+{/* Include this section only if component uses compound pattern */}
+
+This component can be used with the following sub-components:
+
+### `ComponentName.Header`
+
+Optional header section for the component.
+
+```tsx
+<Canvas />
+```
+
+| Prop       | Type     | Default | Description       |
+| ---------- | -------- | ------- | ----------------- |
+| `title`    | `string` | -       | Header title      |
+| `subtitle` | `string` | -       | Optional subtitle |
+
+### `ComponentName.Body`
+
+Main content area of the component.
+
+```tsx
+<Canvas />
+```
+
+| Prop       | Type        | Default | Description   |
+| ---------- | ----------- | ------- | ------------- |
+| `children` | `ReactNode` | -       | Body content  |
+| `padding`  | `boolean`   | `true`  | Apply padding |
+
+### `ComponentName.Footer`
+
+Optional footer section with actions.
+
+```tsx
+<Canvas />
+```
+
+| Prop       | Type                            | Default   | Description       |
+| ---------- | ------------------------------- | --------- | ----------------- |
+| `children` | `ReactNode`                     | -         | Footer content    |
+| `align`    | `'left' \| 'center' \| 'right'` | `'right'` | Content alignment |
+
+### Complete Compound Example
+
+```tsx
+<Canvas />
+```
+
+```tsx
+<ComponentName>
+  <ComponentName.Header title="Card Title" />
+  <ComponentName.Body>Main content goes here</ComponentName.Body>
+  <ComponentName.Footer>
+    <Button>Cancel</Button>
+    <Button variant="primary">Save</Button>
+  </ComponentName.Footer>
+</ComponentName>
+```
+
+## Design Tokens
+
+This component uses the following CSS variables from the theme:
+
+```css
+/* Colors */
+--primary-base
+--primary-hover
+--text
+--border
+
+/* Spacing */
+--space-2
+--space-3
+--space-4
+
+/* Typography */
+--font-size-sm
+--font-size-base
+--font-weight-medium
+
+/* Other */
+--border-radius-md
+--duration-fast
+```
+
+## Related Components
+
+- [RelatedComponent1](./RelatedComponent1.mdx) - Used together for X
+- [RelatedComponent2](./RelatedComponent2.mdx) - Alternative for Y use case
+- [RelatedComponent3](./RelatedComponent3.mdx) - Contains this component

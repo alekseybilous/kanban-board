@@ -1,13 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from './Button';
+import { Button } from '../Button';
 
 const meta: Meta<typeof Button> = {
-  title: 'Components/Basic/Button',
+  title: 'Components/Button',
   component: Button,
   parameters: {
     layout: 'centered',
   },
   argTypes: {
+    type: {
+      control: 'select',
+      options: ['button', 'submit'],
+    },
     variant: {
       control: 'select',
       options: [
@@ -43,14 +47,12 @@ const meta: Meta<typeof Button> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Default interactive story
 export const Default: Story = {
   args: {
     children: 'Button',
   },
 };
 
-// All variants in one story
 export const Variants: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
@@ -68,7 +70,6 @@ export const Variants: Story = {
   },
 };
 
-// All sizes
 export const Sizes: Story = {
   render: () => (
     <div
@@ -91,7 +92,6 @@ export const Sizes: Story = {
   },
 };
 
-// Different states
 export const States: Story = {
   render: () => (
     <div
@@ -116,7 +116,6 @@ export const States: Story = {
   },
 };
 
-// Real-world usage patterns
 export const CommonPatterns: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
@@ -193,7 +192,6 @@ export const CommonPatterns: Story = {
   },
 };
 
-// Do and Don't examples
 export const DoAndDont: Story = {
   render: () => (
     <div
@@ -265,7 +263,6 @@ export const DoAndDont: Story = {
   },
 };
 
-// Accessibility examples
 export const Accessibility: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -296,7 +293,6 @@ export const Accessibility: Story = {
   },
 };
 
-// Custom elements with asChild
 export const CustomElements: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '8px' }}>
@@ -317,7 +313,6 @@ export const CustomElements: Story = {
   },
 };
 
-// Form integration
 export const FormIntegration: Story = {
   render: () => (
     <form style={{ display: 'flex', gap: '8px' }}>

@@ -1,7 +1,6 @@
 .btn {
   appearance: none;
   background: none;
-  border: none;
   margin: 0;
   padding: 0;
 
@@ -26,36 +25,36 @@
 }
 
 .xs {
-  height: 1.5rem;
-  padding: 0 var(--space-2);
+  height: var(--space-6);
+  padding: var(--space-0) var(--space-2);
   font-size: var(--font-size-xs);
   border-radius: var(--border-radius-sm);
 }
 
 .sm {
-  height: 2rem;
-  padding: 0 var(--space-3);
+  height: var(--space-8);
+  padding: var(--space-0) var(--space-3);
   font-size: var(--font-size-sm);
   border-radius: var(--border-radius-md);
 }
 
 .md {
-  height: 2.5rem;
-  padding: 0 var(--space-4);
+  height: var(--space-10);
+  padding: var(--space-0) var(--space-4);
   font-size: var(--font-size-base);
   border-radius: var(--border-radius-md);
 }
 
 .lg {
-  height: 3rem;
-  padding: 0 var(--space-6);
+  height: var(--space-12);
+  padding: var(--space-0) var(--space-6);
   font-size: var(--font-size-lg);
   border-radius: var(--border-radius-lg);
 }
 
 .xl {
-  height: 3.5rem;
-  padding: 0 var(--space-8);
+  height: var(--space-14);
+  padding: var(--space-0) var(--space-8);
   font-size: var(--font-size-xl);
   border-radius: var(--border-radius-lg);
 }
@@ -93,7 +92,7 @@
 }
 
 .outline {
-  background-color: transparent;
+  background-color: var(--color-transparent);
   color: var(--primary-text);
   border-color: var(--primary-border);
 }
@@ -111,9 +110,9 @@
 }
 
 .ghost {
-  background-color: transparent;
+  background-color: var(--color-transparent);
   color: var(--text-secondary);
-  border-color: transparent;
+  border-color: var(--color-transparent);
 }
 
 .ghost:hover:not(:disabled) {
