@@ -1,0 +1,139 @@
+import { Meta, Canvas, ArgTypes, Controls } from '@storybook/addon-docs/blocks';
+import * as SelectStories from './Select.stories';
+
+<Meta of={SelectStories} />
+
+# Select
+
+A flexible dropdown component for selecting options from a list, built with Radix UI primitives and custom styling.
+
+## Overview
+
+<Canvas of={SelectStories.Default} />
+
+<Controls sort="requiredFirst" />
+
+## Usage
+
+```tsx
+import {
+  SelectRoot,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from '@kanban-board/design-system';
+
+<SelectRoot>
+  <SelectTrigger>
+    <SelectValue placeholder="Select an option..." />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="option1">Option 1</SelectItem>
+    <SelectItem value="option2">Option 2</SelectItem>
+    <SelectItem value="option3">Option 3</SelectItem>
+  </SelectContent>
+</SelectRoot>;
+```
+
+## Visual Examples
+
+<Canvas of={SelectStories.Default} />
+
+<Canvas of={SelectStories.Sizes} />
+
+<Canvas of={SelectStories.Variants} />
+
+## Components
+
+### SelectRoot
+
+The root container that manages the select state and provides context to child components.
+
+<ArgTypes
+  of={SelectStories.Default}
+  include={['size', 'variant', 'value', 'onValueChange', 'disabled']}
+/>
+
+### SelectTrigger
+
+The clickable trigger that opens the dropdown and displays the selected value.
+
+### SelectValue
+
+Displays the selected value or placeholder text within the trigger.
+
+### SelectContent
+
+The dropdown container that holds all selectable options.
+
+### SelectItem
+
+Individual selectable options within the dropdown.
+
+### SelectSeparator
+
+Visual separator for grouping related options.
+
+### SelectLabel
+
+Label for grouping options within the dropdown.
+
+## Design Tokens
+
+This component uses the following CSS variables from the theme:
+
+```css
+/* Colors */
+--surface
+--surface-hover
+--text
+--text-secondary
+--text-tertiary
+--border
+--border-hover
+--border-focus
+--border-subtle
+--primary-surface
+--primary-text
+--danger-border
+--danger-text
+--danger-base
+
+/* Spacing */
+--space-1
+--space-1_5
+--space-2
+--space-2_5
+--space-3
+--space-4
+--space-6
+--space-8
+--space-10
+--space-12
+--space-80
+
+/* Typography */
+--font-size-xs
+--font-size-sm
+--font-size-base
+--font-weight-normal
+--font-weight-medium
+--line-height-normal
+
+/* Other */
+--border-radius-sm
+--border-radius-md
+--border-width-1
+--shadow-lg
+--focus-ring
+--opacity-50
+--duration-fast
+--ease-out
+--z-dropdown
+```
+
+## Related Components
+
+- [Button](/docs/components-button--docs) - For form actions
+- [Input](/docs/components-input--docs) - For text input fields

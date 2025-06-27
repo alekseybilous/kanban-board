@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { Button } from '../Button';
-
+import { Button } from '../../Button';
 import {
   SelectRoot,
   SelectTrigger,
@@ -12,7 +11,7 @@ import {
   SelectLabel,
   SelectSeparator,
   SelectGroup,
-} from './Select';
+} from '../Select';
 
 const meta: Meta<typeof SelectTrigger> = {
   title: 'Components/Select',
@@ -229,7 +228,7 @@ export const Controlled: Story = {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         <p>Selected value: {value || 'None'}</p>
-        <SelectRoot value={value} onValueChange={setValue} open>
+        <SelectRoot value={value} onValueChange={setValue}>
           <SelectTrigger style={{ width: '200px' }}>
             <SelectValue placeholder="Controlled select..." />
           </SelectTrigger>
