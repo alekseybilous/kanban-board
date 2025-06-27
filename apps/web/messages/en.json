@@ -2,9 +2,13 @@
   "HomePage": {
     "title": "US TEXT HERE !!!!!!!"
   },
-  "LocaleSwitcher": {
+  "locales": {
     "de": "Deutsch",
-    "en": "English",
-    "label": "Language"
+    "en": "English"
+  },
+  "UserMenu": {
+    "theme": "Theme",
+    "language": "Language",
+    "logOut": "Log out"
   }
 }

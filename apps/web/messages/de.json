@@ -2,9 +2,13 @@
   "HomePage": {
     "title": "DE TEXT HERE !!!!!!!"
   },
-  "LocaleSwitcher": {
+  "locales": {
     "de": "Deutsch",
-    "en": "English",
-    "label": "Sprache"
+    "en": "English"
+  },
+  "UserMenu": {
+    "theme": "Design",
+    "language": "Sprache",
+    "logOut": "Abmelden"
   }
 }

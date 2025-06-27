@@ -67,3 +67,22 @@
 .fallback--rounded {
   border-radius: var(--border-radius-md);
 }
+
+.root {
+  display: inline-flex;
+  position: relative;
+}
+
+.root--focusable {
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.root--focusable:hover {
+  transform: scale(1.05);
+}
+
+.root--focusable:focus {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}

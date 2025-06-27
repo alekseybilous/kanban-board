@@ -1,5 +1,5 @@
 import { Slot } from '@radix-ui/react-slot';
-import clsx from 'clsx';
+import { clsx } from 'clsx';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import { forwardRef } from 'react';
 

@@ -1,22 +1,50 @@
 'use client';
 
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
+import clsx from 'clsx';
 import React from 'react';
 
 import styles from './avatar.module.css';
 import type { AvatarSize, AvatarVariant } from './AvatarContext';
 import { useAvatarContext, AvatarProvider } from './AvatarContext';
 
-export const AvatarRoot: React.FC<
+export const AvatarRoot = React.forwardRef<
+  React.ComponentRef<typeof AvatarPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root> & {
     size?: AvatarSize;
     variant?: AvatarVariant;
+    focusable?: boolean;
   }
-> = ({ size = 'medium', variant = 'default', children, ...props }) => (
-  <AvatarProvider size={size} variant={variant}>
-    <AvatarPrimitive.Root {...props}>{children}</AvatarPrimitive.Root>
-  </AvatarProvider>
+>(
+  (
+    {
+      size = 'medium',
+      variant = 'default',
+      focusable = false,
+      className,
+      children,
+      ...props
+    },
+    ref
+  ) => (
+    <AvatarProvider size={size} variant={variant}>
+      <AvatarPrimitive.Root
+        ref={ref}
+        className={clsx(
+          styles.root,
+          focusable && styles['root--focusable'],
+          className
+        )}
+        tabIndex={focusable ? 0 : undefined}
+        {...props}
+      >
+        {children}
+      </AvatarPrimitive.Root>
+    </AvatarProvider>
+  )
 );
+
+AvatarRoot.displayName = 'AvatarRoot';
 
 export const AvatarImage = React.forwardRef<
   React.ComponentRef<typeof AvatarPrimitive.Image>,
@@ -27,12 +55,12 @@ export const AvatarImage = React.forwardRef<
   return (
     <AvatarPrimitive.Image
       ref={ref}
-      className={`
-        ${styles.image}
-        ${styles[`image--${size}`]}
-        ${styles[`image--${variant}`]}
-        ${className || ''}
-      `.trim()}
+      className={clsx(
+        styles.image,
+        styles[`image--${size}`],
+        styles[`image--${variant}`],
+        className
+      )}
       {...props}
     />
   );
@@ -49,12 +77,12 @@ export const AvatarFallback = React.forwardRef<
   return (
     <AvatarPrimitive.Fallback
       ref={ref}
-      className={`
-        ${styles.fallback}
-        ${styles[`fallback--${size}`]}
-        ${styles[`fallback--${variant}`]}
-        ${className || ''}
-      `.trim()}
+      className={clsx(
+        styles.fallback,
+        styles[`fallback--${size}`],
+        styles[`fallback--${variant}`],
+        className
+      )}
       {...props}
     />
   );
@@ -62,23 +90,43 @@ export const AvatarFallback = React.forwardRef<
 
 AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
 
-export const Avatar: React.FC<{
-  src?: string;
-  alt?: string;
-  fallback: string;
-  size?: AvatarSize;
-  variant?: AvatarVariant;
-  className?: string;
-}> = ({
-  src,
-  alt,
-  fallback,
-  size = 'medium',
-  variant = 'default',
-  className,
-}) => (
-  <AvatarRoot size={size} variant={variant} className={className}>
-    {src && <AvatarImage src={src} alt={alt} />}
-    <AvatarFallback>{fallback}</AvatarFallback>
-  </AvatarRoot>
+export const Avatar = React.forwardRef<
+  React.ComponentRef<typeof AvatarPrimitive.Root>,
+  {
+    src?: string;
+    alt?: string;
+    fallback: string;
+    size?: AvatarSize;
+    variant?: AvatarVariant;
+    className?: string;
+    focusable?: boolean;
+  } & React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>
+>(
+  (
+    {
+      src,
+      alt,
+      fallback,
+      size = 'medium',
+      variant = 'default',
+      className,
+      focusable = false,
+      ...props
+    },
+    ref
+  ) => (
+    <AvatarRoot
+      ref={ref}
+      size={size}
+      variant={variant}
+      className={className}
+      focusable={focusable}
+      {...props}
+    >
+      {src && <AvatarImage src={src} alt={alt} />}
+      <AvatarFallback>{fallback}</AvatarFallback>
+    </AvatarRoot>
+  )
 );
+
+Avatar.displayName = 'Avatar';

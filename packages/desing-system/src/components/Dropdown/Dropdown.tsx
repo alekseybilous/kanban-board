@@ -2,6 +2,7 @@
 
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { ChevronDownIcon, CheckIcon } from '@radix-ui/react-icons';
+import { clsx } from 'clsx';
 import React from 'react';
 
 import styles from './dropdown.module.css';
@@ -24,18 +25,26 @@ export const DropdownRoot: React.FC<
 export const DropdownTrigger = React.forwardRef<
   React.ComponentRef<typeof DropdownMenuPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Trigger>
->(({ className, children, ...props }, ref) => {
+>(({ className, children, asChild, ...props }, ref) => {
   const { size, variant } = useDropdownContext();
+
+  if (asChild) {
+    return (
+      <DropdownMenuPrimitive.Trigger ref={ref} asChild {...props}>
+        {children}
+      </DropdownMenuPrimitive.Trigger>
+    );
+  }
 
   return (
     <DropdownMenuPrimitive.Trigger
       ref={ref}
-      className={`
-        ${styles.trigger}
-        ${styles[`trigger--${size}`]}
-        ${styles[`trigger--${variant}`]}
-        ${className || ''}
-      `.trim()}
+      className={clsx(
+        styles.trigger,
+        styles[`trigger--${size}`],
+        styles[`trigger--${variant}`],
+        className
+      )}
       {...props}
     >
       {children}
@@ -58,11 +67,7 @@ export const DropdownContent = React.forwardRef<
     <DropdownMenuPrimitive.Content
       ref={ref}
       sideOffset={sideOffset}
-      className={`
-        ${styles.content}
-        ${styles[`content--${size}`]}
-        ${className || ''}
-      `.trim()}
+      className={clsx(styles.content, styles[`content--${size}`], className)}
       {...props}
     />
   );
@@ -81,12 +86,12 @@ export const DropdownItem = React.forwardRef<
   return (
     <DropdownMenuPrimitive.Item
       ref={ref}
-      className={`
-        ${styles.item}
-        ${styles[`item--${size}`]}
-        ${inset ? styles.inset : ''}
-        ${className || ''}
-      `.trim()}
+      className={clsx(
+        styles.item,
+        styles[`item--${size}`],
+        inset && styles.inset,
+        className
+      )}
       {...props}
     />
   );
@@ -103,11 +108,7 @@ export const DropdownCheckboxItem = React.forwardRef<
   return (
     <DropdownMenuPrimitive.CheckboxItem
       ref={ref}
-      className={`
-        ${styles.checkboxItem}
-        ${styles[`item--${size}`]}
-        ${className || ''}
-      `.trim()}
+      className={clsx(styles.checkboxItem, styles[`item--${size}`], className)}
       checked={checked}
       {...props}
     >
@@ -135,11 +136,7 @@ export const DropdownRadioItem = React.forwardRef<
   return (
     <DropdownMenuPrimitive.RadioItem
       ref={ref}
-      className={`
-        ${styles.radioItem}
-        ${styles[`item--${size}`]}
-        ${className || ''}
-      `.trim()}
+      className={clsx(styles.radioItem, styles[`item--${size}`], className)}
       {...props}
     >
       <span className={styles.itemIndicator}>
@@ -162,11 +159,7 @@ export const DropdownLabel = React.forwardRef<
 >(({ className, inset, ...props }, ref) => (
   <DropdownMenuPrimitive.Label
     ref={ref}
-    className={`
-      ${styles.label}
-      ${inset ? styles.inset : ''}
-      ${className || ''}
-    `.trim()}
+    className={clsx(styles.label, inset && styles.inset, className)}
     {...props}
   />
 ));
@@ -179,7 +172,7 @@ export const DropdownSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DropdownMenuPrimitive.Separator
     ref={ref}
-    className={`${styles.separator} ${className || ''}`.trim()}
+    className={clsx(styles.separator, className)}
     {...props}
   />
 ));
@@ -199,12 +192,12 @@ export const DropdownSubTrigger = React.forwardRef<
   return (
     <DropdownMenuPrimitive.SubTrigger
       ref={ref}
-      className={`
-        ${styles.subTrigger}
-        ${styles[`item--${size}`]}
-        ${inset ? styles.inset : ''}
-        ${className || ''}
-      `.trim()}
+      className={clsx(
+        styles.subTrigger,
+        styles[`item--${size}`],
+        inset && styles.inset,
+        className
+      )}
       {...props}
     >
       {children}
@@ -224,11 +217,7 @@ export const DropdownSubContent = React.forwardRef<
   return (
     <DropdownMenuPrimitive.SubContent
       ref={ref}
-      className={`
-        ${styles.subContent}
-        ${styles[`content--${size}`]}
-        ${className || ''}
-      `.trim()}
+      className={clsx(styles.subContent, styles[`content--${size}`], className)}
       {...props}
     />
   );
