@@ -16,7 +16,10 @@ node_modules
 *.launch
 .settings/
 *.sublime-workspace
-
+*.env
+*.env.example
+*.env.local
+*.env.staging
 # IDE - VSCode
 .vscode/*
 !.vscode/settings.json

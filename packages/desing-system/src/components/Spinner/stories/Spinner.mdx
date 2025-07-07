@@ -1,0 +1,101 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as SpinnerStories from './Spinner.stories';
+
+<Meta of={SpinnerStories} />
+
+# Spinner
+
+A loading indicator that displays an animated pulsing effect to indicate that content is being loaded or processed.
+
+## Overview
+
+<Canvas of={SpinnerStories.Default} />
+
+<Controls of={SpinnerStories.Default} />
+
+## Usage
+
+```tsx
+import { Spinner } from '@kanban-board/design-system';
+
+function Example() {
+  return (
+    <div>
+      <Spinner />
+      <span>Loading...</span>
+    </div>
+  );
+}
+```
+
+## Variants
+
+Available color variants using design system theme tokens.
+
+<Canvas of={SpinnerStories.Variants} />
+
+## Sizes
+
+Available size options for different contexts.
+
+<Canvas of={SpinnerStories.Sizes} />
+
+## Common Patterns
+
+Typical usage patterns for loading states.
+
+<Canvas of={SpinnerStories.CommonPatterns} />
+
+## Props
+
+| Prop        | Type                                                                          | Default     | Description                      |
+| ----------- | ----------------------------------------------------------------------------- | ----------- | -------------------------------- |
+| `size`      | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'`                                        | `'md'`      | Size of the spinner              |
+| `variant`   | `'default' \| 'primary' \| 'secondary' \| 'success' \| 'warning' \| 'danger'` | `'default'` | Color variant using theme tokens |
+| `className` | `string`                                                                      | -           | Additional CSS classes           |
+
+## Design Tokens
+
+This component uses the following CSS variables from the theme:
+
+```css
+/* Colors */
+--text                  /* Default spinner color */
+--primary-base          /* Primary variant color */
+--text-secondary        /* Secondary variant color */
+--success-base          /* Success variant color */
+--warning-base          /* Warning variant color */
+--danger-base           /* Danger variant color */
+
+/* Spacing */
+--space-4               /* XS size (16px) */
+--space-6               /* SM size (24px) */
+--space-12              /* MD size (48px) */
+--space-16              /* LG size (64px) */
+--space-20              /* XL size (80px) */
+
+/* Borders */
+--border-width-1        /* XS/SM border width */
+--border-width-2        /* MD border width */
+--border-width-3        /* LG border width */
+--border-width-4        /* XL border width */
+```
+
+## Accessibility
+
+- The spinner is implemented using CSS animations that respect `prefers-reduced-motion`
+- Consider adding `aria-label` or `aria-labelledby` for screen readers
+- Use `aria-live="polite"` on the container for status updates
+
+```tsx
+<div aria-live="polite" aria-label="Loading content">
+  <Spinner size="sm" />
+  <span>Loading...</span>
+</div>
+```
+
+## Related Components
+
+- [Button](./Button.mdx) - Often used with spinner for loading states
+- [Card](./Card.mdx) - May contain spinner during content loading
+- [Modal](./Modal.mdx) - Can use spinner for async operations

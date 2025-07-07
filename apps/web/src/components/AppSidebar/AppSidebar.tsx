@@ -6,7 +6,7 @@ export const AppSidebar = () => {
   return (
     <aside className={styles.sidebar}>
       <header className={styles.header}>
-        <Link href="/">
+        <Link href="/app">
           <Logo width={120} />
         </Link>
       </header>

@@ -123,7 +123,7 @@ export const Avatar = React.forwardRef<
       focusable={focusable}
       {...props}
     >
-      {src && <AvatarImage src={src} alt={alt} />}
+      {src && <AvatarImage src={src} alt={alt} crossOrigin="anonymous" />}
       <AvatarFallback>{fallback}</AvatarFallback>
     </AvatarRoot>
   )

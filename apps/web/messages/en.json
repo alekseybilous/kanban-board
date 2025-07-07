@@ -1,4 +1,9 @@
 {
+  "actions": {
+    "logout": "Log out",
+    "signIn": "Sing in"
+  },
+
   "HomePage": {
     "title": "US TEXT HERE !!!!!!!"
   },
@@ -8,7 +13,6 @@
   },
   "UserMenu": {
     "theme": "Theme",
-    "language": "Language",
-    "logOut": "Log out"
+    "language": "Language"
   }
 }

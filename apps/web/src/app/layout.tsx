@@ -1,9 +1,8 @@
 import './global.css';
 import { ReactNode } from 'react';
-import { AppSidebar, Header } from '@/components';
-import { ThemeProvider } from '@/providers';
+import { AppSidebar, Header, AuthConditional } from '@/components';
+import { RootProvider } from '@/providers';
 import styles from './layout.module.css';
-import { NextIntlClientProvider } from 'next-intl';
 import { getLocale } from 'next-intl/server';
 
 export const metadata = {
@@ -21,17 +20,23 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang={locale} suppressHydrationWarning>
       <body>
-        <NextIntlClientProvider>
-          <ThemeProvider>
-            <div className={styles.appLayout}>
-              <AppSidebar />
-
-              <Header title="Dummy project" />
-
-              <main className={styles.content}>{children}</main>
-            </div>
-          </ThemeProvider>
-        </NextIntlClientProvider>
+        <RootProvider>
+          <AuthConditional
+            authenticated={
+              <div className={styles.authenticatedLayout}>
+                <AppSidebar />
+                <Header />
+                <main className={styles.content}>{children}</main>
+              </div>
+            }
+            unauthenticated={
+              <div className={styles.unauthenticatedLayout}>
+                <Header />
+                <main className={styles.contentFullWidth}>{children}</main>
+              </div>
+            }
+          />
+        </RootProvider>
       </body>
     </html>
   );
