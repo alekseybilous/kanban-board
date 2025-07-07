@@ -1,23 +1,12 @@
-/* Blue Theme */
 [data-theme='blue'] {
-  /* =================================
-     FOUNDATION COLORS
-     ================================= */
-
-  /* Canvas - Page backgrounds */
   --canvas: var(--color-blue-50);
   --canvas-subtle: var(--color-white);
 
-  /* Surface - Component backgrounds */
   --surface: var(--color-white);
   --surface-subtle: var(--color-blue-50);
   --surface-hover: var(--color-blue-50);
   --surface-active: var(--color-blue-100);
   --surface-disabled: var(--color-blue-50);
-
-  /* =================================
-     TEXT HIERARCHY
-     ================================= */
 
   --text: var(--color-blue-900);
   --text-secondary: var(--color-blue-700);
@@ -27,10 +16,6 @@
   --text-link: var(--color-blue-700);
   --text-link-hover: var(--color-blue-800);
 
-  /* =================================
-     BORDERS
-     ================================= */
-
   --border: var(--color-blue-200);
   --border-subtle: var(--color-blue-100);
   --border-strong: var(--color-blue-300);
@@ -38,11 +23,6 @@
   --border-focus: var(--color-blue-600);
   --border-disabled: var(--color-blue-100);
 
-  /* =================================
-     INTERACTIVE COLORS
-     ================================= */
-
-  /* Primary Action */
   --primary-base: var(--color-blue-700);
   --primary-hover: var(--color-blue-800);
   --primary-active: var(--color-blue-900);
@@ -59,7 +39,6 @@
   --primary-text-hover: var(--color-blue-800);
   --primary-text-on-primary: var(--color-white);
 
-  /* Secondary Action */
   --secondary-base: var(--color-blue-100);
   --secondary-hover: var(--color-blue-200);
   --secondary-active: var(--color-blue-300);
@@ -72,7 +51,6 @@
   --secondary-text-hover: var(--color-blue-800);
   --secondary-text-on-secondary: var(--color-blue-800);
 
-  /* Success State */
   --success-base: var(--color-green-600);
   --success-hover: var(--color-green-700);
   --success-active: var(--color-green-800);
@@ -85,7 +63,6 @@
   --success-text: var(--color-green-600);
   --success-text-on-success: var(--color-white);
 
-  /* Warning State */
   --warning-base: var(--color-amber-600);
   --warning-hover: var(--color-amber-700);
   --warning-active: var(--color-amber-800);
@@ -98,7 +75,6 @@
   --warning-text: var(--color-amber-600);
   --warning-text-on-warning: var(--color-white);
 
-  /* Danger State */
   --danger-base: var(--color-red-600);
   --danger-hover: var(--color-red-700);
   --danger-active: var(--color-red-800);
@@ -110,10 +86,6 @@
   --danger-border: var(--color-red-600);
   --danger-text: var(--color-red-600);
   --danger-text-on-danger: var(--color-white);
-
-  /* =================================
-     FEEDBACK & OVERLAYS
-     ================================= */
 
   --focus-ring: var(--color-blue-600);
   --focus-ring-offset: var(--color-white);

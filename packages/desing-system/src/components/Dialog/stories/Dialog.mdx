@@ -1,0 +1,185 @@
+import { Canvas, Meta, Controls } from '@storybook/addon-docs/blocks';
+import * as DialogStories from './Dialog.stories';
+
+<Meta of={DialogStories} />
+
+# Dialog
+
+Modal dialog component for presenting content that requires user interaction. Built on Radix UI Dialog primitive with theme-aware styling.
+
+## Overview
+
+<Canvas of={DialogStories.Default} />
+
+<Controls sort="requiredFirst" />
+
+## Usage
+
+```tsx
+import { Dialog } from '@kanban-board/design-system';
+
+function Example() {
+  return (
+    <Dialog.Root>
+      <Dialog.Trigger asChild>
+        <Button>Open Dialog</Button>
+      </Dialog.Trigger>
+      <Dialog.Content>
+        <Dialog.Header>
+          <Dialog.Title>Dialog Title</Dialog.Title>
+          <Dialog.Description>Dialog description text</Dialog.Description>
+        </Dialog.Header>
+        <div>Your content here</div>
+        <Dialog.Footer>
+          <Dialog.Close asChild>
+            <Button variant="outline">Cancel</Button>
+          </Dialog.Close>
+          <Button variant="primary">Confirm</Button>
+        </Dialog.Footer>
+      </Dialog.Content>
+    </Dialog.Root>
+  );
+}
+```
+
+## Sizes
+
+Four size options to accommodate different content needs.
+
+<Canvas of={DialogStories.Sizes} />
+
+### Size Guidelines
+
+- **Small (384px)**: Simple confirmations, alerts, or brief messages
+- **Medium (512px)**: Default size for most dialogs, forms with a few fields
+- **Large (768px)**: Complex forms, detailed content, or data tables
+- **Full**: Immersive experiences, multi-step workflows, or when maximum space is needed
+
+## Common Patterns
+
+Examples of typical dialog use cases in applications.
+
+<Canvas of={DialogStories.CommonPatterns} />
+
+## Dialog Anatomy
+
+The Dialog component consists of several sub-components:
+
+- **Root**: The main container that manages dialog state
+- **Trigger**: The element that opens the dialog (can be any clickable element)
+- **Portal**: Renders dialog content in a portal to avoid z-index issues
+- **Overlay**: The backdrop that appears behind the dialog
+- **Content**: The main dialog container
+- **Header**: Optional container for title and description
+- **Title**: The dialog's main heading
+- **Description**: Supplementary text explaining the dialog's purpose
+- **Footer**: Optional container for action buttons
+- **Close**: Built-in close functionality
+
+## Behavior
+
+### Opening and Closing
+
+- Click the trigger element to open
+- Click the overlay to close (default behavior)
+- Press `Escape` to close
+- Click the close button (X) to close
+- Use `Dialog.Close` component for custom close triggers
+
+### Focus Management
+
+- Focus moves to the dialog when opened
+- Focus is trapped within the dialog while open
+- Focus returns to the trigger element when closed
+- First focusable element receives focus automatically
+
+### Scroll Behavior
+
+- Page scroll is locked when dialog is open
+- Dialog content scrolls internally if content exceeds viewport
+- Scroll position is preserved when dialog closes
+
+## Design Tokens
+
+This component uses the following CSS variables from the theme:
+
+```css
+/* Colors */
+--surface
+--border
+--overlay-backdrop
+--text
+--text-secondary
+--text-tertiary
+--surface-hover
+--focus-ring
+
+/* Spacing */
+--space-1
+--space-4
+--space-6
+--space-8
+
+/* Borders */
+--border-width-1
+--border-radius-sm
+--border-radius-xl
+
+/* Animations */
+--duration-fast
+--ease-out
+--scale-95
+--scale-100
+
+/* Shadows */
+--shadow-lg
+
+/* Z-index */
+--z-overlay
+--z-modal
+```
+
+## Accessibility
+
+The Dialog component follows WAI-ARIA dialog pattern:
+
+- Proper ARIA attributes (`role="dialog"`, `aria-modal="true"`)
+- Focus management and keyboard navigation
+- Screen reader announcements for dialog open/close
+- Escape key handling
+- Focus trap implementation
+- Customizable aria labels via `aria-labelledby` and `aria-describedby`
+
+### Keyboard Support
+
+- `Tab`: Move focus to next focusable element
+- `Shift + Tab`: Move focus to previous focusable element
+- `Escape`: Close the dialog
+- `Enter`: Activate focused button
+
+## Best Practices
+
+### Do's
+
+- Use dialogs for important interactions that require user attention
+- Keep dialog content focused and concise
+- Provide clear action buttons with descriptive labels
+- Use appropriate size for the content
+- Include a clear way to dismiss the dialog
+- Maintain consistent button placement (primary action on the right)
+
+### Don'ts
+
+- Don't use dialogs for non-critical information
+- Don't nest dialogs within dialogs
+- Don't auto-open dialogs without user interaction
+- Don't remove the ability to close the dialog
+- Don't overload dialogs with too much content
+- Don't use dialogs for simple notifications (use toast instead)
+
+## Related Components
+
+- [AlertDialog](./AlertDialog/AlertDialog.mdx) - For critical confirmations
+- [Sheet](./Sheet/Sheet.mdx) - For side panel content
+- [Popover](./Popover/Popover.mdx) - For non-modal floating content
+- [Toast](./Toast/Toast.mdx) - For temporary notifications
