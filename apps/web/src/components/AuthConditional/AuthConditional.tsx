@@ -1,24 +1,15 @@
-'use client';
-
 import { ReactNode } from 'react';
-import { useUser } from '@auth0/nextjs-auth0';
+import { auth0 } from '@/lib/auth';
 
 interface AuthConditionalProps {
   authenticated: ReactNode;
   unauthenticated: ReactNode;
-  loading?: ReactNode;
 }
 
-export function AuthConditional({
+export async function AuthConditional({
   authenticated,
   unauthenticated,
-  loading = null,
 }: AuthConditionalProps) {
-  const { isLoading, user } = useUser();
-
-  if (isLoading) {
-    return loading;
-  }
-
-  return <>{user ? authenticated : unauthenticated}</>;
+  const data = await auth0.getSession();
+  return <>{data?.user ? authenticated : unauthenticated}</>;
 }
