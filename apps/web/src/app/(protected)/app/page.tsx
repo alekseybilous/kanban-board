@@ -1,5 +1,3 @@
-'use client';
-
-export default function AppPage() {
+export default async function AppPage() {
   return <>Hello</>;
 }

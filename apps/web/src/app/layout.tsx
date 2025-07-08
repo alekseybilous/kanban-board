@@ -17,6 +17,7 @@ type RootLayoutProps = {
 
 export default async function RootLayout({ children }: RootLayoutProps) {
   const locale = await getLocale();
+
   return (
     <html lang={locale} suppressHydrationWarning>
       <body>

@@ -2,7 +2,7 @@ import { AuthConditional } from '@/components';
 import {
   DropdownTrigger,
   DropdownRoot,
-  DotsVerticalIcon,
+  EllipsisVerticalIcon,
   DropdownContent,
   DropdownItem,
 } from '@kanban-board/desing-system';
@@ -12,11 +12,10 @@ import {
   ThemeSubmenu,
   UserAvatar,
 } from '@/components/Header/components';
-import { signOut } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 export const HeaderActions = () => {
-  const handleLogout = () => signOut({ redirect: true });
   const t = useTranslations('actions');
 
   return (
@@ -26,7 +25,7 @@ export const HeaderActions = () => {
           <AuthConditional
             authenticated={<UserAvatar />}
             unauthenticated={
-              <DotsVerticalIcon className={styles.threeDotIcon} />
+              <EllipsisVerticalIcon className={styles.threeDotIcon} />
             }
           />
         </div>
@@ -36,8 +35,8 @@ export const HeaderActions = () => {
         <LanguageSubmenu />
         <AuthConditional
           authenticated={
-            <DropdownItem onSelect={handleLogout}>
-              <span>{t('logout')}</span>
+            <DropdownItem asChild>
+              <Link href="/auth/logout">{t('logout')}</Link>
             </DropdownItem>
           }
           unauthenticated={null}

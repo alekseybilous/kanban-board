@@ -1,12 +1,8 @@
 'use client';
 
-import {
-  ChevronDownIcon,
-  ChevronUpIcon,
-  CheckIcon,
-} from '@radix-ui/react-icons';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import { clsx } from 'clsx';
+import { ChevronDownIcon, ChevronUpIcon, CheckIcon } from 'lucide-react';
 import React from 'react';
 
 import styles from './select.module.css';
