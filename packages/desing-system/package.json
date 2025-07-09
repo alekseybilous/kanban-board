@@ -18,6 +18,9 @@
     "dist",
     "!**/*.tsbuildinfo"
   ],
+  "sideEffects": [
+    "**/*.css"
+  ],
   "dependencies": {
     "@kanban-board/eslint-config": "*",
     "@radix-ui/react-avatar": "^1.1.10",

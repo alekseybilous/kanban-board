@@ -1,4 +1,4 @@
-/// <reference types='vitest' />
+// / <reference types='vitest' />
 import { fileURLToPath } from 'node:url';
 import { extname, relative, join } from 'path';
 
@@ -17,6 +17,7 @@ export default defineConfig(() => ({
     dts({
       entryRoot: 'src',
       tsconfigPath: join(__dirname, 'tsconfig.lib.json'),
+      exclude: ['src/**/stories/*'],
     }),
   ],
   // Uncomment this if you are using workers.
@@ -52,7 +53,7 @@ export default defineConfig(() => ({
       input: Object.fromEntries(
         glob
           .sync('src/**/*.{ts,tsx}', {
-            ignore: ['src/**/*.d.ts', 'src/**/stories', 'src/**/*.mdx'],
+            ignore: ['src/**/*.d.ts', 'src/**/stories/*', 'src/**/*.mdx'],
           })
           .map((file) => [
             // The name of the entry point
