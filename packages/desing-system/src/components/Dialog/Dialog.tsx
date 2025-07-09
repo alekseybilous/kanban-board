@@ -2,9 +2,8 @@
 
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import clsx from 'clsx';
+import { XIcon } from 'lucide-react';
 import React from 'react';
-
-import { Button } from '../Button';
 
 import styles from './dialog.module.css';
 import type { DialogSize } from './DialogContext';
@@ -125,9 +124,7 @@ export const DialogClose = React.forwardRef<
       asChild
       {...props}
     >
-      <Button variant="ghost" size="md">
-        x
-      </Button>
+      <XIcon />
     </DialogPrimitive.Close>
   );
 });
