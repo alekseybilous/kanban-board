@@ -57,10 +57,10 @@ export default defineConfig(() => ({
           })
           .map((file) => [
             // The name of the entry point
-            // lib/nested/foo.ts becomes nested/foo
+            // src/nested/foo.ts becomes nested/foo
             relative('src', file.slice(0, file.length - extname(file).length)),
             // The absolute path to the entry file
-            // lib/nested/foo.ts becomes /project/lib/nested/foo.ts
+            // src/nested/foo.ts becomes /project/src/nested/foo.ts
             fileURLToPath(new URL(file, import.meta.url)),
           ])
       ),
