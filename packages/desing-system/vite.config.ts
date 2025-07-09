@@ -1,19 +1,22 @@
-// eslint-disable-next-line spaced-comment
 /// <reference types='vitest' />
-import * as path from 'path';
+import { fileURLToPath } from 'node:url';
+import { extname, relative, join } from 'path';
 
 import react from '@vitejs/plugin-react-swc';
+import { glob } from 'glob';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
+import { libInjectCss } from 'vite-plugin-lib-inject-css';
 
 export default defineConfig(() => ({
   root: __dirname,
   cacheDir: '../../node_modules/.vite/packages/desing-system',
   plugins: [
     react(),
+    libInjectCss(),
     dts({
       entryRoot: 'src',
-      tsconfigPath: path.join(__dirname, 'tsconfig.lib.json'),
+      tsconfigPath: join(__dirname, 'tsconfig.lib.json'),
     }),
   ],
   // Uncomment this if you are using workers.
@@ -43,7 +46,23 @@ export default defineConfig(() => ({
       external: ['react', 'react-dom', 'react/jsx-runtime'],
       output: {
         banner: "'use client';",
+        assetFileNames: 'assets/[name][extname]',
+        entryFileNames: '[name].js',
       },
+      input: Object.fromEntries(
+        glob
+          .sync('src/**/*.{ts,tsx}', {
+            ignore: ['src/**/*.d.ts', 'src/**/stories', 'src/**/*.mdx'],
+          })
+          .map((file) => [
+            // The name of the entry point
+            // lib/nested/foo.ts becomes nested/foo
+            relative('src', file.slice(0, file.length - extname(file).length)),
+            // The absolute path to the entry file
+            // lib/nested/foo.ts becomes /project/lib/nested/foo.ts
+            fileURLToPath(new URL(file, import.meta.url)),
+          ])
+      ),
     },
   },
   test: {
