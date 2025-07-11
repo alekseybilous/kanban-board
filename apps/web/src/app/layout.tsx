@@ -10,11 +10,11 @@ export const metadata = {
     'A modern Kanban board for agile project management and task tracking',
 };
 
-type RootLayoutProps = {
+type LayoutProps = {
   children?: ReactNode;
 };
 
-export default async function Layout({ children }: RootLayoutProps) {
+export default async function Layout({ children }: LayoutProps) {
   const locale = await getLocale();
 
   return (
