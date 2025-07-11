@@ -1,11 +1,20 @@
 import { NextIntlClientProvider } from 'next-intl';
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 import { ThemeProvider } from './ThemeProvider';
+import { QueryProvider } from './QueryProvider';
+import { PageLoader } from '@/components/PageLoader';
+import { ModalProvider } from '@/components';
 
 type RootProviderProps = { children: ReactNode };
 
 export const RootProvider = async ({ children }: RootProviderProps) => (
-  <NextIntlClientProvider>
-    <ThemeProvider>{children}</ThemeProvider>
-  </NextIntlClientProvider>
+  <Suspense fallback={<PageLoader />}>
+    <NextIntlClientProvider>
+      <ThemeProvider>
+        <ModalProvider>
+          <QueryProvider>{children}</QueryProvider>
+        </ModalProvider>
+      </ThemeProvider>
+    </NextIntlClientProvider>
+  </Suspense>
 );

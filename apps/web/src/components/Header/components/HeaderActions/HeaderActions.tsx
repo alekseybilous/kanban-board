@@ -1,4 +1,4 @@
-import { AuthConditional } from '@/components';
+import { AuthConditional } from '@/components/AuthConditional';
 import {
   DropdownTrigger,
   DropdownRoot,
@@ -7,11 +7,9 @@ import {
   DropdownItem,
 } from '@kanban-board/desing-system';
 import styles from './HeaderActions.module.css';
-import {
-  LanguageSubmenu,
-  ThemeSubmenu,
-  UserAvatar,
-} from '@/components/Header/components';
+import { LanguageSubmenu } from '../LanguageSubmenu';
+import { ThemeSubmenu } from '../ThemeSubmenu';
+import { UserAvatar } from '../UserAvatar';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 

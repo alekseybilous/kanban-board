@@ -8,7 +8,7 @@ import {
 } from '@kanban-board/desing-system';
 import { useLocale, useTranslations } from 'next-intl';
 import { useTransition } from 'react';
-import { setUserLocale } from '@/services/locale';
+import { setUserLocale } from '@/services/locale.service';
 import { Locale } from '@/i18n/config';
 import { LOCALES } from '@/constants';
 

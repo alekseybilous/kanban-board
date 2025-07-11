@@ -17,7 +17,7 @@ interface ModalConfig {
   props: Record<string, any>;
 }
 
-export function ModalProvider({ children }: { children: ReactNode }) {
+export function ModalProvider({ children }: { children?: ReactNode }) {
   const [modals, setModals] = useState<Map<string, ModalConfig>>(new Map());
   const modalIdCounter = useRef(0);
 

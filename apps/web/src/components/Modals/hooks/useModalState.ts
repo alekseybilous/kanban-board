@@ -1,3 +1,5 @@
+'use client';
+
 import { ModalName, ModalPropsFor } from '@/components/Modals/types';
 import { useRef } from 'react';
 import { useModal } from '@/components/Modals/hooks/useModal';
