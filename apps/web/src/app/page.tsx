@@ -6,7 +6,6 @@ import styles from './page.module.css';
 export default function RootPage() {
   return (
     <main className={styles.main}>
-      {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <div className={styles.heroText}>
@@ -79,7 +78,6 @@ export default function RootPage() {
         </div>
       </section>
 
-      {/* Features Section */}
       <section id="features" className={styles.features}>
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
@@ -286,7 +284,6 @@ export default function RootPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className={styles.cta}>
         <div className={styles.container}>
           <div className={styles.ctaContent}>
