@@ -1,3 +1,3 @@
 export default async function AppPage() {
-  return <>Hello</>;
+  return <div>Nothing here, select the board</div>;
 }

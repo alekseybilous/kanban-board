@@ -1,4 +1,3 @@
-// app/api/boards/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { CreateBoardRequest, BoardResponse } from '@/types/board';
 
@@ -69,7 +68,6 @@ const boards: BoardResponse[] = [
   },
 ];
 
-// GET /api/boards - Get all boards for user
 export async function GET(request: NextRequest) {
   try {
     return NextResponse.json(boards);

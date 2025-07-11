@@ -1,0 +1,101 @@
+.taskCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--space-3);
+  padding: var(--space-4);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px 0 var(--overlay-shadow-subtle);
+}
+
+.taskCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px 0 var(--overlay-shadow);
+  border-color: var(--primary-border);
+}
+
+.taskHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+}
+
+.taskTitle {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text);
+  margin: var(--space-0);
+  line-height: var(--line-height-tight);
+  flex: 1;
+}
+
+.taskPriority {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--space-1);
+  letter-spacing: 0.05em;
+  margin-left: var(--space-2);
+  white-space: nowrap;
+}
+
+.taskPriority.low {
+  background: var(--success-surface);
+  color: var(--success-text);
+}
+
+.taskPriority.medium {
+  background: var(--warning-surface);
+  color: var(--warning-text);
+}
+
+.taskPriority.high {
+  background: var(--danger-surface);
+  color: var(--danger-text);
+}
+
+.taskDescription {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: var(--line-height-tight);
+  margin: var(--space-0) var(--space-0) var(--space-3) var(--space-0);
+}
+
+.taskAssignee {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+
+  & span {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    font-weight: var(--font-weight-medium);
+  }
+}
+
+.taskFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.taskDueDate {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--text-tertiary);
+
+  & span {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+  }
+}
+
+@media (max-width: 480px) {
+  .taskCard {
+    padding: var(--space-3);
+  }
+}

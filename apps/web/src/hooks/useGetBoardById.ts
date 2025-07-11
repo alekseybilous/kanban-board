@@ -3,15 +3,16 @@ import { BoardResponse } from '@/types/board';
 import { RequestError } from '@/errors';
 import { boardService } from '@/services/boards.service';
 
-export function useGetBoards(
+export function useGetBoardById(
+  boardId: string,
   options?: Omit<
-    UseQueryOptions<BoardResponse[], RequestError>,
+    UseQueryOptions<BoardResponse, RequestError>,
     'queryKey' | 'queryFn'
   >
 ) {
   return useQuery({
-    queryKey: ['boards'],
-    queryFn: boardService.getAll,
+    queryKey: ['board', boardId],
+    queryFn: () => boardService.getById(boardId),
     ...options,
   });
 }

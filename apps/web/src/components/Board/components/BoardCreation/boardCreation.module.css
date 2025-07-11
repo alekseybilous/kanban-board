@@ -1,0 +1,23 @@
+.column {
+  flex: 0 0 320px;
+  background: var(--surface);
+  border-radius: var(--space-3);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 100%;
+  box-shadow: 0 1px 3px 0 var(--overlay-shadow-subtle);
+}
+
+@media (max-width: 768px) {
+  .column {
+    flex: 0 0 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .column {
+    flex: 0 0 260px;
+  }
+}

@@ -1,0 +1,136 @@
+/* Board Component Styles */
+.board {
+  width: 100%;
+  height: 100%;
+  background: var(--canvas-subtle);
+  border-radius: var(--space-3);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.boardHeader {
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.boardContent {
+  flex: 1;
+  overflow: hidden;
+  padding-top: var(--space-6);
+}
+
+.columnsContainer {
+  display: flex;
+  gap: var(--space-6);
+  height: 100%;
+  overflow-x: auto;
+  padding-bottom: var(--space-2);
+}
+
+.columnsContainer::-webkit-scrollbar {
+  height: 8px;
+}
+
+.columnsContainer::-webkit-scrollbar-track {
+  background: var(--surface-subtle);
+  border-radius: var(--space-1);
+}
+
+.columnsContainer::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: var(--space-1);
+}
+
+.columnsContainer::-webkit-scrollbar-thumb:hover {
+  background: var(--border-hover);
+}
+
+/* Column Styles */
+.column {
+  flex: 0 0 320px;
+  background: var(--surface);
+  border-radius: var(--space-3);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  box-shadow: 0 1px 3px 0 var(--overlay-shadow-subtle);
+}
+
+.columnHeader {
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface-subtle);
+  border-radius: var(--space-3) var(--space-3) 0 0;
+}
+
+.columnActions {
+  background: none;
+  border: none;
+  padding: var(--space-2);
+  border-radius: var(--space-2);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.columnActions:hover {
+  background: var(--surface-hover);
+  color: var(--text-secondary);
+}
+
+/* Task Card Styles */
+
+@media (max-width: 768px) {
+  .boardMeta {
+    align-self: stretch;
+    justify-content: space-between;
+  }
+
+  .boardContent {
+    padding: var(--space-4);
+  }
+
+  .columnsContainer {
+    gap: var(--space-4);
+  }
+
+  .column {
+    flex: 0 0 280px;
+  }
+
+  .addColumnContainer {
+    flex: 0 0 240px;
+  }
+
+  .addColumnButton {
+    height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .boardContent {
+    padding: var(--space-3);
+  }
+
+  .column {
+    flex: 0 0 260px;
+  }
+
+  .addColumnContainer {
+    flex: 0 0 220px;
+  }
+
+  .columnHeader {
+    padding: var(--space-3) var(--space-4);
+  }
+}
