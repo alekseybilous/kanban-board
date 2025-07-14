@@ -1,41 +1,31 @@
-import { ComponentType } from 'react';
+import { NextRequest, NextResponse } from 'next/server';
 import { auth0 } from '@/lib/auth';
+import { SessionData } from '@auth0/nextjs-auth0/types';
 
-export interface WithAuthProps {
-  user?: any;
-  isAuthenticated: boolean;
-}
+type AuthenticatedHandler = (
+  request: NextRequest,
+  context: { session: SessionData }
+) => Promise<NextResponse>;
 
-export function withAuth<T extends object>(
-  Component: ComponentType<T & WithAuthProps>
-) {
-  return async function AuthWrapper(props: T) {
-    const session = await auth0.getSession();
+export function withAuth(handler: AuthenticatedHandler) {
+  return async (request: NextRequest) => {
+    try {
+      const session = await auth0.getSession();
 
-    return (
-      <Component
-        {...props}
-        user={session?.user}
-        isAuthenticated={!!session?.user}
-      />
-    );
-  };
-}
+      if (!session) {
+        return NextResponse.json(
+          { error: 'Not authenticated' },
+          { status: 401 }
+        );
+      }
 
-// For client components that need auth data
-export function withAuthClient<T extends object>(
-  Component: ComponentType<T & WithAuthProps>
-) {
-  return function AuthClientWrapper(props: T & WithAuthProps) {
-    return <Component {...props} />;
-  };
-}
-
-// Usage helper for getting auth data in server components
-export async function getAuthData() {
-  const session = await auth0.getSession();
-  return {
-    user: session?.user,
-    isAuthenticated: !!session?.user,
+      return await handler(request, { session });
+    } catch (error) {
+      console.error('Authentication error:', error);
+      return NextResponse.json(
+        { error: 'Authentication failed' },
+        { status: 401 }
+      );
+    }
   };
 }

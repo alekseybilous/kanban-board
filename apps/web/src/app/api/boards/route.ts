@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { CreateBoardRequest, BoardResponse } from '@/types/board';
 
 const boards: BoardResponse[] = [
@@ -68,7 +68,9 @@ const boards: BoardResponse[] = [
   },
 ];
 
-export async function GET(request: NextRequest) {
+import { withAuth } from '@/lib/withAuth';
+
+export const GET = withAuth(async () => {
   try {
     return NextResponse.json(boards);
   } catch (error) {
@@ -78,10 +80,10 @@ export async function GET(request: NextRequest) {
       { status: 500 }
     );
   }
-}
+});
 
 // POST /api/boards - Create a new board
-export async function POST(request: NextRequest) {
+export const POST = withAuth(async (request) => {
   try {
     const body: CreateBoardRequest = await request.json();
 
@@ -121,4 +123,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-}
+});

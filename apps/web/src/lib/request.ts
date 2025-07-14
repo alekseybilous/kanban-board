@@ -21,12 +21,31 @@ export async function request<T>(
     });
   }
 
+  // Handle cookies for SSR vs CSR
+  const requestHeaders: Record<string, string> = {
+    'Content-Type': 'application/json',
+    ...headers,
+  };
+
+  // Check if we're in server-side context (SSR)
+  if (typeof window === 'undefined') {
+    // Server-side: get cookies from Next.js headers
+    try {
+      const { cookies } = await import('next/headers');
+      const cookieStore = await cookies();
+      const cookieHeader = cookieStore.toString();
+      if (cookieHeader) {
+        requestHeaders['Cookie'] = cookieHeader;
+      }
+    } catch (error) {
+      console.warn('Could not get cookies in server context:', error);
+    }
+  }
+  // Client-side: cookies are automatically sent by browser
+
   const config: RequestInit = {
     method,
-    headers: {
-      'Content-Type': 'application/json',
-      ...headers,
-    },
+    headers: requestHeaders,
   };
 
   if (body) {
