@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, use } from 'react';
 
 export type SelectSize = 'small' | 'medium' | 'large';
 export type SelectVariant = 'default' | 'ghost';
@@ -21,7 +21,7 @@ export const SelectProvider: React.FC<
 };
 
 export const useSelectContext = () => {
-  const context = useContext(SelectContext);
+  const context = use(SelectContext);
   return (
     context || {
       size: 'medium' as SelectSize,

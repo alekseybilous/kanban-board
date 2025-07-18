@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, use } from 'react';
 
 export type AvatarSize = 'small' | 'medium' | 'large';
 export type AvatarVariant = 'default' | 'rounded';
@@ -21,7 +21,7 @@ export const AvatarProvider: React.FC<
 };
 
 export const useAvatarContext = () => {
-  const context = useContext(AvatarContext);
+  const context = use(AvatarContext);
   return (
     context || {
       size: 'medium' as AvatarSize,

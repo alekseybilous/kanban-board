@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, use } from 'react';
 
 export type DropdownSize = 'small' | 'medium' | 'large';
 export type DropdownVariant = 'default' | 'ghost';
@@ -21,7 +21,7 @@ export const DropdownProvider: React.FC<
 };
 
 export const useDropdownContext = () => {
-  const context = useContext(DropdownContext);
+  const context = use(DropdownContext);
   return (
     context || {
       size: 'medium' as DropdownSize,

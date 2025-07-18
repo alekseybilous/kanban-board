@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, use } from 'react';
 
 export type DialogSize = 'small' | 'medium' | 'large' | 'full';
 
@@ -17,7 +17,7 @@ export const DialogProvider: React.FC<
 };
 
 export const useDialogContext = () => {
-  const context = useContext(DialogContext);
+  const context = use(DialogContext);
   return (
     context || {
       size: 'medium' as DialogSize,
