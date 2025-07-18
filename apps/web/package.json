@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "@auth0/nextjs-auth0": "^4.8.0",
+    "@clerk/nextjs": "^6.25.4",
     "@kanban-board/desing-system": "*",
     "@kanban-board/theme": "*",
     "@tanstack/react-query": "^5.82.0",

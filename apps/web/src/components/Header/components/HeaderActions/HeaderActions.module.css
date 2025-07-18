@@ -1,3 +1,5 @@
-.three-dot-icon {
-  color: var(--text);
+.logout {
+  & button {
+    background: transparent;
+  }
 }

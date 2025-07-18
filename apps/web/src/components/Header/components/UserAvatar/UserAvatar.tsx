@@ -2,20 +2,28 @@
 
 import { Avatar } from '@kanban-board/desing-system';
 import styles from './UserAvatar.module.css';
-import { useUser } from '@auth0/nextjs-auth0';
+import { useSession } from '@clerk/nextjs';
 
 export const UserAvatar = () => {
-  const { user } = useUser();
+  const { session, isSignedIn } = useSession();
+
+  const image = session?.publicUserData.imageUrl;
+  const name =
+    session?.publicUserData.firstName ||
+    '' + session?.publicUserData.lastName ||
+    '';
 
   return (
     <div className={styles.container}>
-      <Avatar
-        src={user?.picture}
-        alt="AB"
-        fallback="AB"
-        size="medium"
-        focusable
-      />
+      {isSignedIn && (
+        <Avatar
+          src={image}
+          alt={name}
+          fallback={name}
+          size="medium"
+          focusable
+        />
+      )}
     </div>
   );
 };

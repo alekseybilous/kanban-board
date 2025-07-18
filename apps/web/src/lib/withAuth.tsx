@@ -1,25 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { auth0 } from '@/lib/auth';
-import { SessionData } from '@auth0/nextjs-auth0/types';
+import { auth } from '@clerk/nextjs/server';
 
 type AuthenticatedHandler = (
   request: NextRequest,
-  context: { session: SessionData }
+  context: { userId: string }
 ) => Promise<NextResponse>;
 
 export function withAuth(handler: AuthenticatedHandler) {
   return async (request: NextRequest) => {
     try {
-      const session = await auth0.getSession();
+      const { userId } = await auth();
 
-      if (!session) {
+      if (!userId) {
         return NextResponse.json(
           { error: 'Not authenticated' },
           { status: 401 }
         );
       }
 
-      return await handler(request, { session });
+      return await handler(request, { userId });
     } catch (error) {
       console.error('Authentication error:', error);
       return NextResponse.json(

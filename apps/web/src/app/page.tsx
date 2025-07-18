@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Button } from '@kanban-board/desing-system';
 
 import styles from './page.module.css';
+import { SignedOut, SignUpButton } from '@clerk/nextjs';
 
 export default function RootPage() {
   return (
@@ -24,9 +25,13 @@ export default function RootPage() {
               faster than ever.
             </p>
             <div className={styles.heroActions}>
-              <Button asChild size="lg" variant="primary">
-                <Link href="/auth/login">Get Started Free</Link>
-              </Button>
+              <SignedOut>
+                <SignUpButton>
+                  <Button size="lg" variant="primary">
+                    Get Started Free
+                  </Button>
+                </SignUpButton>
+              </SignedOut>
               <Button asChild size="lg" variant="ghost">
                 <Link href="#features">Learn More</Link>
               </Button>
